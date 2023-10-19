@@ -60,3 +60,13 @@ public class Event                             //Stock class containing all info
     public Int64 Volume { get; set; }                       //Volume value for stock (Int count)
     public string StockFilePath { get; set; }      //Path to file
 }
+
+public class Location
+{
+    [Key] public string Address { get; set; }
+    public string Website { get; set; }
+    public string Email { get; set; }
+    public float RentalFee { get; set; }
+    public int VendorCapacity { get; set; }
+    public int AttendeeCapacity { get; set; }
+}
