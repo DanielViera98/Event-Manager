@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Reflection;
 using System.Diagnostics.SymbolStore;
-
+                                                                                    //TODO: ADD KEYS
 //Create new class for database context
 public class EventContext : DbContext
 {
