@@ -146,26 +146,24 @@ public class Employee                                   //Employee Entity Table
     public Host Host { get; set; }                      //FK to host they work for if applicable
 }
 
-public class Presenter                                  //Presenter Entity Table
+public class Presenter
 {
-    [Key] public Guid PresenterID { get; set; }     //Guid key
-    public string Name { get; set; }                //Name of presenter
-    public string Email { get; set; }               //email of presenter
-    public string PhoneNum { get; set; }            //Phone number of presenter
-    public decimal Fee { get; set; }                //Fee to present (+ = presenter pays, - = event pays presenter)
+    [Key] public int PresenterID { get; set; }
+    public int Name { get; set; }
+    public string Email { get; set; }
+    public float PresenterFee { get; set; }
 }
 
-[PrimaryKey(nameof(RoomID), nameof(Time))]              //Composite Primary Key for Presents. Can't have two presenters in the same room simultaneously
-public class Presents                                   //Presents Multi-Multi Relationship Table
+public class Presents
 {
-    public Presenter Presenter { get; set; }        //FK to Presenter
-    public Event Event { get; set; }                //FK to Event
-    public string RoomID { get; set; }              //Presentation room
-    public string Title { get; set; }               //Title of presentation
-    public string Description { get; set; }         //Description of presentation
-    public DateTime Time { get; set; }              //Time of presentation
+    [Key] public int RoomID { set; get; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public DateTime Time { get; set; }
+    public Presenter Presenter { get; set; }
+    public Event Event { get; set; }
 }
-public class Vendor                                     //Vendor Entity Table
+public class Vendor
 {
     [Key] public Guid VendorID { get; set; }               //ID of vendor
     public string Name { get; set; }                //Name of vendor
