@@ -103,18 +103,20 @@ public class Person
     public string Email { get; set; }
 }
 
+[PrimaryKey(nameof(roomID), nameof(TableID))]
 public class HasSpace
 {
-    [Key] public int roomID { get; set; }
-    [Key] public int TableID { get; set; }
+    public int roomID { get; set; }
+    public int TableID { get; set; }
     public Vendor Vendor { get; set; }
     public Event Event { get; set; }
 }
 
 public class HostedBy
 {
-    [Key] public Event Event { get; set; }
-    [Key] public Host Host { get; set; }
+    [Key] public Guid HostedByID { get; set; }
+    public Event Event { get; set; }
+    public Host Host { get; set; }
 }
 
 public class Employee
@@ -125,4 +127,39 @@ public class Employee
     public string ShiftSchedule { get; set; }
     public string WorkAddress { get; set; }
     public Host Host { get; set; }
+}
+
+[PrimaryKey(nameof(OrgID), nameof(HostID))]
+public class Organization
+{
+    public int OrgID { get; set; }
+    public int HostID { get; set; }
+    public string OrganizationName { get; set; }
+    public string RepresentativeName { get; set; }
+    public Host Host { get; set; }
+}
+
+public class Presenter
+{
+    [Key] public int PresenterID { get; set; }
+    public int Name { get; set; }
+    public string Email { get; set; }
+    public float PresenterFee { get; set; }
+}
+
+public class Presents
+{
+    [Key] public int RoomID { set; get; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public DateTime Time { get; set; }
+    public Presenter Presenter { get; set; }
+    public Event Event { get; set; }
+}
+public class Vendor
+{
+    [Key] public int VendorID { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public float VendorFee { get; set; }
 }
