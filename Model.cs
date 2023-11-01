@@ -121,10 +121,11 @@ public class HasSpace                                   //HasSpace Multi-Multi R
     public Event Event { get; set; }                    //FK for Event
 }
 
+[PrimaryKey(nameof(EventID), nameof(HostID))]
 public class HostedBy                                   //HostedBy Multi-Multi Relationship Table
 {
-    [Key] public Event Event { get; set; }              //FK for Event
-    [Key] public Host Host { get; set; }                //FK for Host
+    public int EventID { get; set; }              //FK for Event
+    public int HostID { get; set; }                //FK for Host
 }
 
 public class Employee                                   //Employee Entity Table
@@ -135,4 +136,29 @@ public class Employee                                   //Employee Entity Table
     public string ShiftSchedule { get; set; }
     public string WorkAddress { get; set; }
     public Host Host { get; set; }
+}
+
+public class Presenter
+{
+    [Key] public int PresenterID { get; set; }
+    public int Name { get; set; }
+    public string Email { get; set; }
+    public float PresenterFee { get; set; }
+}
+
+public class Presents
+{
+    [Key] public int RoomID { set; get; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public DateTime Time { get; set; }
+    public Presenter Presenter { get; set; }
+    public Event Event { get; set; }
+}
+public class Vendor
+{
+    [Key] public int VendorID { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public float VendorFee { get; set; }
 }
