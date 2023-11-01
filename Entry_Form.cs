@@ -1,8 +1,8 @@
 namespace Event_Manager
 {
-    public partial class Form1 : Form
+    public partial class Entry_Form : Form
     {
-        public Form1()
+        public Entry_Form()
         {
             InitializeComponent();
             

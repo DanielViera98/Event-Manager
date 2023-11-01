@@ -1,6 +1,6 @@
 ﻿namespace Event_Manager
 {
-    partial class Form1
+    partial class Entry_Form
     {
         /// <summary>
         ///  Required designer variable.
