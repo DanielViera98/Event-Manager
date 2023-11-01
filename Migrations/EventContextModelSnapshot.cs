@@ -220,24 +220,21 @@ namespace Event_Manager.Migrations
 
             modelBuilder.Entity("Presenter", b =>
                 {
-                    b.Property<Guid>("PresenterID")
+                    b.Property<int>("PresenterID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PresenterID"));
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Fee")
-                        .HasColumnType("numeric");
+                    b.Property<int>("Name")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNum")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<float>("PresenterFee")
+                        .HasColumnType("real");
 
                     b.HasKey("PresenterID");
 
@@ -246,11 +243,11 @@ namespace Event_Manager.Migrations
 
             modelBuilder.Entity("Presents", b =>
                 {
-                    b.Property<string>("RoomID")
-                        .HasColumnType("text");
+                    b.Property<int>("RoomID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("timestamp with time zone");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoomID"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -259,14 +256,17 @@ namespace Event_Manager.Migrations
                     b.Property<Guid>("EventId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("PresenterID")
-                        .HasColumnType("uuid");
+                    b.Property<int>("PresenterID")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("RoomID", "Time");
+                    b.HasKey("RoomID");
 
                     b.HasIndex("EventId");
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -66,11 +67,11 @@ namespace Event_Manager.Migrations
                 name: "Presenters",
                 columns: table => new
                 {
-                    PresenterID = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    PresenterID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<int>(type: "integer", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    PhoneNum = table.Column<string>(type: "text", nullable: false),
-                    Fee = table.Column<decimal>(type: "numeric", nullable: false)
+                    PresenterFee = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,16 +205,17 @@ namespace Event_Manager.Migrations
                 name: "Presents",
                 columns: table => new
                 {
-                    RoomID = table.Column<string>(type: "text", nullable: false),
-                    Time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    PresenterID = table.Column<Guid>(type: "uuid", nullable: false),
-                    EventId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RoomID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    PresenterID = table.Column<int>(type: "integer", nullable: false),
+                    EventId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Presents", x => new { x.RoomID, x.Time });
+                    table.PrimaryKey("PK_Presents", x => x.RoomID);
                     table.ForeignKey(
                         name: "FK_Presents_Events_EventId",
                         column: x => x.EventId,
