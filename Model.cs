@@ -9,6 +9,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Reflection;
 using System.Diagnostics.SymbolStore;
+using System.Numerics;
+using System.ComponentModel.DataAnnotations.Schema;
 
 //Create new class for database context
 public class EventContext : DbContext
@@ -47,31 +49,29 @@ public class EventContext : DbContext
 
 }
 
-public class Event                             //Stock class containing all information for stock
+public class Event                                      //Event Entity Table
 {
-    //Ignore so that the csvReader does not try and use it as a column to read into. Key marks as unique identifier for entry.
-    [Key] public Guid EventId { get; set; }              //Identifier for Stock entry.
+    [Key] public Guid EventId { get; set; }             
     public string Name { get; set; }
     public string Description { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public string Website {  get; set; }
-    public Location Location { get; set; }
-
+    public Location Location { get; set; }              //FK to Location Table
 }
 
-public class Location
+public class Location                                   //Location Entity Table
 {
     [Key] public string Address { get; set; }
     public string Website { get; set; }
     public string Email { get; set; }
-    public float RentalFee { get; set; }
+    public decimal RentalFee { get; set; }
     public int VendorCapacity { get; set; }
     public int AttendeeCapacity { get; set; }
     public List<Event> Events { get; set; }
 }
 
-public class Attendee
+public class Attendee                                   //Attendee Entity Table
 {
     [Key] public Guid AttendeeID { get; set; }
     public string Name { get; set; }
@@ -80,46 +80,54 @@ public class Attendee
     public DateTime CheckinTime { get; set; }
 }
 
-public class Ticket
+public class Ticket                                     //Ticket Entity Table
 {
     [Key] public Guid TicketID { get; set; }
     public float Cost { get; set; }
-    public Attendee Attendee { get; set; }
-    public Event Event { get; set; }
+    public Attendee Attendee { get; set; }              //FK to Attendee Table
+    public Event Event { get; set; }                    //FK to Event Table
     public string TicketType { get; set; }
 }
 
-public class Host
+public class Host                                       //Host Parent Entity Table
 {
     [Key] public Guid HostID { get; set; }
     public string Website { get; set; }
     public string Email { get; set; }
 }
 
-public class Person
+public class Person                                     /*Person, inherits parent table Host*/
+    : Host
 {
-    [Key] public Guid HostID { get; set; }
-    public string Website { get; set; }
-    public string Email { get; set; }
+    public string Name { get; set; }
+    public string PhoneNum { get; set; }
 }
 
-[PrimaryKey(nameof(roomID), nameof(TableID))]
-public class HasSpace
+public class Organization                               /*Organization, inherits parent table Host*/
+    :Host
 {
-    public int roomID { get; set; }
+    public string OrganizationName { get; set; }                //Name of organization
+    public string OrganizationPhone { get; set; }
+    public string RepresentativeName { get; set; }      //Representative name
+    public string RepresentativePhone { get; set; }
+}
+
+[PrimaryKey(nameof(RoomID), nameof(TableID))]           //Composite primary key for HasSpace
+public class HasSpace                                   //HasSpace Multi-Multi Relationship Table
+{
+    public int RoomID { get; set; }
     public int TableID { get; set; }
-    public Vendor Vendor { get; set; }
-    public Event Event { get; set; }
+    public Vendor Vendor { get; set; }                  //FK for Vendor
+    public Event Event { get; set; }                    //FK for Event
 }
 
-public class HostedBy
+public class HostedBy                                   //HostedBy Multi-Multi Relationship Table
 {
-    [Key] public Guid HostedByID { get; set; }
-    public Event Event { get; set; }
-    public Host Host { get; set; }
+    [Key] public Event Event { get; set; }              //FK for Event
+    [Key] public Host Host { get; set; }                //FK for Host
 }
 
-public class Employee
+public class Employee                                   //Employee Entity Table
 {
     [Key] public Guid EmpID { get; set;}
     public string Name { get; set; }
@@ -127,39 +135,4 @@ public class Employee
     public string ShiftSchedule { get; set; }
     public string WorkAddress { get; set; }
     public Host Host { get; set; }
-}
-
-[PrimaryKey(nameof(OrgID), nameof(HostID))]
-public class Organization
-{
-    public int OrgID { get; set; }
-    public int HostID { get; set; }
-    public string OrganizationName { get; set; }
-    public string RepresentativeName { get; set; }
-    public Host Host { get; set; }
-}
-
-public class Presenter
-{
-    [Key] public int PresenterID { get; set; }
-    public int Name { get; set; }
-    public string Email { get; set; }
-    public float PresenterFee { get; set; }
-}
-
-public class Presents
-{
-    [Key] public int RoomID { set; get; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public DateTime Time { get; set; }
-    public Presenter Presenter { get; set; }
-    public Event Event { get; set; }
-}
-public class Vendor
-{
-    [Key] public int VendorID { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public float VendorFee { get; set; }
 }
