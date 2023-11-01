@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Diagnostics.SymbolStore;
 using System.Numerics;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 //Create new class for database context
 public class EventContext : DbContext
@@ -29,10 +30,8 @@ public class EventContext : DbContext
     public DbSet<HostedBy> HostedBy { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public string DbPath { get; }               //Path to the database
-    public string StockPath { get; set; }       //Path to the Stock Files folder
 
-
-    public EventContext()                               //Constructor for StockContext
+    public EventContext()                               //Constructor for EventContext
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;    //Get folder name for data
         var path = Environment.GetFolderPath(folder);                   //Get path to folder
@@ -58,6 +57,12 @@ public class Event                                      //Event Entity Table
     public DateTime EndDate { get; set; }
     public string Website {  get; set; }
     public Location Location { get; set; }              //FK to Location Table
+
+    /*public List<Host> Hosts { get; set; }
+    public List<Vendor> Vendors { get; set; }
+    public List<Ticket> Tickets { get; set; }
+    public List<Presenter> Presenters { get; set; }*/
+
 }
 
 public class Location                                   //Location Entity Table
@@ -94,6 +99,8 @@ public class Host                                       //Host Parent Entity Tab
     [Key] public Guid HostID { get; set; }
     public string Website { get; set; }
     public string Email { get; set; }
+
+    public List<Event> Events { get; set; }
 }
 
 public class Person                                     /*Person, inherits parent table Host*/
@@ -123,16 +130,18 @@ public class HasSpace                                   //HasSpace Multi-Multi R
 
 public class HostedBy                                   //HostedBy Multi-Multi Relationship Table
 {
-    [Key] public Event Event { get; set; }              //FK for Event
-    [Key] public Host Host { get; set; }                //FK for Host
+    [Key] public Guid HostedID { get; set; }
+    public Event Event { get; set; }              //FK for Event
+    public Host Host { get; set; }                //FK for Host
 }
+
 
 public class Employee                                   //Employee Entity Table
 {
     [Key] public Guid EmpID { get; set;}
     public string Name { get; set; }
     public decimal Pay { get; set; }
-    public List<Tuple<DateTime, DateTime>> ShiftSchedule { get; set; }      //May have problems
+    public string ShiftSchedule { get; set; }      
     public Location Location { get; set; }              //FK to location of workplace if applicable
     public Host Host { get; set; }                      //FK to host they work for if applicable
 }
@@ -158,7 +167,7 @@ public class Presents                                   //Presents Multi-Multi R
 }
 public class Vendor                                     //Vendor Entity Table
 {
-    [Key] Guid VendorID { get; set; }               //ID of vendor
+    [Key] public Guid VendorID { get; set; }               //ID of vendor
     public string Name { get; set; }                //Name of vendor
     public string Email { get; set; }               //Email of vendor
     public string PhoneNum { get; set; }            //Phone number of vendor
