@@ -182,7 +182,7 @@
             // 
             // Entry_Form
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(553, 336);
             Controls.Add(panel4);
