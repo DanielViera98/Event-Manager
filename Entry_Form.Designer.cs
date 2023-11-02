@@ -30,12 +30,13 @@
         {
             SuspendLayout();
             // 
-            // Form1
+            // Entry_Form
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Name = "Form1";
+            ClientSize = new Size(640, 360);
+            Margin = new Padding(2);
+            Name = "Entry_Form";
             Text = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);

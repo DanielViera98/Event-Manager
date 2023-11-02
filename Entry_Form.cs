@@ -5,12 +5,12 @@ namespace Event_Manager
         public Entry_Form()
         {
             InitializeComponent();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
