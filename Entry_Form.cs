@@ -5,12 +5,18 @@ namespace Event_Manager
         public Entry_Form()
         {
             InitializeComponent();
-            
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void button_LogIn_Click(object sender, EventArgs e)
         {
-            
+            var accountType = comboBox_Login.Text;
+
+        }
+
+        private void button_Register_Click(object sender, EventArgs e)
+        {
+            Register_Form reg = new Register_Form();
+            reg.Show();
         }
     }
 }

@@ -16,5 +16,30 @@ namespace Event_Manager
         {
             InitializeComponent();
         }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void User_Form_Load(object sender, EventArgs e)
+        {
+            //listView1.Items.Add();
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void vendorData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
