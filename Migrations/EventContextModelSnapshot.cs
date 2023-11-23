@@ -87,7 +87,6 @@ namespace Event_Manager.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("EndDate")
@@ -200,6 +199,10 @@ namespace Event_Manager.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 

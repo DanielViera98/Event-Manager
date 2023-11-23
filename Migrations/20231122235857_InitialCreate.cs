@@ -52,6 +52,7 @@ namespace Event_Manager.Migrations
                 columns: table => new
                 {
                     Address = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     Website = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     RentalFee = table.Column<decimal>(type: "numeric", nullable: false),
@@ -127,7 +128,7 @@ namespace Event_Manager.Migrations
                 {
                     EventId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Website = table.Column<string>(type: "text", nullable: false),

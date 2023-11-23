@@ -50,9 +50,20 @@ public class EventContext : DbContext
 
 public class Event                                      //Event Entity Table
 {
+    public Event() { }
+    public Event(string name, string desc, DateTime start, DateTime end, string site, Location local) 
+    {
+        EventId = new Guid();
+        Name = name;
+        Description = desc;
+        StartDate = start;
+        EndDate = end;
+        Website = site;
+        Location = local;
+    }
     [Key] public Guid EventId { get; set; }             
     public string Name { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public string Website {  get; set; }

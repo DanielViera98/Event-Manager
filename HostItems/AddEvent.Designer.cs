@@ -42,8 +42,8 @@
             richTextBox_Description = new RichTextBox();
             dateTimePicker_Start = new DateTimePicker();
             dateTimePicker_End = new DateTimePicker();
-            button1 = new Button();
-            button2 = new Button();
+            button_AddEvent = new Button();
+            button_Cancel = new Button();
             panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)locationBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -153,29 +153,31 @@
             dateTimePicker_End.Size = new Size(300, 31);
             dateTimePicker_End.TabIndex = 11;
             // 
-            // button1
+            // button_AddEvent
             // 
-            button1.Location = new Point(87, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 46);
-            button1.TabIndex = 12;
-            button1.Text = "Add Event";
-            button1.UseVisualStyleBackColor = true;
+            button_AddEvent.Location = new Point(87, 4);
+            button_AddEvent.Name = "button_AddEvent";
+            button_AddEvent.Size = new Size(112, 46);
+            button_AddEvent.TabIndex = 12;
+            button_AddEvent.Text = "Add Event";
+            button_AddEvent.UseVisualStyleBackColor = true;
+            button_AddEvent.Click += button_AddEvent_Click;
             // 
-            // button2
+            // button_Cancel
             // 
-            button2.Location = new Point(205, 4);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 46);
-            button2.TabIndex = 13;
-            button2.Text = "Cancel";
-            button2.UseVisualStyleBackColor = true;
+            button_Cancel.Location = new Point(205, 4);
+            button_Cancel.Name = "button_Cancel";
+            button_Cancel.Size = new Size(112, 46);
+            button_Cancel.TabIndex = 13;
+            button_Cancel.Text = "Cancel";
+            button_Cancel.UseVisualStyleBackColor = true;
+            button_Cancel.Click += button_Cancel_Click;
             // 
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.Fixed3D;
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(button_Cancel);
+            panel1.Controls.Add(button_AddEvent);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 418);
             panel1.Name = "panel1";
@@ -225,8 +227,8 @@
         private RichTextBox richTextBox_Description;
         private DateTimePicker dateTimePicker_Start;
         private DateTimePicker dateTimePicker_End;
-        private Button button1;
-        private Button button2;
+        private Button button_AddEvent;
+        private Button button_Cancel;
         private Panel panel1;
     }
 }

@@ -28,21 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             button_RegisterEvent = new Button();
-            button2 = new Button();
+            button_Refresh = new Button();
             button3 = new Button();
-            dataGridView1 = new DataGridView();
-            eventBindingSource = new BindingSource(components);
-            eventIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            startDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            endDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            websiteDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            locationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)eventBindingSource).BeginInit();
+            dataGridView_Events = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_Events).BeginInit();
             SuspendLayout();
             // 
             // button_RegisterEvent
@@ -53,16 +43,17 @@
             button_RegisterEvent.TabIndex = 0;
             button_RegisterEvent.Text = "Register Event";
             button_RegisterEvent.UseVisualStyleBackColor = true;
-            button_RegisterEvent.Click += button1_RegisterEvent;
+            button_RegisterEvent.Click += button_RegisterEvent_Click;
             // 
-            // button2
+            // button_Refresh
             // 
-            button2.Location = new Point(351, 324);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 72);
-            button2.TabIndex = 1;
-            button2.Text = "View Events";
-            button2.UseVisualStyleBackColor = true;
+            button_Refresh.Location = new Point(355, 340);
+            button_Refresh.Name = "button_Refresh";
+            button_Refresh.Size = new Size(112, 72);
+            button_Refresh.TabIndex = 1;
+            button_Refresh.Text = "Refresh View";
+            button_Refresh.UseVisualStyleBackColor = true;
+            button_Refresh.Click += button_Refresh_Click;
             // 
             // button3
             // 
@@ -73,110 +64,38 @@
             button3.Text = "View Account Info";
             button3.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridView_Events
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { eventIdDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, endDateDataGridViewTextBoxColumn, websiteDataGridViewTextBoxColumn, locationDataGridViewTextBoxColumn });
-            dataGridView1.DataSource = eventBindingSource;
-            dataGridView1.Dock = DockStyle.Top;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(800, 258);
-            dataGridView1.TabIndex = 3;
-            // 
-            // eventBindingSource
-            // 
-            eventBindingSource.DataSource = typeof(Event);
-            // 
-            // eventIdDataGridViewTextBoxColumn
-            // 
-            eventIdDataGridViewTextBoxColumn.DataPropertyName = "EventId";
-            eventIdDataGridViewTextBoxColumn.HeaderText = "EventId";
-            eventIdDataGridViewTextBoxColumn.MinimumWidth = 8;
-            eventIdDataGridViewTextBoxColumn.Name = "eventIdDataGridViewTextBoxColumn";
-            eventIdDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.MinimumWidth = 8;
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            nameDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            descriptionDataGridViewTextBoxColumn.MinimumWidth = 8;
-            descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            descriptionDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // startDateDataGridViewTextBoxColumn
-            // 
-            startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
-            startDateDataGridViewTextBoxColumn.HeaderText = "StartDate";
-            startDateDataGridViewTextBoxColumn.MinimumWidth = 8;
-            startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
-            startDateDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // endDateDataGridViewTextBoxColumn
-            // 
-            endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            endDateDataGridViewTextBoxColumn.HeaderText = "EndDate";
-            endDateDataGridViewTextBoxColumn.MinimumWidth = 8;
-            endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
-            endDateDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // websiteDataGridViewTextBoxColumn
-            // 
-            websiteDataGridViewTextBoxColumn.DataPropertyName = "Website";
-            websiteDataGridViewTextBoxColumn.HeaderText = "Website";
-            websiteDataGridViewTextBoxColumn.MinimumWidth = 8;
-            websiteDataGridViewTextBoxColumn.Name = "websiteDataGridViewTextBoxColumn";
-            websiteDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // locationDataGridViewTextBoxColumn
-            // 
-            locationDataGridViewTextBoxColumn.DataPropertyName = "Location";
-            locationDataGridViewTextBoxColumn.HeaderText = "Location";
-            locationDataGridViewTextBoxColumn.MinimumWidth = 8;
-            locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
-            locationDataGridViewTextBoxColumn.Width = 150;
+            dataGridView_Events.AllowUserToAddRows = false;
+            dataGridView_Events.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_Events.Dock = DockStyle.Top;
+            dataGridView_Events.Location = new Point(0, 0);
+            dataGridView_Events.Name = "dataGridView_Events";
+            dataGridView_Events.RowHeadersWidth = 62;
+            dataGridView_Events.RowTemplate.Height = 33;
+            dataGridView_Events.Size = new Size(800, 258);
+            dataGridView_Events.TabIndex = 3;
             // 
             // HostLanding
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGridView_Events);
             Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(button_Refresh);
             Controls.Add(button_RegisterEvent);
             Name = "HostLanding";
             Text = "HostLanding";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)eventBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_Events).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button button_RegisterEvent;
-        private Button button2;
+        private Button button_Refresh;
         private Button button3;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn eventIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn websiteDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn locationDataGridViewTextBoxColumn;
-        private BindingSource eventBindingSource;
+        private DataGridView dataGridView_Events;
     }
 }

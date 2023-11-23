@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Event_Manager.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20231101225110_InitialCreate")]
+    [Migration("20231122235857_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -90,7 +90,6 @@ namespace Event_Manager.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("EndDate")
@@ -203,6 +202,10 @@ namespace Event_Manager.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 

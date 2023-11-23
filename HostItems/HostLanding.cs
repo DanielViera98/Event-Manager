@@ -16,12 +16,30 @@ namespace Event_Manager
         public HostLanding()
         {
             InitializeComponent();
+
+            refresh_view();
         }
 
-        private void button1_RegisterEvent(object sender, EventArgs e)
+        private void button_RegisterEvent_Click(object sender, EventArgs e)
         {
             var newEvent = new AddEvent();
             newEvent.Show();
+        }
+
+        private void button_Refresh_Click(object sender, EventArgs e)
+        {
+            refresh_view();
+        }
+
+        private void refresh_view()
+        {
+            var db = new EventContext();
+            var eventSource = new BindingList<Event>();
+            foreach (var local in db.Events)
+            {
+                eventSource.Add(local);
+            }
+            dataGridView_Events.DataSource = eventSource;
         }
     }
 }
