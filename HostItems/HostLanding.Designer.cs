@@ -39,7 +39,7 @@
             // 
             button_RegisterEvent.Location = new Point(572, 340);
             button_RegisterEvent.Name = "button_RegisterEvent";
-            button_RegisterEvent.Size = new Size(112, 72);
+            button_RegisterEvent.Size = new Size(110, 70);
             button_RegisterEvent.TabIndex = 0;
             button_RegisterEvent.Text = "Register Event";
             button_RegisterEvent.UseVisualStyleBackColor = true;
@@ -49,7 +49,7 @@
             // 
             button_Refresh.Location = new Point(355, 340);
             button_Refresh.Name = "button_Refresh";
-            button_Refresh.Size = new Size(112, 72);
+            button_Refresh.Size = new Size(110, 70);
             button_Refresh.TabIndex = 1;
             button_Refresh.Text = "Refresh View";
             button_Refresh.UseVisualStyleBackColor = true;
@@ -59,7 +59,7 @@
             // 
             button3.Location = new Point(160, 340);
             button3.Name = "button3";
-            button3.Size = new Size(131, 72);
+            button3.Size = new Size(168, 70);
             button3.TabIndex = 2;
             button3.Text = "View Account Info";
             button3.UseVisualStyleBackColor = true;
