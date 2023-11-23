@@ -72,14 +72,18 @@
             HostedLabel = new Label();
             ShowHosts = new CheckBox();
             ticketData = new DataGridView();
-            ticketBindingSource = new BindingSource(components);
             ticketIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            costDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             attendeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             eventDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             ticketTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ticketBindingSource = new BindingSource(components);
+            costDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             TicketsLabel = new Label();
             ShowTickets = new CheckBox();
+            buyButton = new Button();
+            confirmation = new TextBox();
+            Confirm = new Button();
+            Cancel = new Button();
             ((System.ComponentModel.ISupportInitialize)vendorBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)presenterData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)presenterBindingSource).BeginInit();
@@ -493,10 +497,6 @@
             ticketData.Size = new Size(720, 188);
             ticketData.TabIndex = 17;
             // 
-            // ticketBindingSource
-            // 
-            ticketBindingSource.DataSource = typeof(Ticket);
-            // 
             // ticketIDDataGridViewTextBoxColumn
             // 
             ticketIDDataGridViewTextBoxColumn.DataPropertyName = "TicketID";
@@ -504,14 +504,6 @@
             ticketIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             ticketIDDataGridViewTextBoxColumn.Name = "ticketIDDataGridViewTextBoxColumn";
             ticketIDDataGridViewTextBoxColumn.Width = 92;
-            // 
-            // costDataGridViewTextBoxColumn
-            // 
-            costDataGridViewTextBoxColumn.DataPropertyName = "Cost";
-            costDataGridViewTextBoxColumn.HeaderText = "Cost";
-            costDataGridViewTextBoxColumn.MinimumWidth = 6;
-            costDataGridViewTextBoxColumn.Name = "costDataGridViewTextBoxColumn";
-            costDataGridViewTextBoxColumn.Width = 67;
             // 
             // attendeeDataGridViewTextBoxColumn
             // 
@@ -537,6 +529,18 @@
             ticketTypeDataGridViewTextBoxColumn.Name = "ticketTypeDataGridViewTextBoxColumn";
             ticketTypeDataGridViewTextBoxColumn.Width = 108;
             // 
+            // ticketBindingSource
+            // 
+            ticketBindingSource.DataSource = typeof(Ticket);
+            // 
+            // costDataGridViewTextBoxColumn
+            // 
+            costDataGridViewTextBoxColumn.DataPropertyName = "Cost";
+            costDataGridViewTextBoxColumn.HeaderText = "Cost";
+            costDataGridViewTextBoxColumn.MinimumWidth = 6;
+            costDataGridViewTextBoxColumn.Name = "costDataGridViewTextBoxColumn";
+            costDataGridViewTextBoxColumn.Width = 67;
+            // 
             // TicketsLabel
             // 
             TicketsLabel.AutoSize = true;
@@ -557,11 +561,55 @@
             ShowTickets.UseVisualStyleBackColor = true;
             ShowTickets.CheckedChanged += ShowTickets_CheckedChanged;
             // 
+            // buyButton
+            // 
+            buyButton.Location = new Point(12, 192);
+            buyButton.Name = "buyButton";
+            buyButton.Size = new Size(222, 29);
+            buyButton.TabIndex = 20;
+            buyButton.Text = "buy ticket";
+            buyButton.UseVisualStyleBackColor = true;
+            buyButton.Click += buyButton_Click;
+            // 
+            // confirmation
+            // 
+            confirmation.Location = new Point(12, 227);
+            confirmation.Name = "confirmation";
+            confirmation.ReadOnly = true;
+            confirmation.Size = new Size(222, 27);
+            confirmation.TabIndex = 21;
+            confirmation.Text = "Are you sure?";
+            confirmation.TextAlign = HorizontalAlignment.Center;
+            // 
+            // Confirm
+            // 
+            Confirm.Location = new Point(12, 260);
+            Confirm.Name = "Confirm";
+            Confirm.Size = new Size(94, 29);
+            Confirm.TabIndex = 22;
+            Confirm.Text = "Yes";
+            Confirm.UseVisualStyleBackColor = true;
+            Confirm.Click += Confirm_Click;
+            // 
+            // Cancel
+            // 
+            Cancel.Location = new Point(140, 260);
+            Cancel.Name = "Cancel";
+            Cancel.Size = new Size(94, 29);
+            Cancel.TabIndex = 23;
+            Cancel.Text = "No";
+            Cancel.UseVisualStyleBackColor = true;
+            Cancel.Click += Cancel_Click;
+            // 
             // User_Form
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1600, 900);
+            Controls.Add(Cancel);
+            Controls.Add(Confirm);
+            Controls.Add(confirmation);
+            Controls.Add(buyButton);
             Controls.Add(ShowTickets);
             Controls.Add(TicketsLabel);
             Controls.Add(ticketData);
@@ -651,5 +699,9 @@
         private BindingSource ticketBindingSource;
         private Label TicketsLabel;
         private CheckBox ShowTickets;
+        private Button buyButton;
+        private TextBox confirmation;
+        private Button Confirm;
+        private Button Cancel;
     }
 }

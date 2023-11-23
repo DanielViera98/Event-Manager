@@ -14,6 +14,7 @@ namespace Event_Manager
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new HostLanding());
+            Application.Run(new User_Form());
         }
     }
 }

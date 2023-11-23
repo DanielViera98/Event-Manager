@@ -29,6 +29,10 @@ namespace Event_Manager
             PresentsLabel.Hide();
             HostedLabel.Hide();
             TicketsLabel.Hide();
+
+            confirmation.Hide();
+            Confirm.Hide();
+            Cancel.Hide();
         }
 
         private void User_Form_Load(object sender, EventArgs e)
@@ -159,6 +163,27 @@ namespace Event_Manager
                 TicketsLabel.Show();
                 tablesShowing += 1;
             }
+        }
+
+        private void buyButton_Click(object sender, EventArgs e)
+        {
+            Confirm.Show();
+            confirmation.Show();
+            Cancel.Show();
+        }
+
+        private void Confirm_Click(object sender, EventArgs e)
+        {
+            Confirm.Hide();
+            confirmation.Hide();
+            Cancel.Hide();
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            Confirm.Hide();
+            confirmation.Hide();
+            Cancel.Hide();
         }
     }
 }
