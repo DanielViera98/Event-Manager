@@ -15,6 +15,8 @@ namespace Event_Manager
             ApplicationConfiguration.Initialize();
             Application.Run(new HostLanding());
             Application.Run(new User_Form());
+            
+
         }
     }
 }
