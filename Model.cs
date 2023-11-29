@@ -86,6 +86,11 @@ public class Location                                   //Location Entity Table
     public int VendorCapacity { get; set; }
     public int AttendeeCapacity { get; set; }
     public List<Event> Events { get; set; }
+
+    public static explicit operator Location(string v)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class Attendee                                   //Attendee Entity Table
@@ -113,6 +118,11 @@ public class Host                                       //Host Parent Entity Tab
     public string Email { get; set; }
 
     public List<Event> Events { get; set; }
+
+    public static explicit operator Host(string v)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class Person                                     /*Person, inherits parent table Host*/

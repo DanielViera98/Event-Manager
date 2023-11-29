@@ -10,41 +10,21 @@ using System.Windows.Forms;
 
 namespace Event_Manager
 {
-    public enum EntityType
-    {
-        Unknown,
-        Event,
-        Host,
-        Attendee,
-        Location,
-        // ... other entity types
-    }
+    
     public partial class Admin_Edit_Form : Form
     {
         private object _entityToEdit;
-        private EntityType _entityType;
 
-        public Admin_Edit_Form(object entityToEdit, EntityType entityType)
+        public Admin_Edit_Form(object entityToEdit)
         {
             InitializeComponent();
             _entityToEdit = entityToEdit;
-            _entityType = entityType;
             PopulateFields();
         }
 
         private void PopulateFields()
         {
-            switch (_entityType)
-            {
-                case EntityType.Event:
-                    Event eventToEdit = _entityToEdit as Event;
-                    // Populate fields for Event
-                    break;
-                case EntityType.Host:
-                    Host hostToEdit = _entityToEdit as Host;
-                    // Populate fields for Host
-                    break;
-                case EntityType.Location:
+            
                     Location locationToEdit = _entityToEdit as Location;
                     // Populate fields for Location
                     if (locationToEdit != null)
@@ -58,43 +38,18 @@ namespace Event_Manager
                         numericAC.Value = locationToEdit.AttendeeCapacity;
                     }
 
-                    break;
+                    
                     // ... handle other types
-            }
+            
         }
 
         private void Submit_Click(object sender, EventArgs e)
         {
-            switch (_entityType)
-            {
-                case EntityType.Event:
-                    SaveEvent();
-                    break;
-                case EntityType.Host:
-                    SaveHost();
-                    break;
-                // ... other cases
-                case EntityType.Location:
+            
                     SaveLocation();
-                    break;
-                default:
-                    throw new InvalidOperationException("Unsupported entity type.");
-            }
+                    
         }
 
-        private void SaveEvent()
-        {
-            Event eventToSave = _entityToEdit as Event;
-            // Update eventToSave with values from form controls
-            // Save to database
-            // Set DialogResult and close if successful
-        }
-
-        private void SaveHost()
-        {
-            Host hostToSave = _entityToEdit as Host;
-            // Similar handling for Host
-        }
 
         private void SaveLocation()
         {

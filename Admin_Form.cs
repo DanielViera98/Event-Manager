@@ -177,24 +177,66 @@ namespace Event_Manager
         {
             if (item != null)
             {
-                EntityType entityType = EntityType.Unknown;
+                //EntityType entityType = EntityType.Unknown;
 
                 // Determine the type of the entity
+                Form editForm = null; // Declare the form variable outside of the if-else statements
+
+                // Determine the type of the entity and instantiate the appropriate form
                 if (item is Event)
-                    entityType = EntityType.Event;
+                {
+                    editForm = new Event_Edit_Form(item);
+                }
                 else if (item is Host)
-                    entityType = EntityType.Host;
+                {
+                    editForm = new Host_Edit_Form(item);
+                }
                 else if (item is Location)
-                    entityType = EntityType.Location;
+                {
+                    editForm = new Admin_Edit_Form(item);
+                }
+                else if (item is Attendee)
+                {
+                    editForm = new Attendee_Edit_Form(item);
+                }
+                else if (item is Presenter)
+                {
+                    editForm = new Presenter_Edit_Form(item);
+                }
+                else if (item is Ticket)
+                {
+                    editForm = new Ticket_Edit_Form(item);
+                }
+                else if (item is Vendor)
+                {
+                    editForm = new Vendor_Edit_Form(item);
+                }
+                else if (item is Employee)
+                {
+                    editForm = new Employees_Edit_Form(item);
+                }
                 // ... other types
 
-                Admin_Edit_Form editForm = new Admin_Edit_Form(item, entityType);
-                var dialogResult = editForm.ShowDialog(this);
+                // Now show the form if it was instantiated
+                editForm?.ShowDialog(this);
 
-                if (dialogResult == DialogResult.OK)
-                {
+                // ... other types
+
+                //Admin_Edit_Form editForm = new Admin_Edit_Form(item);
+                //Attendee_Edit_Form editForm = new Attendee_Edit_Form(item);
+                //Employees_Edit_Form editForm = new Employees_Edit_Form(item);
+                //Ticket_Edit_Form editForm = new Ticket_Edit_Form(item);
+                //Host_Edit_Form editForm = new Host_Edit_Form(item);
+                //Presenter_Edit_Form editForm = new Presenter_Edit_Form(item);
+                //Vendor_Edit_Form editForm = new Vendor_Edit_Form(item);
+
+
+                //var dialogResult = editForm.ShowDialog(this);
+
+                //if (dialogResult == DialogResult.OK)
+                //{
                     //RefreshDataGridView();
-                }
+                //}
             }
         }
 
