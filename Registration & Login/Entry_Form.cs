@@ -1,3 +1,5 @@
+using Event_Manager.Registration___Login;
+
 namespace Event_Manager
 {
     public partial class Entry_Form : Form
@@ -15,8 +17,11 @@ namespace Event_Manager
 
         private void button_Register_Click(object sender, EventArgs e)
         {
-            Register_Form reg = new Register_Form();
-            reg.Show();
+            if (radioButton_Attendee.Checked)
+            {
+                var reg = new RegisterAttendee_Form();
+                reg.Show();
+            }
         }
     }
 }

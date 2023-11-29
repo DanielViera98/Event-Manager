@@ -31,6 +31,7 @@
             dataGridView_Presenters = new DataGridView();
             panel1 = new Panel();
             button_addPresenter = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Presenters).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -48,6 +49,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(button_addPresenter);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 317);
@@ -64,6 +66,15 @@
             button_addPresenter.Text = "Add Presenter";
             button_addPresenter.UseVisualStyleBackColor = true;
             button_addPresenter.Click += button_addPresenter_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(345, 31);
+            button1.Name = "button1";
+            button1.Size = new Size(110, 70);
+            button1.TabIndex = 1;
+            button1.Text = "Register For Event";
+            button1.UseVisualStyleBackColor = true;
             // 
             // PresenterLanding
             // 
@@ -84,5 +95,6 @@
         private DataGridView dataGridView_Presenters;
         private Panel panel1;
         private Button button_addPresenter;
+        private Button button1;
     }
 }
