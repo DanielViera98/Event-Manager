@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace Event_Manager
     {
         int tablesShowing = 0;
         string userName;
+        Attendee currAttendee;
         public User_Form(string user)
         {
             InitializeComponent();
@@ -35,6 +37,7 @@ namespace Event_Manager
             Confirm.Hide();
             Cancel.Hide();
             userName = user;
+            currAttendee = new Attendee();
 
         }
 
@@ -43,12 +46,15 @@ namespace Event_Manager
             NameBox.Text = userName;
             var db = new EventContext();
             var attendees = db.Attendees.Where(p => p.Name == userName).ToList();
+            if (attendees.Count > 0 )
+            {
+                currAttendee = attendees.First();
+            }
             var tickets = db.Tickets.Where(p => attendees.Contains(p.Attendee)).ToList();
             var hosts = db.HostedBy.Where(p => db.Tickets.Any()).ToList();
             var events = db.Events.ToList();
             var presents = db.Presents.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).ToList();
             var presenters = db.Presenters.ToList();
-            //var presenters = db.Presenters.Where(p => db.Events.Where(e => presents.Where(q => q.Presenter == p).Select(w => w.Event).ToArray().Contains(e));// && tickets.Select(t => t.Event).ToList().Contains(e));// && ); ;
             var vendors = db.Vendors.ToList();
             hostedData.DataSource = hosts;
             eventData.DataSource = events;
@@ -195,6 +201,24 @@ namespace Event_Manager
             Confirm.Hide();
             confirmation.Hide();
             Cancel.Hide();
+
+            var db = new EventContext();
+            
+            if (Choice.Text == "Select an Event" || db.Tickets.Any(p=> p.Attendee.AttendeeID == currAttendee.AttendeeID))
+            {
+                MessageBox.Show("Must select a cell for an Event. Must not already have ticket.");
+                return;
+            }
+            
+            db.Tickets.Add(new Ticket(
+                5,
+                currAttendee,
+                db.Events.Where(p=>p.Name == Choice.Text).First(),
+                "Attendee"
+                ));
+            
+            db.SaveChanges();
+
         }
 
         private void Cancel_Click(object sender, EventArgs e)
@@ -202,6 +226,22 @@ namespace Event_Manager
             Confirm.Hide();
             confirmation.Hide();
             Cancel.Hide();
+        }
+
+        private void eventData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach (DataGridViewRow row in eventData.Rows)
+            {
+                foreach (DataGridViewCell cell in eventData.SelectedCells)
+                {
+                    if (row.Cells[0].Value.ToString() == cell.Value.ToString())
+                    {
+                        Choice.Text = row.Cells[0].Value.ToString();
+                        break;
+                    }
+                }
+
+            }
         }
     }
 }
