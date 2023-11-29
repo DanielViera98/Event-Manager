@@ -40,6 +40,8 @@
             AttendeesButton = new Button();
             EmployeesButton = new Button();
             TicketsButton = new Button();
+            DeleteButton = new Button();
+            ModifyButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)eventBindingSource).BeginInit();
             SuspendLayout();
@@ -47,16 +49,18 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(363, 98);
+            label2.Location = new Point(290, 78);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(0, 25);
+            label2.Size = new Size(0, 20);
             label2.TabIndex = 1;
             // 
             // EventsButton
             // 
             EventsButton.Location = new Point(0, 0);
+            EventsButton.Margin = new Padding(2);
             EventsButton.Name = "EventsButton";
-            EventsButton.Size = new Size(112, 34);
+            EventsButton.Size = new Size(90, 27);
             EventsButton.TabIndex = 2;
             EventsButton.Text = "Events";
             EventsButton.UseVisualStyleBackColor = true;
@@ -64,9 +68,10 @@
             // 
             // VendorsButton
             // 
-            VendorsButton.Location = new Point(0, 70);
+            VendorsButton.Location = new Point(0, 56);
+            VendorsButton.Margin = new Padding(2);
             VendorsButton.Name = "VendorsButton";
-            VendorsButton.Size = new Size(112, 34);
+            VendorsButton.Size = new Size(90, 27);
             VendorsButton.TabIndex = 3;
             VendorsButton.Text = "Vendors";
             VendorsButton.UseVisualStyleBackColor = true;
@@ -74,9 +79,10 @@
             // 
             // LocationsButton
             // 
-            LocationsButton.Location = new Point(0, 105);
+            LocationsButton.Location = new Point(0, 84);
+            LocationsButton.Margin = new Padding(2);
             LocationsButton.Name = "LocationsButton";
-            LocationsButton.Size = new Size(112, 34);
+            LocationsButton.Size = new Size(90, 27);
             LocationsButton.TabIndex = 4;
             LocationsButton.Text = "Locations";
             LocationsButton.UseVisualStyleBackColor = true;
@@ -84,9 +90,10 @@
             // 
             // PresentersButton
             // 
-            PresentersButton.Location = new Point(0, 140);
+            PresentersButton.Location = new Point(0, 112);
+            PresentersButton.Margin = new Padding(2);
             PresentersButton.Name = "PresentersButton";
-            PresentersButton.Size = new Size(112, 34);
+            PresentersButton.Size = new Size(90, 27);
             PresentersButton.TabIndex = 5;
             PresentersButton.Text = "Presenters";
             PresentersButton.UseVisualStyleBackColor = true;
@@ -94,9 +101,10 @@
             // 
             // HostsButton
             // 
-            HostsButton.Location = new Point(0, 35);
+            HostsButton.Location = new Point(0, 28);
+            HostsButton.Margin = new Padding(2);
             HostsButton.Name = "HostsButton";
-            HostsButton.Size = new Size(112, 34);
+            HostsButton.Size = new Size(90, 27);
             HostsButton.TabIndex = 6;
             HostsButton.Text = "Hosts";
             HostsButton.UseVisualStyleBackColor = true;
@@ -104,12 +112,14 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(118, 0);
+            dataGridView1.Location = new Point(94, 0);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(681, 449);
+            dataGridView1.Size = new Size(545, 359);
             dataGridView1.TabIndex = 7;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -119,9 +129,10 @@
             // 
             // AttendeesButton
             // 
-            AttendeesButton.Location = new Point(0, 175);
+            AttendeesButton.Location = new Point(0, 140);
+            AttendeesButton.Margin = new Padding(2);
             AttendeesButton.Name = "AttendeesButton";
-            AttendeesButton.Size = new Size(112, 34);
+            AttendeesButton.Size = new Size(90, 27);
             AttendeesButton.TabIndex = 8;
             AttendeesButton.Text = "Attendees";
             AttendeesButton.UseVisualStyleBackColor = true;
@@ -129,9 +140,10 @@
             // 
             // EmployeesButton
             // 
-            EmployeesButton.Location = new Point(0, 210);
+            EmployeesButton.Location = new Point(0, 168);
+            EmployeesButton.Margin = new Padding(2);
             EmployeesButton.Name = "EmployeesButton";
-            EmployeesButton.Size = new Size(112, 34);
+            EmployeesButton.Size = new Size(90, 27);
             EmployeesButton.TabIndex = 9;
             EmployeesButton.Text = "Employees";
             EmployeesButton.UseVisualStyleBackColor = true;
@@ -139,19 +151,42 @@
             // 
             // TicketsButton
             // 
-            TicketsButton.Location = new Point(0, 245);
+            TicketsButton.Location = new Point(0, 196);
+            TicketsButton.Margin = new Padding(2);
             TicketsButton.Name = "TicketsButton";
-            TicketsButton.Size = new Size(112, 34);
+            TicketsButton.Size = new Size(90, 27);
             TicketsButton.TabIndex = 10;
             TicketsButton.Text = "Tickets";
             TicketsButton.UseVisualStyleBackColor = true;
             TicketsButton.Click += TicketsButton_Click;
             // 
+            // DeleteButton
+            // 
+            DeleteButton.Location = new Point(0, 330);
+            DeleteButton.Name = "DeleteButton";
+            DeleteButton.Size = new Size(94, 29);
+            DeleteButton.TabIndex = 11;
+            DeleteButton.Text = "Delete";
+            DeleteButton.UseVisualStyleBackColor = true;
+            DeleteButton.Click += DeleteButton_Click;
+            // 
+            // ModifyButton
+            // 
+            ModifyButton.Location = new Point(0, 295);
+            ModifyButton.Name = "ModifyButton";
+            ModifyButton.Size = new Size(94, 29);
+            ModifyButton.TabIndex = 12;
+            ModifyButton.Text = "Modify";
+            ModifyButton.UseVisualStyleBackColor = true;
+            ModifyButton.Click += ModifyButton_Click;
+            // 
             // Admin_Form
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(640, 360);
+            Controls.Add(ModifyButton);
+            Controls.Add(DeleteButton);
             Controls.Add(TicketsButton);
             Controls.Add(EmployeesButton);
             Controls.Add(AttendeesButton);
@@ -162,6 +197,7 @@
             Controls.Add(VendorsButton);
             Controls.Add(EventsButton);
             Controls.Add(label2);
+            Margin = new Padding(2);
             Name = "Admin_Form";
             Text = "Admin";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -182,5 +218,7 @@
         private Button AttendeesButton;
         private Button EmployeesButton;
         private Button TicketsButton;
+        private Button DeleteButton;
+        private Button ModifyButton;
     }
 }

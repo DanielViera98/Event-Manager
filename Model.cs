@@ -43,7 +43,7 @@ public class EventContext : DbContext
     // special "local" folder for your platform.
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=passw0rd;Database=EventDatabase;");
+        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=Najam2002!;Database=EventDatabase;");
         base.OnConfiguring(options);
     }
 
@@ -175,7 +175,7 @@ public class Employee                                   //Employee Entity Table
 public class Presenter
 {
     [Key] public int PresenterID { get; set; }
-    public int Name { get; set; }
+    public string Name { get; set; }
     public string Email { get; set; }
     public float PresenterFee { get; set; }
 }

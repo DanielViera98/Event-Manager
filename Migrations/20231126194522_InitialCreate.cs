@@ -70,7 +70,7 @@ namespace Event_Manager.Migrations
                 {
                     PresenterID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     PresenterFee = table.Column<float>(type: "real", nullable: false)
                 },
