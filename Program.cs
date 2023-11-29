@@ -1,3 +1,5 @@
+using Event_Manager.LocationItems;  //For LocationLanding
+
 namespace Event_Manager
 {
     internal static class Program

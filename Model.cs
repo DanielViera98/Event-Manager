@@ -12,6 +12,7 @@ using System.Diagnostics.SymbolStore;
 using System.Numerics;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Logging;
 
 //Create new class for database context
 public class EventContext : DbContext
@@ -78,9 +79,22 @@ public class Event                                      //Event Entity Table
 
 public class Location                                   //Location Entity Table
 {
+    public Location() { }
+    public Location(string address, string name, string website, string email, decimal rentalFee, 
+        int vendors, int attendees)
+    {
+        Address = address;
+        Name = name;
+        Website = website;
+        Email = email;
+        RentalFee = rentalFee;
+        VendorCapacity = vendors;
+        AttendeeCapacity = attendees;
+        Events = new List<Event>();
+    }
     [Key] public string Address { get; set; }
     public string Name { get; set; }
-    public string Website { get; set; }
+    public string? Website { get; set; }
     public string Email { get; set; }
     public decimal RentalFee { get; set; }
     public int VendorCapacity { get; set; }
