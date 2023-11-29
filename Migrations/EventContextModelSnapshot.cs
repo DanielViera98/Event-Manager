@@ -213,7 +213,6 @@ namespace Event_Manager.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Website")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Address");

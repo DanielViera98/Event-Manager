@@ -14,7 +14,8 @@ namespace Event_Manager
     public partial class User_Form : Form
     {
         int tablesShowing = 0;
-        public User_Form()
+        string userName;
+        public User_Form(string user)
         {
             InitializeComponent();
             presenterData.Hide();
@@ -33,11 +34,28 @@ namespace Event_Manager
             confirmation.Hide();
             Confirm.Hide();
             Cancel.Hide();
+            userName = user;
+
         }
 
         private void User_Form_Load(object sender, EventArgs e)
         {
-            //listView1.Items.Add();
+            NameBox.Text = userName;
+            var db = new EventContext();
+            var attendees = db.Attendees.Where(p => p.Name == userName).ToList();
+            var tickets = db.Tickets.Where(p => attendees.Contains(p.Attendee)).ToList();
+            var hosts = db.HostedBy.Where(p => db.Tickets.Any()).ToList();
+            var events = db.Events.ToList();
+            var presents = db.Presents.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).ToList();
+            var presenters = db.Presenters.ToList();
+            //var presenters = db.Presenters.Where(p => db.Events.Where(e => presents.Where(q => q.Presenter == p).Select(w => w.Event).ToArray().Contains(e));// && tickets.Select(t => t.Event).ToList().Contains(e));// && ); ;
+            var vendors = db.Vendors.ToList();
+            hostedData.DataSource = hosts;
+            eventData.DataSource = events;
+            presenterData.DataSource = presenters;
+            presentationData.DataSource = presents;
+            vendorData.DataSource = vendors;
+            ticketData.DataSource = tickets;
 
         }
 

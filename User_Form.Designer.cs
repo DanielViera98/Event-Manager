@@ -84,6 +84,7 @@
             confirmation = new TextBox();
             Confirm = new Button();
             Cancel = new Button();
+            NameBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)vendorBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)presenterData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)presenterBindingSource).BeginInit();
@@ -214,7 +215,7 @@
             // showPresenters
             // 
             showPresenters.AutoSize = true;
-            showPresenters.Location = new Point(12, 3);
+            showPresenters.Location = new Point(12, 47);
             showPresenters.Name = "showPresenters";
             showPresenters.Size = new Size(138, 24);
             showPresenters.TabIndex = 6;
@@ -225,7 +226,7 @@
             // showVendors
             // 
             showVendors.AutoSize = true;
-            showVendors.Location = new Point(12, 33);
+            showVendors.Location = new Point(12, 77);
             showVendors.Name = "showVendors";
             showVendors.Size = new Size(124, 24);
             showVendors.TabIndex = 7;
@@ -236,7 +237,7 @@
             // ShowEvents
             // 
             ShowEvents.AutoSize = true;
-            ShowEvents.Location = new Point(12, 63);
+            ShowEvents.Location = new Point(12, 107);
             ShowEvents.Name = "ShowEvents";
             ShowEvents.Size = new Size(113, 24);
             ShowEvents.TabIndex = 8;
@@ -409,7 +410,7 @@
             // ShowPresentations
             // 
             ShowPresentations.AutoSize = true;
-            ShowPresentations.Location = new Point(12, 93);
+            ShowPresentations.Location = new Point(12, 137);
             ShowPresentations.Name = "ShowPresentations";
             ShowPresentations.Size = new Size(159, 24);
             ShowPresentations.TabIndex = 13;
@@ -473,7 +474,7 @@
             // ShowHosts
             // 
             ShowHosts.AutoSize = true;
-            ShowHosts.Location = new Point(12, 123);
+            ShowHosts.Location = new Point(12, 167);
             ShowHosts.Name = "ShowHosts";
             ShowHosts.Size = new Size(108, 24);
             ShowHosts.TabIndex = 16;
@@ -553,7 +554,7 @@
             // ShowTickets
             // 
             ShowTickets.AutoSize = true;
-            ShowTickets.Location = new Point(12, 153);
+            ShowTickets.Location = new Point(12, 197);
             ShowTickets.Name = "ShowTickets";
             ShowTickets.Size = new Size(116, 24);
             ShowTickets.TabIndex = 19;
@@ -563,7 +564,7 @@
             // 
             // buyButton
             // 
-            buyButton.Location = new Point(12, 192);
+            buyButton.Location = new Point(12, 236);
             buyButton.Name = "buyButton";
             buyButton.Size = new Size(222, 29);
             buyButton.TabIndex = 20;
@@ -573,7 +574,7 @@
             // 
             // confirmation
             // 
-            confirmation.Location = new Point(12, 227);
+            confirmation.Location = new Point(12, 271);
             confirmation.Name = "confirmation";
             confirmation.ReadOnly = true;
             confirmation.Size = new Size(222, 27);
@@ -583,7 +584,7 @@
             // 
             // Confirm
             // 
-            Confirm.Location = new Point(12, 260);
+            Confirm.Location = new Point(12, 304);
             Confirm.Name = "Confirm";
             Confirm.Size = new Size(94, 29);
             Confirm.TabIndex = 22;
@@ -593,7 +594,7 @@
             // 
             // Cancel
             // 
-            Cancel.Location = new Point(140, 260);
+            Cancel.Location = new Point(140, 304);
             Cancel.Name = "Cancel";
             Cancel.Size = new Size(94, 29);
             Cancel.TabIndex = 23;
@@ -601,11 +602,19 @@
             Cancel.UseVisualStyleBackColor = true;
             Cancel.Click += Cancel_Click;
             // 
+            // NameBox
+            // 
+            NameBox.Location = new Point(12, 12);
+            NameBox.Name = "NameBox";
+            NameBox.Size = new Size(222, 27);
+            NameBox.TabIndex = 24;
+            // 
             // User_Form
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1600, 900);
+            Controls.Add(NameBox);
             Controls.Add(Cancel);
             Controls.Add(Confirm);
             Controls.Add(confirmation);
@@ -703,5 +712,6 @@
         private TextBox confirmation;
         private Button Confirm;
         private Button Cancel;
+        private TextBox NameBox;
     }
 }

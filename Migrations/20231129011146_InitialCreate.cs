@@ -53,7 +53,7 @@ namespace Event_Manager.Migrations
                 {
                     Address = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Website = table.Column<string>(type: "text", nullable: false),
+                    Website = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: false),
                     RentalFee = table.Column<decimal>(type: "numeric", nullable: false),
                     VendorCapacity = table.Column<int>(type: "integer", nullable: false),
