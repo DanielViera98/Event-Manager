@@ -1,6 +1,6 @@
 ﻿namespace Event_Manager
 {
-    partial class Admin_Edit_Form
+    partial class Location_Edit_Form
     {
         /// <summary>
         /// Required designer variable.

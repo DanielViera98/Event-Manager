@@ -11,11 +11,11 @@ using System.Windows.Forms;
 namespace Event_Manager
 {
     
-    public partial class Admin_Edit_Form : Form
+    public partial class Location_Edit_Form : Form
     {
         private object _entityToEdit;
 
-        public Admin_Edit_Form(object entityToEdit)
+        public Location_Edit_Form(object entityToEdit)
         {
             InitializeComponent();
             _entityToEdit = entityToEdit;

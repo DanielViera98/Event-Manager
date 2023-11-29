@@ -193,7 +193,7 @@ namespace Event_Manager
                 }
                 else if (item is Location)
                 {
-                    editForm = new Admin_Edit_Form(item);
+                    editForm = new Location_Edit_Form(item);
                 }
                 else if (item is Attendee)
                 {
