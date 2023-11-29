@@ -154,24 +154,68 @@ namespace Event_Manager
             // else if (entity is AnotherEntityType) { ... }
         }
 
-        private void ApplyChanges<T>(T originalItem, T updatedItem) where T : class
-        {
-            var properties = typeof(T).GetProperties();
-            foreach (var property in properties)
-            {
-                var originalValue = property.GetValue(originalItem);
-                var updatedValue = property.GetValue(updatedItem);
 
-                if (!Equals(originalValue, updatedValue))
+        private void ModifyButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var row = dataGridView1.SelectedRows[0];
+                var itemToEdit = row.DataBoundItem;
+                if (itemToEdit != null)
                 {
-                    property.SetValue(originalItem, updatedValue);
+                    // Open a new form or display a section in the current form to edit the selected item
+                    EditItem(itemToEdit);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a single row to edit.");
+            }
+        }
+
+        private void EditItem(object item)
+        {
+            if (item != null)
+            {
+                EntityType entityType = EntityType.Unknown;
+
+                // Determine the type of the entity
+                if (item is Event)
+                    entityType = EntityType.Event;
+                else if (item is Host)
+                    entityType = EntityType.Host;
+                else if (item is Location)
+                    entityType = EntityType.Location;
+                // ... other types
+
+                Admin_Edit_Form editForm = new Admin_Edit_Form(item, entityType);
+                var dialogResult = editForm.ShowDialog(this);
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    //RefreshDataGridView();
                 }
             }
         }
 
 
-        private void ModifyButton_Click(object sender, EventArgs e)
+
+        private void SaveEditedItem(object editedItem)
         {
+            var db = new EventContext();
+            // Assuming you know the type of the edited item, update it in the corresponding DbSet
+            // Example:
+            // if (editedItem is YourEntityType editedEntity)
+            // {
+            //     var originalEntity = db.YourEntitySet.Find(editedEntity.Id);
+            //     if (originalEntity != null)
+            //     {
+            //         ApplyChanges(originalEntity, editedEntity);
+            //         db.SaveChanges();
+            //         RefreshDataGridView(); // Refresh your DataGridView
+            //     }
+            // }
         }
+
     }
 }
