@@ -42,7 +42,7 @@ public class EventContext : DbContext
     // special "local" folder for your platform.
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=Najam2002!;Database=EventDatabase;");
+        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=passw0rd;Database=EventDatabase;");
         base.OnConfiguring(options);
     }
 
