@@ -39,8 +39,8 @@ namespace Event_Manager.Registration___Login
                 PresenterFee = numericUpDown_Fee.Value
             });
             db.SaveChanges();
-            var newForm = new PresenterLanding();
-            newForm.Show();
+            var form = new PresenterLanding();
+            form.Show();
             Close();
         }
     }

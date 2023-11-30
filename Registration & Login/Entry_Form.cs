@@ -34,31 +34,19 @@ namespace Event_Manager
 
         private void button_Register_Click(object sender, EventArgs e)
         {
+            dynamic reg;
             if (radioButton_Attendee.Checked)
-            {
-                var reg = new RegisterAttendee_Form();
-                reg.Show();
-            }
-            if (radioButton_Employee.Checked)
-            {
-                var reg = new RegisterEmployee_Form();
-                reg.Show();
-            }
-            if (radioButton_Presenter.Checked)
-            {
-                var reg = new RegisterPresenter_Form();
-                reg.Show();
-            }
-            if (radioButton_Vendor.Checked)
-            {
-                var reg = new RegisterVendor_Form();
-                reg.Show();
-            }
-            if (radioButton_Host.Checked)
-            {
-                var reg = new RegisterHost_Form();
-                reg.Show();
-            }
+                reg = new RegisterAttendee_Form();
+            else if (radioButton_Employee.Checked)
+                reg = new RegisterEmployee_Form();
+            else if (radioButton_Presenter.Checked)
+                reg = new RegisterPresenter_Form();
+            else if (radioButton_Vendor.Checked)
+                reg = new RegisterVendor_Form();
+            else //(radioButton_Host.Checked)
+                reg = new RegisterHost_Form();
+            //else reg = new Entry_Form();
+            reg.Show();
         }
     }
 }

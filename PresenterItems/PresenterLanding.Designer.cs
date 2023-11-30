@@ -47,6 +47,10 @@
             // 
             // dataGridView_Presenters
             // 
+            dataGridView_Presenters.AllowUserToAddRows = false;
+            dataGridView_Presenters.AllowUserToDeleteRows = false;
+            dataGridView_Presenters.AllowUserToResizeColumns = false;
+            dataGridView_Presenters.AllowUserToResizeRows = false;
             dataGridView_Presenters.AutoGenerateColumns = false;
             dataGridView_Presenters.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_Presenters.Columns.AddRange(new DataGridViewColumn[] { eventIdDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, endDateDataGridViewTextBoxColumn, websiteDataGridViewTextBoxColumn, locationDataGridViewTextBoxColumn });
@@ -54,29 +58,31 @@
             dataGridView_Presenters.Dock = DockStyle.Top;
             dataGridView_Presenters.Location = new Point(0, 0);
             dataGridView_Presenters.Name = "dataGridView_Presenters";
+            dataGridView_Presenters.ReadOnly = true;
             dataGridView_Presenters.RowHeadersWidth = 62;
             dataGridView_Presenters.RowTemplate.Height = 33;
+            dataGridView_Presenters.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView_Presenters.Size = new Size(800, 317);
             dataGridView_Presenters.TabIndex = 0;
             // 
             // panel1
             // 
-            panel1.Controls.Add(button_Register);
+            panel1.Controls.Add(button_register);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 317);
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 133);
             panel1.TabIndex = 1;
             // 
-            // button_Register
+            // button_register
             // 
-            button_Register.Location = new Point(345, 31);
-            button_Register.Name = "button_Register";
-            button_Register.Size = new Size(110, 70);
-            button_Register.TabIndex = 1;
-            button_Register.Text = "Register For Event";
-            button_Register.UseVisualStyleBackColor = true;
-            button_Register.Click += button_Register_Click;
+            button_register.Location = new Point(345, 31);
+            button_register.Name = "button_register";
+            button_register.Size = new Size(110, 70);
+            button_register.TabIndex = 1;
+            button_register.Text = "Register For Event";
+            button_register.UseVisualStyleBackColor = true;
+            button_register.Click += button_register_Click;
             // 
             // eventBindingSource
             // 
@@ -157,7 +163,8 @@
 
         private DataGridView dataGridView_Presenters;
         private Panel panel1;
-        private Button button_Register;
+        private Button button_addPresenter;
+        private Button button_register;
         private DataGridViewTextBoxColumn eventIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;

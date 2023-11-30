@@ -27,9 +27,33 @@ namespace Event_Manager.PresenterItems
             }
             dataGridView_Presenters.DataSource = presenterSource;
         }
-        private void button_Register_Click(object sender, EventArgs e)
+        private void button_register_Click(object sender, EventArgs e)
         {
-
+            var selected = dataGridView_Presenters.SelectedRows;
+            if (selected.Count <= 0)
+            {
+                MessageBox.Show("Must Select an Event.");
+                return;
+            }
+            string selection = "";
+            for (int i = 0; i < selected.Count; i++)
+            {
+                selection = selection + "\n" + selected[i].Cells[1].Value;
+            }
+            DialogResult dialogResult = MessageBox.Show($"Register for following events?\n {selection}", "Registration Verification", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                var db = new EventContext();
+                for (int i = 0; i < selected.Count; i++)
+                {
+                    var temp2 = (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value;
+                    var temp = db.Events.Where(s => s.EventId == (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value);
+                    if (temp != null)
+                    {
+                        MessageBox.Show("Y");
+                    }
+                }
+            }
         }
     }
 }
