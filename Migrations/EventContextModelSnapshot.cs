@@ -55,6 +55,7 @@ namespace Event_Manager.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid?>("HostID")
+                        .IsRequired()
                         .HasColumnType("uuid");
 
                     b.Property<string>("LocationAddress")
@@ -373,7 +374,9 @@ namespace Event_Manager.Migrations
                 {
                     b.HasOne("Host", "Host")
                         .WithMany()
-                        .HasForeignKey("HostID");
+                        .HasForeignKey("HostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Location", "Location")
                         .WithMany()
@@ -388,7 +391,8 @@ namespace Event_Manager.Migrations
                 {
                     b.HasOne("Host", null)
                         .WithMany("Events")
-                        .HasForeignKey("HostID");
+                        .HasForeignKey("HostID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Location", "Location")
                         .WithMany("Events")

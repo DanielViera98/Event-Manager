@@ -17,6 +17,26 @@ using Microsoft.Extensions.Logging;
 //Create new class for database context
 public class EventContext : DbContext
 {
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // ... other configurations ...
+
+        modelBuilder.Entity<Host>()
+            .HasMany(h => h.Events)
+            .WithOne() // Assuming there is no navigation property back to Host in Event
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Employee>()
+            .HasOne(e => e.Host)
+            .WithMany() // Assuming there is no collection navigation property in Host for Employees
+            .HasForeignKey(e => e.HostID) // Assuming there is a HostID foreign key property in Employee
+    .       OnDelete(DeleteBehavior.Cascade); // Set this if you want to set the foreign key to null instead of deleting the employee
+
+
+        // ... configurations for other relationships ...
+
+    }
     public DbSet<Event> Events { get; set; }    //Table containing Stock classes
     public DbSet<Location> Locations { get; set; }    //Table containing Stock classes
     public DbSet<Attendee> Attendees { get; set; }
@@ -51,6 +71,9 @@ public class EventContext : DbContext
 
 public class Event                                      //Event Entity Table
 {
+
+    
+
     public Event() { }
     public Event(string name, string desc, DateTime start, DateTime end, string site, Location local)
     {
@@ -175,7 +198,9 @@ public class Employee                                   //Employee Entity Table
     public decimal Pay { get; set; }
     public string? ShiftSchedule { get; set; }
     public Location? Location { get; set; }              //FK to location of workplace if applicable
-    public Host? Host { get; set; }                      //FK to host they work for if applicable
+
+    public Host Host { get; set; }
+    public Guid? HostID { get; set; }                      //FK to host they work for if applicable
 }
 
 public class Presenter
