@@ -33,10 +33,11 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            textBox_Timeslot = new TextBox();
             comboBox_Room = new ComboBox();
             label4 = new Label();
-            label5 = new Label();
+            label_Welcome = new Label();
+            button_register = new Button();
+            comboBox_Timeslot = new ComboBox();
             SuspendLayout();
             // 
             // textBox_Title
@@ -80,13 +81,6 @@
             label3.TabIndex = 4;
             label3.Text = "Timeslot";
             // 
-            // textBox_Timeslot
-            // 
-            textBox_Timeslot.Location = new Point(189, 173);
-            textBox_Timeslot.Name = "textBox_Timeslot";
-            textBox_Timeslot.Size = new Size(150, 31);
-            textBox_Timeslot.TabIndex = 5;
-            // 
             // comboBox_Room
             // 
             comboBox_Room.FormattingEnabled = true;
@@ -104,24 +98,43 @@
             label4.TabIndex = 7;
             label4.Text = "Room:";
             // 
-            // label5
+            // label_Welcome
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(97, 8);
-            label5.Name = "label5";
-            label5.Size = new Size(181, 25);
-            label5.TabIndex = 8;
-            label5.Text = "Registering for Event ";
+            label_Welcome.AutoSize = true;
+            label_Welcome.Location = new Point(97, 8);
+            label_Welcome.Name = "label_Welcome";
+            label_Welcome.Size = new Size(181, 25);
+            label_Welcome.TabIndex = 8;
+            label_Welcome.Text = "Registering for Event ";
+            // 
+            // button_register
+            // 
+            button_register.Location = new Point(131, 233);
+            button_register.Name = "button_register";
+            button_register.Size = new Size(112, 34);
+            button_register.TabIndex = 9;
+            button_register.Text = "Register";
+            button_register.UseVisualStyleBackColor = true;
+            button_register.Click += button_register_Click;
+            // 
+            // comboBox_Timeslot
+            // 
+            comboBox_Timeslot.FormattingEnabled = true;
+            comboBox_Timeslot.Location = new Point(189, 168);
+            comboBox_Timeslot.Name = "comboBox_Timeslot";
+            comboBox_Timeslot.Size = new Size(150, 33);
+            comboBox_Timeslot.TabIndex = 10;
             // 
             // AddPresenter
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(375, 231);
-            Controls.Add(label5);
+            ClientSize = new Size(375, 279);
+            Controls.Add(comboBox_Timeslot);
+            Controls.Add(button_register);
+            Controls.Add(label_Welcome);
             Controls.Add(label4);
             Controls.Add(comboBox_Room);
-            Controls.Add(textBox_Timeslot);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -140,9 +153,10 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private TextBox textBox_Timeslot;
         private ComboBox comboBox_Room;
         private Label label4;
-        private Label label5;
+        private Label label_Welcome;
+        private Button button_register;
+        private ComboBox comboBox_Timeslot;
     }
 }

@@ -7,14 +7,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Event_Manager.PresenterItems
 {
     public partial class AddPresenter : Form
     {
-        public AddPresenter()
+        EventContext db = new EventContext();
+        private Event e;
+        private Presenter p;
+        private int DateTimes;
+        public AddPresenter(Event e, Presenter p)
         {
+            this.e = e;
+            this.p = p;
             InitializeComponent();
+            label_Welcome.Text.Concat(e.Name);
+            Location l = db.Locations.Find(e.Location);
+            DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
+            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0);
+
+            while (startTime < endTime)
+            {
+                comboBox_Timeslot.Items.Add(startTime.ToString("hh:mm tt"));
+                startTime = startTime.AddMinutes(30);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                comboBox_Room.Items.Add(i);
+            }
+        }
+
+        private void button_register_Click(object sender, EventArgs e)
+        {
+            int roomID = (int)comboBox_Room.SelectedItem;
+            string Title = textBox_Title.Text;
+            string Description = textBox_description.Text;
+            Event ev = db.Events.Find(this.e.EventId);
+            Presenter pr = db.Presenters.Find(this.p.PresenterID);
+            DateTime d = DateTime.Parse(comboBox_Timeslot.SelectedItem.ToString());
+            db.Presents.Add(new Presents
+            {
+                RoomID = (int)comboBox_Room.SelectedItem,
+                Title = textBox_Title.Text,
+                Description = textBox_description.Text,
+                Event = db.Events.Find(this.e.EventId),
+                Presenter = db.Presenters.Find(this.p.PresenterID),
+                Time = DateTime.Parse(comboBox_Timeslot.SelectedItem.ToString()).ToUniversalTime()
+            });
+            db.SaveChanges();
+            Close();
         }
     }
 }

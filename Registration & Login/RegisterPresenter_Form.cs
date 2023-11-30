@@ -30,16 +30,17 @@ namespace Event_Manager.Registration___Login
             Functions.CheckNull(check);
             Functions.CheckMin(check, 2);
 
-
-            db.Presenters.Add(new Presenter
+            Presenter p = new Presenter
             {
                 Name = textBox_Name.Text,
                 Email = textBox_Email.Text,
                 Phone = textBox_PhoneNum.Text,
                 PresenterFee = numericUpDown_Fee.Value
-            });
+            };
+            db.Presenters.Add(p);
             db.SaveChanges();
-            var form = new PresenterLanding();
+
+            var form = new PresenterLanding(p);
             form.Show();
             Close();
         }

@@ -7,13 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Event_Manager.PresenterItems
 {
     public partial class PresenterLanding : Form
     {
-        public PresenterLanding()
+        private Presenter p;
+        public PresenterLanding(Presenter p)
         {
+            this.p = p;
             InitializeComponent();
             refresh_view();
         }
@@ -43,13 +46,15 @@ namespace Event_Manager.PresenterItems
             var db = new EventContext();
             for (int i = 0; i < selected.Count; i++)
             {
-                var addPresent = new AddPresenter();
                 var temp2 = (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value;
-                var temp = db.Events.Where(s => s.EventId == (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value) as Event;
+                var temp = db.Events.First(s => s.EventId == temp2);
                 if (temp != null)
                 {
-                    //db.Presents.Add(new Presents { RoomID = 1, Title = "t", Description = "t", Event = temp, Presenter = this, Time = "t"});
+                    var addPresent = new AddPresenter(temp, p);
+                    addPresent.Show();
                 }
+                else
+                    MessageBox.Show("Error finding Event");
             }
         }
     }
