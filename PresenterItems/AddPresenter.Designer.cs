@@ -28,73 +28,105 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            textBox_Title = new TextBox();
+            textBox_description = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            textBox3 = new TextBox();
+            textBox_Timeslot = new TextBox();
+            comboBox_Room = new ComboBox();
+            label4 = new Label();
+            label5 = new Label();
             SuspendLayout();
             // 
-            // textBox1
+            // textBox_Title
             // 
-            textBox1.Location = new Point(174, 36);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 31);
-            textBox1.TabIndex = 0;
+            textBox_Title.Location = new Point(189, 99);
+            textBox_Title.Name = "textBox_Title";
+            textBox_Title.Size = new Size(150, 31);
+            textBox_Title.TabIndex = 0;
             // 
-            // textBox2
+            // textBox_description
             // 
-            textBox2.Location = new Point(174, 73);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(150, 31);
-            textBox2.TabIndex = 1;
+            textBox_description.Location = new Point(189, 136);
+            textBox_description.Name = "textBox_description";
+            textBox_description.Size = new Size(150, 31);
+            textBox_description.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(109, 39);
+            label1.Location = new Point(36, 102);
             label1.Name = "label1";
-            label1.Size = new Size(59, 25);
+            label1.Size = new Size(147, 25);
             label1.TabIndex = 2;
-            label1.Text = "Name";
+            label1.Text = "Presentation Title";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(114, 76);
+            label2.Location = new Point(81, 139);
             label2.Name = "label2";
-            label2.Size = new Size(54, 25);
+            label2.Size = new Size(102, 25);
             label2.TabIndex = 3;
-            label2.Text = "Email";
+            label2.Text = "Description";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(129, 113);
+            label3.Location = new Point(104, 176);
             label3.Name = "label3";
-            label3.Size = new Size(39, 25);
+            label3.Size = new Size(79, 25);
             label3.TabIndex = 4;
-            label3.Text = "Fee";
+            label3.Text = "Timeslot";
             // 
-            // textBox3
+            // textBox_Timeslot
             // 
-            textBox3.Location = new Point(174, 110);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(150, 31);
-            textBox3.TabIndex = 5;
+            textBox_Timeslot.Location = new Point(189, 173);
+            textBox_Timeslot.Name = "textBox_Timeslot";
+            textBox_Timeslot.Size = new Size(150, 31);
+            textBox_Timeslot.TabIndex = 5;
+            // 
+            // comboBox_Room
+            // 
+            comboBox_Room.FormattingEnabled = true;
+            comboBox_Room.Location = new Point(189, 60);
+            comboBox_Room.Name = "comboBox_Room";
+            comboBox_Room.Size = new Size(150, 33);
+            comboBox_Room.TabIndex = 6;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(121, 63);
+            label4.Name = "label4";
+            label4.Size = new Size(64, 25);
+            label4.TabIndex = 7;
+            label4.Text = "Room:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(97, 8);
+            label5.Name = "label5";
+            label5.Size = new Size(181, 25);
+            label5.TabIndex = 8;
+            label5.Text = "Registering for Event ";
             // 
             // AddPresenter
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(409, 476);
-            Controls.Add(textBox3);
+            ClientSize = new Size(375, 231);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(comboBox_Room);
+            Controls.Add(textBox_Timeslot);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBox_description);
+            Controls.Add(textBox_Title);
             Name = "AddPresenter";
             Text = "AddPresenter";
             ResumeLayout(false);
@@ -103,11 +135,14 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox textBox_Title;
+        private TextBox textBox_description;
         private Label label1;
         private Label label2;
         private Label label3;
-        private TextBox textBox3;
+        private TextBox textBox_Timeslot;
+        private ComboBox comboBox_Room;
+        private Label label4;
+        private Label label5;
     }
 }
