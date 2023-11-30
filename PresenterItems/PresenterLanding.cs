@@ -27,11 +27,9 @@ namespace Event_Manager.PresenterItems
             }
             dataGridView_Presenters.DataSource = presenterSource;
         }
-
-        private void button_addPresenter_Click(object sender, EventArgs e)
+        private void button_Register_Click(object sender, EventArgs e)
         {
-            var newForm = new AddPresenter();
-            newForm.Show();
+
         }
     }
 }
