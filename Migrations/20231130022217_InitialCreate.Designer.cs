@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Event_Manager.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20231129011337_InitialCreate")]
+    [Migration("20231130022217_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,9 +29,6 @@ namespace Event_Manager.Migrations
                     b.Property<Guid>("AttendeeID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CheckinTime")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -56,11 +53,14 @@ namespace Event_Manager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("HostID")
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("HostID")
                         .HasColumnType("uuid");
 
                     b.Property<string>("LocationAddress")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -70,8 +70,11 @@ namespace Event_Manager.Migrations
                     b.Property<decimal>("Pay")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("ShiftSchedule")
+                    b.Property<string>("PhoneNum")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ShiftSchedule")
                         .HasColumnType("text");
 
                     b.HasKey("EmpID");
@@ -159,6 +162,14 @@ namespace Event_Manager.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Website")
                         .IsRequired()
                         .HasColumnType("text");
@@ -239,8 +250,12 @@ namespace Event_Manager.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<float>("PresenterFee")
-                        .HasColumnType("real");
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("PresenterFee")
+                        .HasColumnType("numeric");
 
                     b.HasKey("PresenterID");
 
@@ -289,6 +304,9 @@ namespace Event_Manager.Migrations
 
                     b.Property<Guid>("AttendeeID")
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CheckInTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<float>("Cost")
                         .HasColumnType("real");
@@ -339,20 +357,10 @@ namespace Event_Manager.Migrations
                 {
                     b.HasBaseType("Host");
 
-                    b.Property<string>("OrganizationName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("OrganizationPhone")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("RepresentativeName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("RepresentativePhone")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasDiscriminator().HasValue("Organization");
@@ -362,14 +370,6 @@ namespace Event_Manager.Migrations
                 {
                     b.HasBaseType("Host");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNum")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasDiscriminator().HasValue("Person");
                 });
 
@@ -377,15 +377,11 @@ namespace Event_Manager.Migrations
                 {
                     b.HasOne("Host", "Host")
                         .WithMany()
-                        .HasForeignKey("HostID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HostID");
 
                     b.HasOne("Location", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationAddress")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LocationAddress");
 
                     b.Navigation("Host");
 

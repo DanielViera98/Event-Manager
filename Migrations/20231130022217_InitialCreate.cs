@@ -19,8 +19,7 @@ namespace Event_Manager.Migrations
                     AttendeeID = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
-                    CheckinTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,13 +33,11 @@ namespace Event_Manager.Migrations
                     HostID = table.Column<Guid>(type: "uuid", nullable: false),
                     Website = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     Discriminator = table.Column<string>(type: "text", nullable: false),
-                    OrganizationName = table.Column<string>(type: "text", nullable: true),
-                    OrganizationPhone = table.Column<string>(type: "text", nullable: true),
                     RepresentativeName = table.Column<string>(type: "text", nullable: true),
-                    RepresentativePhone = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    PhoneNum = table.Column<string>(type: "text", nullable: true)
+                    RepresentativePhone = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,7 +69,8 @@ namespace Event_Manager.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    PresenterFee = table.Column<float>(type: "real", nullable: false)
+                    Phone = table.Column<string>(type: "text", nullable: false),
+                    PresenterFee = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,10 +98,12 @@ namespace Event_Manager.Migrations
                 {
                     EmpID = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
+                    PhoneNum = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
                     Pay = table.Column<decimal>(type: "numeric", nullable: false),
-                    ShiftSchedule = table.Column<string>(type: "text", nullable: false),
-                    LocationAddress = table.Column<string>(type: "text", nullable: false),
-                    HostID = table.Column<Guid>(type: "uuid", nullable: false)
+                    ShiftSchedule = table.Column<string>(type: "text", nullable: true),
+                    LocationAddress = table.Column<string>(type: "text", nullable: true),
+                    HostID = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,14 +112,12 @@ namespace Event_Manager.Migrations
                         name: "FK_Employees_Hosts_HostID",
                         column: x => x.HostID,
                         principalTable: "Hosts",
-                        principalColumn: "HostID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "HostID");
                     table.ForeignKey(
                         name: "FK_Employees_Locations_LocationAddress",
                         column: x => x.LocationAddress,
                         principalTable: "Locations",
-                        principalColumn: "Address",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Address");
                 });
 
             migrationBuilder.CreateTable(
@@ -239,7 +237,8 @@ namespace Event_Manager.Migrations
                     Cost = table.Column<float>(type: "real", nullable: false),
                     AttendeeID = table.Column<Guid>(type: "uuid", nullable: false),
                     EventId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TicketType = table.Column<string>(type: "text", nullable: false)
+                    TicketType = table.Column<string>(type: "text", nullable: false),
+                    CheckInTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

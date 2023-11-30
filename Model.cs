@@ -43,7 +43,7 @@ public class EventContext : DbContext
     // special "local" folder for your platform.
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=Najam2002!;Database=EventDatabase;");
+        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=passw0rd;Database=EventDatabase;");
         base.OnConfiguring(options);
     }
 
@@ -130,26 +130,23 @@ public class Ticket                                     //Ticket Entity Table
 public class Host                                       //Host Parent Entity Table
 {
     [Key] public Guid HostID { get; set; }
-    public string Website { get; set; }
+    public string? Website { get; set; }
     public string Email { get; set; }
+    public string Name { get; set; }
+    public string PhoneNumber { get; set; }
 
     public List<Event> Events { get; set; }
 }
 
 public class Person                                     /*Person, inherits parent table Host*/
     : Host
-{
-    public string Name { get; set; }
-    public string PhoneNum { get; set; }
-}
+{   }
 
 public class Organization                               /*Organization, inherits parent table Host*/
     :Host
 {
-    public string OrganizationName { get; set; }                //Name of organization
-    public string OrganizationPhone { get; set; }
-    public string RepresentativeName { get; set; }      //Representative name
-    public string RepresentativePhone { get; set; }
+    public string? RepresentativeName { get; set; }      //Representative name
+    public string? RepresentativePhone { get; set; }
 }
 
 [PrimaryKey(nameof(RoomID), nameof(TableID))]           //Composite primary key for HasSpace
@@ -176,7 +173,7 @@ public class Employee                                   //Employee Entity Table
     public string PhoneNum { get; set; }
     public string Email { get; set; }
     public decimal Pay { get; set; }
-    public string ShiftSchedule { get; set; }      
+    public string? ShiftSchedule { get; set; }      
     public Location? Location { get; set; }              //FK to location of workplace if applicable
     public Host? Host { get; set; }                      //FK to host they work for if applicable
 }
@@ -187,7 +184,7 @@ public class Presenter
     public string Name { get; set; }
     public string Email { get; set; }
     public string Phone { get; set; }
-    public float PresenterFee { get; set; }
+    public decimal PresenterFee { get; set; }
 }
 
 public class Presents

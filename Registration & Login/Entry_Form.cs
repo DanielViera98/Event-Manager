@@ -22,6 +22,26 @@ namespace Event_Manager
                 var reg = new RegisterAttendee_Form();
                 reg.Show();
             }
+            if (radioButton_Employee.Checked)
+            {
+                var reg = new RegisterEmployee_Form();
+                reg.Show();
+            }
+            if (radioButton_Presenter.Checked)
+            {
+                var reg = new RegisterPresenter_Form();
+                reg.Show();
+            }
+            if (radioButton_Vendor.Checked)
+            {
+                var reg = new RegisterVendor_Form();
+                reg.Show();
+            }
+            if (radioButton_Host.Checked)
+            {
+                var reg = new RegisterHost_Form();
+                reg.Show();
+            }
         }
     }
 }

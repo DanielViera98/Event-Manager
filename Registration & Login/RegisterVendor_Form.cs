@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Event_Manager.Registration___Login
 {
-    public partial class RegisterAttendee_Form : Form
+    public partial class RegisterVendor_Form : Form
     {
-        public RegisterAttendee_Form()
+        public RegisterVendor_Form()
         {
             InitializeComponent();
         }
@@ -26,9 +26,17 @@ namespace Event_Manager.Registration___Login
                 textBox_Name.Text,
                 textBox_PhoneNum.Text
             };
-            Functions.CheckNull( check );
+            Functions.CheckNull(check);
             Functions.CheckMin(check, 2);
-            db.Attendees.Add(new Attendee { Name = textBox_Name.Text, Email = textBox_Email.Text, PhoneNumber = textBox_PhoneNum.Text });
+
+
+            db.Vendors.Add(new Vendor
+            {
+                Name = textBox_Name.Text,
+                Email = textBox_Email.Text,
+                PhoneNum = textBox_PhoneNum.Text,
+                Fee = numericUpDown_Fee.Value
+            });
             db.SaveChanges();
             Close();
         }
