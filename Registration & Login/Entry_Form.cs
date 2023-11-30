@@ -59,6 +59,12 @@ namespace Event_Manager
                 var reg = new RegisterHost_Form();
                 reg.Show();
             }
+            if (radioButton_Admin.Checked)
+            {
+                var reg = new Admin_Form();
+                reg.Show();
+            }
+
         }
     }
 }
