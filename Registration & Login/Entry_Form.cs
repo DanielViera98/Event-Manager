@@ -66,8 +66,8 @@ namespace Event_Manager
             else if (radioButton_Host.Checked)
                 reg = new RegisterHost_Form();
             //else reg = new Entry_Form();
-            else if (radioButton_Admin.Checked)
-                var reg = new Admin_Form();
+            else//(radioButton_Admin.Checked)
+                reg = new Admin_Form();
             reg.Show();
         }
     }
