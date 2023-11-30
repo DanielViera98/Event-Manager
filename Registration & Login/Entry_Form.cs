@@ -12,6 +12,7 @@ namespace Event_Manager
 
         private void button_LogIn_Click(object sender, EventArgs e)
         {
+                                                                            //TODO: CREATE PASSWORD VERIFICATION
             var db = new EventContext();
             var accountType = comboBox_Login.Text;
             if (accountType == "Attendee" && textBox1.Text != "" && textBox2.Text != "")

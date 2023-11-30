@@ -38,11 +38,6 @@ namespace Event_Manager.PresenterItems
                 MessageBox.Show("Must Select an Event.");
                 return;
             }
-            string selection = "";
-            for (int i = 0; i < selected.Count; i++)
-            {
-                selection = selection + "\n" + selected[i].Cells[1].Value;
-            }
             var db = new EventContext();
             for (int i = 0; i < selected.Count; i++)
             {
