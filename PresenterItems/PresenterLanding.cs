@@ -28,10 +28,28 @@ namespace Event_Manager.PresenterItems
             dataGridView_Presenters.DataSource = presenterSource;
         }
 
-        private void button_addPresenter_Click(object sender, EventArgs e)
+        private void button_register_Click(object sender, EventArgs e)
         {
-            var newForm = new AddPresenter();
-            newForm.Show();
+            var selected = dataGridView_Presenters.SelectedRows;
+            if (selected.Count <= 0)
+            {
+                MessageBox.Show("Must Select an Event.");
+                return;
+            }
+            string selection = "";
+            for (int i = 0; i < selected.Count; i++)
+            {
+                selection = selection + "\n" + selected[i].Cells[1].Value;
+            }
+            DialogResult dialogResult = MessageBox.Show($"Register for following events?\n {selection}", "Registration Verification", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                //do something
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
         }
     }
 }

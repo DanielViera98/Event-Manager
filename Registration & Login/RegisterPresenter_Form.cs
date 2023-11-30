@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Event_Manager.PresenterItems;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,6 +39,8 @@ namespace Event_Manager.Registration___Login
                 PresenterFee = numericUpDown_Fee.Value
             });
             db.SaveChanges();
+            var form = new PresenterLanding();
+            form.Show();
             Close();
         }
     }
