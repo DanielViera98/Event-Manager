@@ -1,3 +1,5 @@
+using Event_Manager.LocationItems;  //For LocationLanding
+
 namespace Event_Manager
 {
     internal static class Program
@@ -13,11 +15,12 @@ namespace Event_Manager
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+          
+            //Application.Run(new Admin_Form());
             //Application.Run(new HostLanding());
             //Application.Run(new User_Form());
-            Application.Run(new Admin_Form());
-
-
+            //Application.Run(new LocationLanding());
+            Application.Run(new Entry_Form());
         }
     }
 }
