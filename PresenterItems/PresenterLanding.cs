@@ -44,11 +44,16 @@ namespace Event_Manager.PresenterItems
             DialogResult dialogResult = MessageBox.Show($"Register for following events?\n {selection}", "Registration Verification", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                //do something
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                //do something else
+                var db = new EventContext();
+                for (int i = 0; i < selected.Count; i++)
+                {
+                    var temp2 = (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value;
+                    var temp = db.Events.Where(s => s.EventId == (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value);
+                    if (temp != null)
+                    {
+                        MessageBox.Show("Y");
+                    }
+                }
             }
         }
     }
