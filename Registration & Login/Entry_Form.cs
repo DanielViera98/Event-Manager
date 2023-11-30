@@ -1,4 +1,5 @@
 using Event_Manager.Registration___Login;
+using Event_Manager.VendorItems;
 
 namespace Event_Manager
 {
@@ -26,7 +27,26 @@ namespace Event_Manager
             }
             else if (accountType == "Host" && textBox1.Text != "" && textBox2.Text != "")
             {
-                var hostZone = new HostLanding();
+                var currHost = db.Hosts.Where(p => p.Name == textBox1.Text).FirstOrDefault();
+                if (currHost == null)
+                {
+                    MessageBox.Show("Must have an account as a Host.");
+                    return;
+                }
+
+                var hostZone = new HostLanding(currHost);
+                hostZone.Show();
+            }
+            else if (accountType == "Vendor" && textBox1.Text != "" && textBox2.Text != "")
+            {
+                var currVendor = db.Vendors.Where(p => p.Name == textBox1.Text).FirstOrDefault();
+                if (currVendor == null)
+                {
+                    MessageBox.Show("Must have an account as a Vendor.");
+                    return;
+                }
+
+                var hostZone = new VendorLanding(currVendor);
                 hostZone.Show();
             }
 
@@ -43,9 +63,11 @@ namespace Event_Manager
                 reg = new RegisterPresenter_Form();
             else if (radioButton_Vendor.Checked)
                 reg = new RegisterVendor_Form();
-            else //(radioButton_Host.Checked)
+            else if (radioButton_Host.Checked)
                 reg = new RegisterHost_Form();
             //else reg = new Entry_Form();
+            else if (radioButton_Admin.Checked)
+                var reg = new Admin_Form();
             reg.Show();
         }
     }

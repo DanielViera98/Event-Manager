@@ -12,7 +12,8 @@ namespace Event_Manager.HostItems
 {
     public partial class AddEvent : Form
     {
-        public AddEvent()
+        Host hostUser;
+        public AddEvent(Host host)
         {
             InitializeComponent();
             var db = new EventContext();
@@ -22,7 +23,7 @@ namespace Event_Manager.HostItems
                 localSource.Add(local);
             }
             comboBox_Locations.DataSource = localSource;
-
+            hostUser = host;
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)
@@ -46,13 +47,20 @@ namespace Event_Manager.HostItems
                 return;
             }
 
-            db.Events.Add(new Event(
+            Event addedEvent = new Event(
                 textBox_Name.Text,
                 richTextBox_Description.Text,
                 dateTimePicker_Start.Value.ToUniversalTime(),
                 dateTimePicker_End.Value.ToUniversalTime(),
                 textBox_Website.Text,
-                existingLocation));
+                existingLocation);
+
+            db.Events.Add(addedEvent);
+
+            db.HostedBy.Add(new HostedBy(
+                addedEvent,
+                db.Hosts.Find(hostUser.HostID)
+                ));
 
             db.SaveChanges();
             Close();

@@ -15,7 +15,6 @@ namespace Event_Manager
 {
     public partial class User_Form : Form
     {
-        public DbSet<UserTicket> userTickets { get; set; }
         int tablesShowing = 0;
         Attendee currAttendee;
         public User_Form(Attendee user)
@@ -39,12 +38,6 @@ namespace Event_Manager
             Cancel.Hide();
             currAttendee = user;
 
-        }
-
-        class Test1
-        {
-            public DataTable table1 = new DataTable("table1");
-            public BindingSource sr = new BindingSource();
         }
 
 
