@@ -52,7 +52,7 @@ public class EventContext : DbContext
 public class Event                                      //Event Entity Table
 {
     public Event() { }
-    public Event(string name, string desc, DateTime start, DateTime end, string site, Location local) 
+    public Event(string name, string desc, DateTime start, DateTime end, string site, Location local)
     {
         EventId = new Guid();
         Name = name;
@@ -62,12 +62,12 @@ public class Event                                      //Event Entity Table
         Website = site;
         Location = local;
     }
-    [Key] public Guid EventId { get; set; }             
+    [Key] public Guid EventId { get; set; }
     public string Name { get; set; }
     public string? Description { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public string Website {  get; set; }
+    public string Website { get; set; }
     public Location Location { get; set; }              //FK to Location Table
 
     /*public List<Host> Hosts { get; set; }
@@ -158,10 +158,11 @@ public class Host                                       //Host Parent Entity Tab
 
 public class Person                                     /*Person, inherits parent table Host*/
     : Host
-{   }
+{ }
+
 
 public class Organization                               /*Organization, inherits parent table Host*/
-    :Host
+    : Host
 {
     public string? RepresentativeName { get; set; }      //Representative name
     public string? RepresentativePhone { get; set; }
@@ -186,7 +187,7 @@ public class HostedBy                                   //HostedBy Multi-Multi R
 
 public class Employee                                   //Employee Entity Table
 {
-    [Key] public Guid EmpID { get; set;}
+    [Key] public Guid EmpID { get; set; }
     public string Name { get; set; }
     public string PhoneNum { get; set; }
     public string Email { get; set; }
