@@ -57,5 +57,10 @@ namespace Event_Manager.HostItems
             db.SaveChanges();
             Close();
         }
+
+        private void AddEvent_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
