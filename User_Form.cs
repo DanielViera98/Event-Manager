@@ -79,7 +79,8 @@ namespace Event_Manager
             }).ToList();
             hostedData.DataSource = db.HostedBy.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).Select(o => new
             {
-                Event = o.Event.Name
+                Event = o.Event.Name,
+                Host = o.Host.Name
             }).ToList();
             vendorData.DataSource = db.Vendors.Where(p => db.HasSpace.Any(q => q.Vendor.VendorID == p.VendorID && tickets.Select(t => t.Event).Contains(q.Event))).Select(o => new
             {
@@ -241,11 +242,11 @@ namespace Event_Manager
 
             var db = new EventContext();
 
-            if (Choice.Text == "Select an Event" || db.Tickets.Any(p => p.Attendee == currAttendee))
-            {
-                MessageBox.Show("Must select a cell for an Event. Must not already have ticket.");
-                return;
-            }
+            //if (Choice.Text == "Select an Event" || db.Tickets.Any(p => p.Attendee == currAttendee))
+            //{
+            //    MessageBox.Show("Must select a cell for an Event. Must not already have ticket.");
+            //    return;
+            //}
 
             db.Tickets.Add(new Ticket(
                 5,

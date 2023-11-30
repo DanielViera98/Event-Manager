@@ -32,7 +32,7 @@ namespace Event_Manager.Registration___Login
             db.SaveChanges();
             if (textBox_Name.Text != null)
             {
-                var userForm = new User_Form(db.Attendees.Select(s => s.Name == textBox_Name.Text) as Attendee);
+                var userForm = new User_Form(db.Attendees.Where(s => s.Name == textBox_Name.Text).First());
                 userForm.Show();
             }
             Close();
