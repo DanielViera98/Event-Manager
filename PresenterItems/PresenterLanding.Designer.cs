@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             dataGridView_Presenters = new DataGridView();
             panel1 = new Panel();
-            button_Register = new Button();
+            button_register = new Button();
             eventBindingSource = new BindingSource(components);
             eventIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();

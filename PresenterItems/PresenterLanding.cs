@@ -50,7 +50,7 @@ namespace Event_Manager.PresenterItems
                     var temp = db.Events.Where(s => s.EventId == (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value);
                     if (temp != null)
                     {
-                        MessageBox.Show("Y");
+                        MessageBox.Show("Y");                                           //TODO: FINISH ADDING PRESENTERS TO EVENT SELECTIONS
                     }
                 }
             }
