@@ -15,9 +15,8 @@ namespace Event_Manager
     public partial class User_Form : Form
     {
         int tablesShowing = 0;
-        string userName;
         Attendee currAttendee;
-        public User_Form(string user)
+        public User_Form(Attendee user)
         {
             InitializeComponent();
             presenterData.Hide();
@@ -36,21 +35,16 @@ namespace Event_Manager
             confirmation.Hide();
             Confirm.Hide();
             Cancel.Hide();
-            userName = user;
-            currAttendee = new Attendee();
+            currAttendee = user;
 
         }
 
         private void User_Form_Load(object sender, EventArgs e)
         {
-            NameBox.Text = userName;
+            NameBox.Text = currAttendee.Name;
             var db = new EventContext();
-            var attendees = db.Attendees.Where(p => p.Name == userName).ToList();
-            if (attendees.Count > 0 )
-            {
-                currAttendee = attendees.First();
-            }
-            var tickets = db.Tickets.Where(p => attendees.Contains(p.Attendee)).ToList();
+            //var attendees = db.Attendees.Where(p => p.Name == userName).ToList();
+            var tickets = db.Tickets.Where(p => p.Attendee == currAttendee).ToList();
             var hosts = db.HostedBy.Where(p => db.Tickets.Any()).ToList();
             var events = db.Events.ToList();
             var presents = db.Presents.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).ToList();
@@ -61,9 +55,35 @@ namespace Event_Manager
             presenterData.DataSource = presenters;
             presentationData.DataSource = presents;
             vendorData.DataSource = vendors;
-            ticketData.DataSource = tickets;
+            //ticketData.DataSource = tickets;
+            //foreach (DataGridViewRow row in ticketData.Rows)
+            //{
+                //Ticket ticketItem = row.DataBoundItem as Ticket;
+                //if (ticketItem.Attendee != null)
+                //{
+                //row.Cells[1].ValueType = typeof(string);
+                //row.Cells[1] = new Item("One", 1);//db.Attendees.First().ToString();
+                //row.Cells[1].Tag = "hello";
+
+                //row.Cells[0].Value = "hello";
+                //row.Cells[2].Value = db.Tickets.First().ToString();
+                //}
+                //
+                //Ticket potentialAttendee = db.Tickets.Where(p => p.TicketID.ToString() == row.Cells[0].Value.ToString()).First();
+                //row.Cells[1].Value = potentialAttendee.Attendee.Name;
+                /*if (potentialAttendee == null)
+                {
+
+                }
+                else
+                {
+                    row.Cells[1].Value = potentialAttendee;
+                }*/
+                //row.Cells[2].Value = db.Tickets.Where(p=>p.TicketID.ToString() == row.Cells[0].Value.ToString()).First().Attendee.Name; // db.Attendees.Where(p => row.Cells[2].Value.ToString() == p.Name.ToString()).Select();
+            //}
 
         }
+
 
         private void PresentersLabel_Click(object sender, EventArgs e)
         {
@@ -203,21 +223,22 @@ namespace Event_Manager
             Cancel.Hide();
 
             var db = new EventContext();
-            
-            if (Choice.Text == "Select an Event" || db.Tickets.Any(p=> p.Attendee.AttendeeID == currAttendee.AttendeeID))
+
+            if (Choice.Text == "Select an Event" || db.Tickets.Any(p => p.Attendee == currAttendee))
             {
                 MessageBox.Show("Must select a cell for an Event. Must not already have ticket.");
                 return;
             }
-            
+
             db.Tickets.Add(new Ticket(
                 5,
                 currAttendee,
-                db.Events.Where(p=>p.Name == Choice.Text).First(),
+                db.Events.Where(p => p.Name == Choice.Text).First(),
                 "Attendee"
                 ));
-            
+
             db.SaveChanges();
+            User_Form_Load(null, null);
 
         }
 
