@@ -82,12 +82,13 @@
             NameBox = new TextBox();
             Choice = new TextBox();
             attendeeBindingSource = new BindingSource(components);
-            ticketData = new DataGridView();
             ticketBindingSource1 = new BindingSource(components);
-            TicketID = new DataGridViewTextBoxColumn();
-            Attendee = new DataGridViewTextBoxColumn();
+            ticketData = new DataGridView();
+            ticketIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            attendeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             eventDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             ticketTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ticketBindingSource2 = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)vendorBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)presenterData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)presenterBindingSource).BeginInit();
@@ -100,8 +101,9 @@
             ((System.ComponentModel.ISupportInitialize)hostedByBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ticketBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)attendeeBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ticketData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ticketBindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ticketData).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ticketBindingSource2).BeginInit();
             SuspendLayout();
             // 
             // vendorBindingSource
@@ -192,7 +194,7 @@
             vendorData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             vendorData.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, feeDataGridViewTextBoxColumn });
             vendorData.DataSource = vendorBindingSource;
-            vendorData.Location = new Point(545, 107);
+            vendorData.Location = new Point(508, 98);
             vendorData.Name = "vendorData";
             vendorData.ReadOnly = true;
             vendorData.RowHeadersWidth = 51;
@@ -602,54 +604,52 @@
             // 
             attendeeBindingSource.DataSource = typeof(Attendee);
             // 
+            // ticketBindingSource1
+            // 
+            ticketBindingSource1.DataSource = typeof(Ticket);
+            // 
             // ticketData
             // 
             ticketData.AllowUserToAddRows = false;
             ticketData.AllowUserToDeleteRows = false;
             ticketData.AutoGenerateColumns = false;
-            ticketData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ticketData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ticketData.Columns.AddRange(new DataGridViewColumn[] { TicketID, Attendee, eventDataGridViewTextBoxColumn2, ticketTypeDataGridViewTextBoxColumn });
-            ticketData.DataSource = ticketBindingSource1;
-            ticketData.Location = new Point(276, 47);
+            ticketData.Columns.AddRange(new DataGridViewColumn[] { ticketIDDataGridViewTextBoxColumn, attendeeDataGridViewTextBoxColumn, eventDataGridViewTextBoxColumn2, ticketTypeDataGridViewTextBoxColumn });
+            ticketData.DataSource = ticketBindingSource2;
+            ticketData.Location = new Point(276, 12);
             ticketData.Name = "ticketData";
             ticketData.ReadOnly = true;
             ticketData.RowHeadersWidth = 51;
             ticketData.RowTemplate.Height = 29;
             ticketData.Size = new Size(720, 188);
-            ticketData.TabIndex = 17;
+            ticketData.TabIndex = 26;
             // 
-            // ticketBindingSource1
+            // ticketIDDataGridViewTextBoxColumn
             // 
-            ticketBindingSource1.DataSource = typeof(Ticket);
+            ticketIDDataGridViewTextBoxColumn.DataPropertyName = "TicketID";
+            ticketIDDataGridViewTextBoxColumn.HeaderText = "TicketID";
+            ticketIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            ticketIDDataGridViewTextBoxColumn.Name = "ticketIDDataGridViewTextBoxColumn";
+            ticketIDDataGridViewTextBoxColumn.ReadOnly = true;
+            ticketIDDataGridViewTextBoxColumn.Width = 125;
             // 
-            // TicketID
+            // attendeeDataGridViewTextBoxColumn
             // 
-            TicketID.DataPropertyName = "TicketID";
-            TicketID.HeaderText = "TicketID";
-            TicketID.MinimumWidth = 6;
-            TicketID.Name = "TicketID";
-            TicketID.ReadOnly = true;
-            TicketID.Visible = false;
-            TicketID.Width = 92;
-            // 
-            // Attendee
-            // 
-            Attendee.DataPropertyName = "Attendee";
-            Attendee.HeaderText = "Attendee";
-            Attendee.MinimumWidth = 6;
-            Attendee.Name = "Attendee";
-            Attendee.ReadOnly = true;
-            Attendee.Visible = false;
-            Attendee.Width = 99;
+            attendeeDataGridViewTextBoxColumn.DataPropertyName = "Attendee";
+            attendeeDataGridViewTextBoxColumn.HeaderText = "Attendee";
+            attendeeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            attendeeDataGridViewTextBoxColumn.Name = "attendeeDataGridViewTextBoxColumn";
+            attendeeDataGridViewTextBoxColumn.ReadOnly = true;
+            attendeeDataGridViewTextBoxColumn.Width = 125;
             // 
             // eventDataGridViewTextBoxColumn2
             // 
+            eventDataGridViewTextBoxColumn2.DataPropertyName = "Event";
             eventDataGridViewTextBoxColumn2.HeaderText = "Event";
             eventDataGridViewTextBoxColumn2.MinimumWidth = 6;
             eventDataGridViewTextBoxColumn2.Name = "eventDataGridViewTextBoxColumn2";
             eventDataGridViewTextBoxColumn2.ReadOnly = true;
-            eventDataGridViewTextBoxColumn2.Width = 74;
+            eventDataGridViewTextBoxColumn2.Width = 125;
             // 
             // ticketTypeDataGridViewTextBoxColumn
             // 
@@ -658,13 +658,18 @@
             ticketTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
             ticketTypeDataGridViewTextBoxColumn.Name = "ticketTypeDataGridViewTextBoxColumn";
             ticketTypeDataGridViewTextBoxColumn.ReadOnly = true;
-            ticketTypeDataGridViewTextBoxColumn.Width = 108;
+            ticketTypeDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // ticketBindingSource2
+            // 
+            ticketBindingSource2.DataSource = typeof(Ticket);
             // 
             // User_Form
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1600, 900);
+            Controls.Add(ticketData);
             Controls.Add(Choice);
             Controls.Add(NameBox);
             Controls.Add(Cancel);
@@ -673,7 +678,6 @@
             Controls.Add(buyButton);
             Controls.Add(ShowTickets);
             Controls.Add(TicketsLabel);
-            Controls.Add(ticketData);
             Controls.Add(ShowHosts);
             Controls.Add(HostedLabel);
             Controls.Add(hostedData);
@@ -704,8 +708,9 @@
             ((System.ComponentModel.ISupportInitialize)hostedByBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)ticketBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)attendeeBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ticketData).EndInit();
             ((System.ComponentModel.ISupportInitialize)ticketBindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ticketData).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ticketBindingSource2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -764,15 +769,16 @@
         private TextBox NameBox;
         private TextBox Choice;
         private BindingSource attendeeBindingSource;
-        private DataGridView ticketData;
-        private DataGridViewTextBoxColumn TicketID;
-        private DataGridViewTextBoxColumn Attendee;
-        private DataGridViewTextBoxColumn eventDataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn ticketTypeDataGridViewTextBoxColumn;
         private BindingSource ticketBindingSource1;
         private DataGridViewTextBoxColumn targetModelDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn upOperationsDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn downOperationsDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn activeProviderDataGridViewTextBoxColumn;
+        private DataGridView ticketData;
+        private DataGridViewTextBoxColumn ticketIDDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn attendeeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn eventDataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn ticketTypeDataGridViewTextBoxColumn;
+        private BindingSource ticketBindingSource2;
     }
 }

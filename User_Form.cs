@@ -52,109 +52,60 @@ namespace Event_Manager
         {
             NameBox.Text = currAttendee.Name;
             var db = new EventContext();
-            //var attendees = db.Attendees.Where(p => p.Name == userName).ToList();
-            var tickets = db.Tickets.Where(p => p.Attendee == currAttendee).ToList();
+            var tickets = db.Tickets.Where(p => p.Attendee == currAttendee);
             var hosts = db.HostedBy.Where(p => db.Tickets.Any()).ToList();
-            var events = db.Events.ToList();
             var presents = db.Presents.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).ToList();
             var presenters = db.Presenters.ToList();
             var vendors = db.Vendors.ToList();
             hostedData.DataSource = hosts;
-            eventData.DataSource = events;
-            presenterData.DataSource = presenters;
-            presentationData.DataSource = presents;
-            vendorData.DataSource = vendors;
-            ticketData.DataSource = db.Tickets.Select(o => new
+
+            eventData.DataSource = db.Events.Select(o => new
+            {
+                Name = o.Name,
+                Description = o.Description,
+                StartDate = o.StartDate,
+                EndDate = o.EndDate,
+                Website = o.Website,
+                Location = o.Location.Name
+            }).ToList();
+            presentationData.DataSource = db.Presents.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).Select(o => new
+            {
+                Time = o.Time,
+                Title = o.Title,
+                Description = o.Description,
+                RoomID = o.RoomID,
+                Presenter = o.Presenter.Name,
+                Event = o.Event.Name
+            }).ToList();
+            hostedData.DataSource = db.HostedBy.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).Select(o => new
+            {
+                Event = o.Event.Name
+            }).ToList();
+            vendorData.DataSource = db.Vendors.Where(p => db.HasSpace.Any(q => q.Vendor.VendorID == p.VendorID && tickets.Select(t => t.Event).Contains(q.Event))).Select(o => new
+            {
+                Name = o.Name,
+                Fee = o.Fee,
+                Email = o.Email
+            }).ToList();
+            presenterData.DataSource = db.Presenters.Where(p => db.Presents.Any(q => q.Presenter.PresenterID == p.PresenterID && tickets.Select(t => t.Event).Contains(q.Event))).Select(o => new
+            {
+                Name = o.Name,
+                PresenterFee = o.PresenterFee,
+                Email = o.Email
+            }).ToList();
+            ticketData.DataSource = db.Tickets.Where(p => p.Attendee == currAttendee).Select(o => new
             {
                 TicketID = o.TicketID,
-                Attendee = o.Attendee,
-                //Cost = o.Time,
-                Event = o.Event,
+                Attendee = o.Attendee.Name,
+                Event = o.Event.Name,
                 TicketType = o.TicketType
             }).ToList();
-            //Test1 ta = new Test1();
-
-            //DataTable table1 = new DataTable();
-            //table1.Columns.Add("TicketID", typeof(Guid));
-            //table1.Columns.Add("Event", typeof(string));
-            //table1.Columns.Add("TicketType", typeof(string));
-            //ticketData.DataBindings.Add("")
-            //foreach (var item in db.Tickets)
-            //{
-            //    table1.Rows.Add(item.TicketID, item.Event.EventId.ToString(), item.TicketType);
-            //}
-            //ta.table1 = table1;
-            //ticketData.AutoGenerateColumns = false;
-            //ticketData.DataSource = ta.table1;
-            //ticketData.DataBindings.Clear();
-            //ticketData.DataBindings.Add("DataSource", ta.table1, "DataSource");
-            /*
-            var columns = ticketData.Columns;
-
-            for (int i = 0; i < ticketData.ColumnCount; i++)
-            {
-                var names = db.Tickets.ToList().Select(x => x.GetType().GetProperty(columns[i].Name).GetValue(x)).ToList();
-                for (int j = 0; j < names.Count(); j++)
-                {
-                    ticketData.Rows[j].Cells[ticketData.Columns[i].Name].Value = names[j].ToString();
-
-                }
-            }*/
-            //MessageBox.Show(db.Tickets.First().Event.ToString());
-            //foreach (Ticket t in db.Tickets) 
-            //{
-            //    UserTicket newTicket = new UserTicket();
-            //    newTicket.TicketType = t.TicketType;
-            //    newTicket.Cost = t.Cost;
-            //    newTicket.Event = t.Event.Name;
-            //    userTickets.Add();
-            //{
-            //    db.Tickets.Select(p=>p.Attendee)
-            //UserTicket newTicket = new UserTicket();
-            //newTicket.Attendee = db.Attendees.Where(p=>p == t.Attendee).First().ToString();
-            //newTicket.TicketType = t.TicketType;
-            //newTicket.Cost = t.Cost;
-            //newTicket.Event = t.Event.Name;
-
-            //userTickets.Add(newTicket);
-
-            //ticketData.DataSource = userTickets.ToList();
-
-            //UserTicket userTicket = new UserTicket();
-            //ticketData.DataSource = tickets;
-            //foreach (DataGridViewRow row in ticketData.Rows)
-            //{
-            //Ticket ticketItem = row.DataBoundItem as Ticket;
-            //if (ticketItem.Attendee != null)
-            //{
-            //row.Cells[1].ValueType = typeof(string);
-            //row.Cells[1] = new Item("One", 1);//db.Attendees.First().ToString();
-            //row.Cells[1].Tag = "hello";
-
-            //row.Cells[0].Value = "hello";
-            //row.Cells[2].Value = db.Tickets.First().ToString();
-            //}
-            //
-            //Ticket potentialAttendee = db.Tickets.Where(p => p.TicketID.ToString() == row.Cells[0].Value.ToString()).First();
-            //row.Cells[1].Value = potentialAttendee.Attendee.Name;
-            /*if (potentialAttendee == null)
-            {
-
-            }
-            else
-            {
-                row.Cells[1].Value = potentialAttendee;
-            }*/
-            //row.Cells[2].Value = db.Tickets.Where(p=>p.TicketID.ToString() == row.Cells[0].Value.ToString()).First().Attendee.Name; // db.Attendees.Where(p => row.Cells[2].Value.ToString() == p.Name.ToString()).Select();
-            //}
 
         }
 
-
         private void PresentersLabel_Click(object sender, EventArgs e)
         {
-            //var entryFormItem = new Entry_Form();
-            //entryFormItem.Show();
+
         }
 
         private void VendorsLabel_Click(object sender, EventArgs e)
@@ -298,7 +249,7 @@ namespace Event_Manager
 
             db.Tickets.Add(new Ticket(
                 5,
-                currAttendee,
+                db.Attendees.Find(currAttendee.AttendeeID),
                 db.Events.Where(p => p.Name == Choice.Text).First(),
                 "Attendee"
                 ));
