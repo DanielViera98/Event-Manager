@@ -30,6 +30,11 @@ namespace Event_Manager.Registration___Login
             Functions.CheckMin(check, 2);
             db.Attendees.Add(new Attendee { Name = textBox_Name.Text, Email = textBox_Email.Text, PhoneNumber = textBox_PhoneNum.Text });
             db.SaveChanges();
+            if (textBox_Name.Text != null)
+            {
+                var userForm = new User_Form(db.Attendees.Where(s => s.Name == textBox_Name.Text).First());
+                userForm.Show();
+            }
             Close();
         }
     }

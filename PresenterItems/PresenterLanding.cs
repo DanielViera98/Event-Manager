@@ -27,7 +27,6 @@ namespace Event_Manager.PresenterItems
             }
             dataGridView_Presenters.DataSource = presenterSource;
         }
-
         private void button_register_Click(object sender, EventArgs e)
         {
             var selected = dataGridView_Presenters.SelectedRows;

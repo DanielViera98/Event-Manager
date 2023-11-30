@@ -31,7 +31,7 @@ namespace Event_Manager.Migrations
                 columns: table => new
                 {
                     HostID = table.Column<Guid>(type: "uuid", nullable: false),
-                    Website = table.Column<string>(type: "text", nullable: false),
+                    Website = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
@@ -103,7 +103,7 @@ namespace Event_Manager.Migrations
                     Pay = table.Column<decimal>(type: "numeric", nullable: false),
                     ShiftSchedule = table.Column<string>(type: "text", nullable: true),
                     LocationAddress = table.Column<string>(type: "text", nullable: true),
-                    HostID = table.Column<Guid>(type: "uuid", nullable: true)
+                    HostID = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -112,7 +112,8 @@ namespace Event_Manager.Migrations
                         name: "FK_Employees_Hosts_HostID",
                         column: x => x.HostID,
                         principalTable: "Hosts",
-                        principalColumn: "HostID");
+                        principalColumn: "HostID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Employees_Locations_LocationAddress",
                         column: x => x.LocationAddress,
@@ -140,7 +141,8 @@ namespace Event_Manager.Migrations
                         name: "FK_Events_Hosts_HostID",
                         column: x => x.HostID,
                         principalTable: "Hosts",
-                        principalColumn: "HostID");
+                        principalColumn: "HostID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Events_Locations_LocationAddress",
                         column: x => x.LocationAddress,

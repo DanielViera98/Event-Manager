@@ -65,17 +65,9 @@
             PresentsLabel = new Label();
             ShowPresentations = new CheckBox();
             hostedData = new DataGridView();
-            hostedIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            eventDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            hostDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             hostedByBindingSource = new BindingSource(components);
             HostedLabel = new Label();
             ShowHosts = new CheckBox();
-            ticketData = new DataGridView();
-            ticketIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            attendeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            eventDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            ticketTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ticketBindingSource = new BindingSource(components);
             costDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             TicketsLabel = new Label();
@@ -84,6 +76,18 @@
             confirmation = new TextBox();
             Confirm = new Button();
             Cancel = new Button();
+            NameBox = new TextBox();
+            Choice = new TextBox();
+            attendeeBindingSource = new BindingSource(components);
+            ticketBindingSource1 = new BindingSource(components);
+            ticketData = new DataGridView();
+            ticketIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            attendeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            eventDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            ticketTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ticketBindingSource2 = new BindingSource(components);
+            eventDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            hostDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)vendorBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)presenterData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)presenterBindingSource).BeginInit();
@@ -94,8 +98,11 @@
             ((System.ComponentModel.ISupportInitialize)presentsBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)hostedData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)hostedByBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ticketData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ticketBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)attendeeBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ticketBindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ticketData).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ticketBindingSource2).BeginInit();
             SuspendLayout();
             // 
             // vendorBindingSource
@@ -111,7 +118,7 @@
             presenterData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             presenterData.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn1, emailDataGridViewTextBoxColumn1, presenterFeeDataGridViewTextBoxColumn });
             presenterData.DataSource = presenterBindingSource;
-            presenterData.Location = new Point(401, 3);
+            presenterData.Location = new Point(410, 89);
             presenterData.Name = "presenterData";
             presenterData.ReadOnly = true;
             presenterData.RowHeadersWidth = 51;
@@ -156,6 +163,7 @@
             feeDataGridViewTextBoxColumn.HeaderText = "Fee";
             feeDataGridViewTextBoxColumn.MinimumWidth = 6;
             feeDataGridViewTextBoxColumn.Name = "feeDataGridViewTextBoxColumn";
+            feeDataGridViewTextBoxColumn.ReadOnly = true;
             feeDataGridViewTextBoxColumn.Width = 61;
             // 
             // emailDataGridViewTextBoxColumn
@@ -164,6 +172,7 @@
             emailDataGridViewTextBoxColumn.HeaderText = "Email";
             emailDataGridViewTextBoxColumn.MinimumWidth = 6;
             emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            emailDataGridViewTextBoxColumn.ReadOnly = true;
             emailDataGridViewTextBoxColumn.Width = 75;
             // 
             // nameDataGridViewTextBoxColumn
@@ -172,6 +181,7 @@
             nameDataGridViewTextBoxColumn.HeaderText = "Name";
             nameDataGridViewTextBoxColumn.MinimumWidth = 6;
             nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
             nameDataGridViewTextBoxColumn.Width = 78;
             // 
             // vendorData
@@ -183,8 +193,9 @@
             vendorData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             vendorData.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, feeDataGridViewTextBoxColumn });
             vendorData.DataSource = vendorBindingSource;
-            vendorData.Location = new Point(399, 47);
+            vendorData.Location = new Point(508, 98);
             vendorData.Name = "vendorData";
+            vendorData.ReadOnly = true;
             vendorData.RowHeadersWidth = 51;
             vendorData.RowTemplate.Height = 29;
             vendorData.Size = new Size(720, 188);
@@ -214,7 +225,7 @@
             // showPresenters
             // 
             showPresenters.AutoSize = true;
-            showPresenters.Location = new Point(12, 3);
+            showPresenters.Location = new Point(12, 47);
             showPresenters.Name = "showPresenters";
             showPresenters.Size = new Size(138, 24);
             showPresenters.TabIndex = 6;
@@ -225,7 +236,7 @@
             // showVendors
             // 
             showVendors.AutoSize = true;
-            showVendors.Location = new Point(12, 33);
+            showVendors.Location = new Point(12, 77);
             showVendors.Name = "showVendors";
             showVendors.Size = new Size(124, 24);
             showVendors.TabIndex = 7;
@@ -236,7 +247,7 @@
             // ShowEvents
             // 
             ShowEvents.AutoSize = true;
-            ShowEvents.Location = new Point(12, 63);
+            ShowEvents.Location = new Point(12, 107);
             ShowEvents.Name = "ShowEvents";
             ShowEvents.Size = new Size(113, 24);
             ShowEvents.TabIndex = 8;
@@ -253,12 +264,14 @@
             eventData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             eventData.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn2, descriptionDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, endDateDataGridViewTextBoxColumn, websiteDataGridViewTextBoxColumn, locationDataGridViewTextBoxColumn });
             eventData.DataSource = eventBindingSource;
-            eventData.Location = new Point(399, 74);
+            eventData.Location = new Point(434, 217);
             eventData.Name = "eventData";
+            eventData.ReadOnly = true;
             eventData.RowHeadersWidth = 51;
             eventData.RowTemplate.Height = 29;
             eventData.Size = new Size(720, 188);
             eventData.TabIndex = 9;
+            eventData.CellContentClick += eventData_CellContentClick;
             // 
             // nameDataGridViewTextBoxColumn2
             // 
@@ -266,6 +279,7 @@
             nameDataGridViewTextBoxColumn2.HeaderText = "Name";
             nameDataGridViewTextBoxColumn2.MinimumWidth = 6;
             nameDataGridViewTextBoxColumn2.Name = "nameDataGridViewTextBoxColumn2";
+            nameDataGridViewTextBoxColumn2.ReadOnly = true;
             nameDataGridViewTextBoxColumn2.Width = 78;
             // 
             // descriptionDataGridViewTextBoxColumn
@@ -274,6 +288,7 @@
             descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
             descriptionDataGridViewTextBoxColumn.MinimumWidth = 6;
             descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            descriptionDataGridViewTextBoxColumn.ReadOnly = true;
             descriptionDataGridViewTextBoxColumn.Width = 114;
             // 
             // startDateDataGridViewTextBoxColumn
@@ -282,6 +297,7 @@
             startDateDataGridViewTextBoxColumn.HeaderText = "StartDate";
             startDateDataGridViewTextBoxColumn.MinimumWidth = 6;
             startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
+            startDateDataGridViewTextBoxColumn.ReadOnly = true;
             startDateDataGridViewTextBoxColumn.Width = 101;
             // 
             // endDateDataGridViewTextBoxColumn
@@ -290,6 +306,7 @@
             endDateDataGridViewTextBoxColumn.HeaderText = "EndDate";
             endDateDataGridViewTextBoxColumn.MinimumWidth = 6;
             endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
+            endDateDataGridViewTextBoxColumn.ReadOnly = true;
             endDateDataGridViewTextBoxColumn.Width = 95;
             // 
             // websiteDataGridViewTextBoxColumn
@@ -298,6 +315,7 @@
             websiteDataGridViewTextBoxColumn.HeaderText = "Website";
             websiteDataGridViewTextBoxColumn.MinimumWidth = 6;
             websiteDataGridViewTextBoxColumn.Name = "websiteDataGridViewTextBoxColumn";
+            websiteDataGridViewTextBoxColumn.ReadOnly = true;
             websiteDataGridViewTextBoxColumn.Width = 91;
             // 
             // locationDataGridViewTextBoxColumn
@@ -306,6 +324,7 @@
             locationDataGridViewTextBoxColumn.HeaderText = "Location";
             locationDataGridViewTextBoxColumn.MinimumWidth = 6;
             locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
+            locationDataGridViewTextBoxColumn.ReadOnly = true;
             locationDataGridViewTextBoxColumn.Width = 95;
             // 
             // eventBindingSource
@@ -338,8 +357,9 @@
             presentationData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             presentationData.Columns.AddRange(new DataGridViewColumn[] { roomIDDataGridViewTextBoxColumn, titleDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn1, timeDataGridViewTextBoxColumn, presenterDataGridViewTextBoxColumn, eventDataGridViewTextBoxColumn });
             presentationData.DataSource = presentsBindingSource;
-            presentationData.Location = new Point(399, 177);
+            presentationData.Location = new Point(298, 112);
             presentationData.Name = "presentationData";
+            presentationData.ReadOnly = true;
             presentationData.RowHeadersWidth = 51;
             presentationData.RowTemplate.Height = 29;
             presentationData.Size = new Size(720, 188);
@@ -351,6 +371,7 @@
             roomIDDataGridViewTextBoxColumn.HeaderText = "RoomID";
             roomIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             roomIDDataGridViewTextBoxColumn.Name = "roomIDDataGridViewTextBoxColumn";
+            roomIDDataGridViewTextBoxColumn.ReadOnly = true;
             roomIDDataGridViewTextBoxColumn.Width = 93;
             // 
             // titleDataGridViewTextBoxColumn
@@ -359,6 +380,7 @@
             titleDataGridViewTextBoxColumn.HeaderText = "Title";
             titleDataGridViewTextBoxColumn.MinimumWidth = 6;
             titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            titleDataGridViewTextBoxColumn.ReadOnly = true;
             titleDataGridViewTextBoxColumn.Width = 67;
             // 
             // descriptionDataGridViewTextBoxColumn1
@@ -367,6 +389,7 @@
             descriptionDataGridViewTextBoxColumn1.HeaderText = "Description";
             descriptionDataGridViewTextBoxColumn1.MinimumWidth = 6;
             descriptionDataGridViewTextBoxColumn1.Name = "descriptionDataGridViewTextBoxColumn1";
+            descriptionDataGridViewTextBoxColumn1.ReadOnly = true;
             descriptionDataGridViewTextBoxColumn1.Width = 114;
             // 
             // timeDataGridViewTextBoxColumn
@@ -375,6 +398,7 @@
             timeDataGridViewTextBoxColumn.HeaderText = "Time";
             timeDataGridViewTextBoxColumn.MinimumWidth = 6;
             timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
+            timeDataGridViewTextBoxColumn.ReadOnly = true;
             timeDataGridViewTextBoxColumn.Width = 71;
             // 
             // presenterDataGridViewTextBoxColumn
@@ -383,6 +407,7 @@
             presenterDataGridViewTextBoxColumn.HeaderText = "Presenter";
             presenterDataGridViewTextBoxColumn.MinimumWidth = 6;
             presenterDataGridViewTextBoxColumn.Name = "presenterDataGridViewTextBoxColumn";
+            presenterDataGridViewTextBoxColumn.ReadOnly = true;
             presenterDataGridViewTextBoxColumn.Width = 99;
             // 
             // eventDataGridViewTextBoxColumn
@@ -391,6 +416,7 @@
             eventDataGridViewTextBoxColumn.HeaderText = "Event";
             eventDataGridViewTextBoxColumn.MinimumWidth = 6;
             eventDataGridViewTextBoxColumn.Name = "eventDataGridViewTextBoxColumn";
+            eventDataGridViewTextBoxColumn.ReadOnly = true;
             eventDataGridViewTextBoxColumn.Width = 74;
             // 
             // presentsBindingSource
@@ -409,7 +435,7 @@
             // ShowPresentations
             // 
             ShowPresentations.AutoSize = true;
-            ShowPresentations.Location = new Point(12, 93);
+            ShowPresentations.Location = new Point(12, 137);
             ShowPresentations.Name = "ShowPresentations";
             ShowPresentations.Size = new Size(159, 24);
             ShowPresentations.TabIndex = 13;
@@ -424,38 +450,15 @@
             hostedData.AutoGenerateColumns = false;
             hostedData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             hostedData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            hostedData.Columns.AddRange(new DataGridViewColumn[] { hostedIDDataGridViewTextBoxColumn, eventDataGridViewTextBoxColumn1, hostDataGridViewTextBoxColumn });
+            hostedData.Columns.AddRange(new DataGridViewColumn[] { eventDataGridViewTextBoxColumn1, hostDataGridViewTextBoxColumn });
             hostedData.DataSource = hostedByBindingSource;
-            hostedData.Location = new Point(399, 241);
+            hostedData.Location = new Point(276, 155);
             hostedData.Name = "hostedData";
+            hostedData.ReadOnly = true;
             hostedData.RowHeadersWidth = 51;
             hostedData.RowTemplate.Height = 29;
             hostedData.Size = new Size(720, 188);
             hostedData.TabIndex = 14;
-            // 
-            // hostedIDDataGridViewTextBoxColumn
-            // 
-            hostedIDDataGridViewTextBoxColumn.DataPropertyName = "HostedID";
-            hostedIDDataGridViewTextBoxColumn.HeaderText = "HostedID";
-            hostedIDDataGridViewTextBoxColumn.MinimumWidth = 6;
-            hostedIDDataGridViewTextBoxColumn.Name = "hostedIDDataGridViewTextBoxColumn";
-            hostedIDDataGridViewTextBoxColumn.Width = 101;
-            // 
-            // eventDataGridViewTextBoxColumn1
-            // 
-            eventDataGridViewTextBoxColumn1.DataPropertyName = "Event";
-            eventDataGridViewTextBoxColumn1.HeaderText = "Event";
-            eventDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            eventDataGridViewTextBoxColumn1.Name = "eventDataGridViewTextBoxColumn1";
-            eventDataGridViewTextBoxColumn1.Width = 74;
-            // 
-            // hostDataGridViewTextBoxColumn
-            // 
-            hostDataGridViewTextBoxColumn.DataPropertyName = "Host";
-            hostDataGridViewTextBoxColumn.HeaderText = "Host";
-            hostDataGridViewTextBoxColumn.MinimumWidth = 6;
-            hostDataGridViewTextBoxColumn.Name = "hostDataGridViewTextBoxColumn";
-            hostDataGridViewTextBoxColumn.Width = 69;
             // 
             // hostedByBindingSource
             // 
@@ -473,7 +476,7 @@
             // ShowHosts
             // 
             ShowHosts.AutoSize = true;
-            ShowHosts.Location = new Point(12, 123);
+            ShowHosts.Location = new Point(12, 167);
             ShowHosts.Name = "ShowHosts";
             ShowHosts.Size = new Size(108, 24);
             ShowHosts.TabIndex = 16;
@@ -481,57 +484,9 @@
             ShowHosts.UseVisualStyleBackColor = true;
             ShowHosts.CheckedChanged += ShowHosts_CheckedChanged;
             // 
-            // ticketData
-            // 
-            ticketData.AllowUserToAddRows = false;
-            ticketData.AllowUserToDeleteRows = false;
-            ticketData.AutoGenerateColumns = false;
-            ticketData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            ticketData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ticketData.Columns.AddRange(new DataGridViewColumn[] { ticketIDDataGridViewTextBoxColumn, attendeeDataGridViewTextBoxColumn, eventDataGridViewTextBoxColumn2, ticketTypeDataGridViewTextBoxColumn });
-            ticketData.DataSource = ticketBindingSource;
-            ticketData.Location = new Point(399, 293);
-            ticketData.Name = "ticketData";
-            ticketData.RowHeadersWidth = 51;
-            ticketData.RowTemplate.Height = 29;
-            ticketData.Size = new Size(720, 188);
-            ticketData.TabIndex = 17;
-            // 
-            // ticketIDDataGridViewTextBoxColumn
-            // 
-            ticketIDDataGridViewTextBoxColumn.DataPropertyName = "TicketID";
-            ticketIDDataGridViewTextBoxColumn.HeaderText = "TicketID";
-            ticketIDDataGridViewTextBoxColumn.MinimumWidth = 6;
-            ticketIDDataGridViewTextBoxColumn.Name = "ticketIDDataGridViewTextBoxColumn";
-            ticketIDDataGridViewTextBoxColumn.Width = 92;
-            // 
-            // attendeeDataGridViewTextBoxColumn
-            // 
-            attendeeDataGridViewTextBoxColumn.DataPropertyName = "Attendee";
-            attendeeDataGridViewTextBoxColumn.HeaderText = "Attendee";
-            attendeeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            attendeeDataGridViewTextBoxColumn.Name = "attendeeDataGridViewTextBoxColumn";
-            attendeeDataGridViewTextBoxColumn.Width = 99;
-            // 
-            // eventDataGridViewTextBoxColumn2
-            // 
-            eventDataGridViewTextBoxColumn2.DataPropertyName = "Event";
-            eventDataGridViewTextBoxColumn2.HeaderText = "Event";
-            eventDataGridViewTextBoxColumn2.MinimumWidth = 6;
-            eventDataGridViewTextBoxColumn2.Name = "eventDataGridViewTextBoxColumn2";
-            eventDataGridViewTextBoxColumn2.Width = 74;
-            // 
-            // ticketTypeDataGridViewTextBoxColumn
-            // 
-            ticketTypeDataGridViewTextBoxColumn.DataPropertyName = "TicketType";
-            ticketTypeDataGridViewTextBoxColumn.HeaderText = "TicketType";
-            ticketTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            ticketTypeDataGridViewTextBoxColumn.Name = "ticketTypeDataGridViewTextBoxColumn";
-            ticketTypeDataGridViewTextBoxColumn.Width = 108;
-            // 
             // ticketBindingSource
             // 
-            ticketBindingSource.DataSource = typeof(Ticket);
+            ticketBindingSource.DataSource = typeof(UserTicket);
             // 
             // costDataGridViewTextBoxColumn
             // 
@@ -553,7 +508,7 @@
             // ShowTickets
             // 
             ShowTickets.AutoSize = true;
-            ShowTickets.Location = new Point(12, 153);
+            ShowTickets.Location = new Point(12, 197);
             ShowTickets.Name = "ShowTickets";
             ShowTickets.Size = new Size(116, 24);
             ShowTickets.TabIndex = 19;
@@ -563,7 +518,7 @@
             // 
             // buyButton
             // 
-            buyButton.Location = new Point(12, 192);
+            buyButton.Location = new Point(12, 281);
             buyButton.Name = "buyButton";
             buyButton.Size = new Size(222, 29);
             buyButton.TabIndex = 20;
@@ -573,7 +528,7 @@
             // 
             // confirmation
             // 
-            confirmation.Location = new Point(12, 227);
+            confirmation.Location = new Point(12, 316);
             confirmation.Name = "confirmation";
             confirmation.ReadOnly = true;
             confirmation.Size = new Size(222, 27);
@@ -583,7 +538,7 @@
             // 
             // Confirm
             // 
-            Confirm.Location = new Point(12, 260);
+            Confirm.Location = new Point(12, 349);
             Confirm.Name = "Confirm";
             Confirm.Size = new Size(94, 29);
             Confirm.TabIndex = 22;
@@ -593,7 +548,7 @@
             // 
             // Cancel
             // 
-            Cancel.Location = new Point(140, 260);
+            Cancel.Location = new Point(140, 349);
             Cancel.Name = "Cancel";
             Cancel.Size = new Size(94, 29);
             Cancel.TabIndex = 23;
@@ -601,18 +556,118 @@
             Cancel.UseVisualStyleBackColor = true;
             Cancel.Click += Cancel_Click;
             // 
+            // NameBox
+            // 
+            NameBox.Location = new Point(12, 12);
+            NameBox.Name = "NameBox";
+            NameBox.Size = new Size(222, 27);
+            NameBox.TabIndex = 24;
+            // 
+            // Choice
+            // 
+            Choice.Location = new Point(11, 235);
+            Choice.Name = "Choice";
+            Choice.ReadOnly = true;
+            Choice.Size = new Size(223, 27);
+            Choice.TabIndex = 25;
+            Choice.Text = "Select an Event";
+            // 
+            // attendeeBindingSource
+            // 
+            attendeeBindingSource.DataSource = typeof(Attendee);
+            // 
+            // ticketBindingSource1
+            // 
+            ticketBindingSource1.DataSource = typeof(Ticket);
+            // 
+            // ticketData
+            // 
+            ticketData.AllowUserToAddRows = false;
+            ticketData.AllowUserToDeleteRows = false;
+            ticketData.AutoGenerateColumns = false;
+            ticketData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ticketData.Columns.AddRange(new DataGridViewColumn[] { ticketIDDataGridViewTextBoxColumn, attendeeDataGridViewTextBoxColumn, eventDataGridViewTextBoxColumn2, ticketTypeDataGridViewTextBoxColumn });
+            ticketData.DataSource = ticketBindingSource2;
+            ticketData.Location = new Point(276, 12);
+            ticketData.Name = "ticketData";
+            ticketData.ReadOnly = true;
+            ticketData.RowHeadersWidth = 51;
+            ticketData.RowTemplate.Height = 29;
+            ticketData.Size = new Size(720, 188);
+            ticketData.TabIndex = 26;
+            // 
+            // ticketIDDataGridViewTextBoxColumn
+            // 
+            ticketIDDataGridViewTextBoxColumn.DataPropertyName = "TicketID";
+            ticketIDDataGridViewTextBoxColumn.HeaderText = "TicketID";
+            ticketIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            ticketIDDataGridViewTextBoxColumn.Name = "ticketIDDataGridViewTextBoxColumn";
+            ticketIDDataGridViewTextBoxColumn.ReadOnly = true;
+            ticketIDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // attendeeDataGridViewTextBoxColumn
+            // 
+            attendeeDataGridViewTextBoxColumn.DataPropertyName = "Attendee";
+            attendeeDataGridViewTextBoxColumn.HeaderText = "Attendee";
+            attendeeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            attendeeDataGridViewTextBoxColumn.Name = "attendeeDataGridViewTextBoxColumn";
+            attendeeDataGridViewTextBoxColumn.ReadOnly = true;
+            attendeeDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // eventDataGridViewTextBoxColumn2
+            // 
+            eventDataGridViewTextBoxColumn2.DataPropertyName = "Event";
+            eventDataGridViewTextBoxColumn2.HeaderText = "Event";
+            eventDataGridViewTextBoxColumn2.MinimumWidth = 6;
+            eventDataGridViewTextBoxColumn2.Name = "eventDataGridViewTextBoxColumn2";
+            eventDataGridViewTextBoxColumn2.ReadOnly = true;
+            eventDataGridViewTextBoxColumn2.Width = 125;
+            // 
+            // ticketTypeDataGridViewTextBoxColumn
+            // 
+            ticketTypeDataGridViewTextBoxColumn.DataPropertyName = "TicketType";
+            ticketTypeDataGridViewTextBoxColumn.HeaderText = "TicketType";
+            ticketTypeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            ticketTypeDataGridViewTextBoxColumn.Name = "ticketTypeDataGridViewTextBoxColumn";
+            ticketTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            ticketTypeDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // ticketBindingSource2
+            // 
+            ticketBindingSource2.DataSource = typeof(Ticket);
+            // 
+            // eventDataGridViewTextBoxColumn1
+            // 
+            eventDataGridViewTextBoxColumn1.DataPropertyName = "Event";
+            eventDataGridViewTextBoxColumn1.HeaderText = "Event";
+            eventDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            eventDataGridViewTextBoxColumn1.Name = "eventDataGridViewTextBoxColumn1";
+            eventDataGridViewTextBoxColumn1.ReadOnly = true;
+            eventDataGridViewTextBoxColumn1.Width = 74;
+            // 
+            // hostDataGridViewTextBoxColumn
+            // 
+            hostDataGridViewTextBoxColumn.DataPropertyName = "Host";
+            hostDataGridViewTextBoxColumn.HeaderText = "Host";
+            hostDataGridViewTextBoxColumn.MinimumWidth = 6;
+            hostDataGridViewTextBoxColumn.Name = "hostDataGridViewTextBoxColumn";
+            hostDataGridViewTextBoxColumn.ReadOnly = true;
+            hostDataGridViewTextBoxColumn.Width = 69;
+            // 
             // User_Form
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1600, 900);
+            Controls.Add(ticketData);
+            Controls.Add(Choice);
+            Controls.Add(NameBox);
             Controls.Add(Cancel);
             Controls.Add(Confirm);
             Controls.Add(confirmation);
             Controls.Add(buyButton);
             Controls.Add(ShowTickets);
             Controls.Add(TicketsLabel);
-            Controls.Add(ticketData);
             Controls.Add(ShowHosts);
             Controls.Add(HostedLabel);
             Controls.Add(hostedData);
@@ -641,8 +696,11 @@
             ((System.ComponentModel.ISupportInitialize)presentsBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)hostedData).EndInit();
             ((System.ComponentModel.ISupportInitialize)hostedByBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ticketData).EndInit();
             ((System.ComponentModel.ISupportInitialize)ticketBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)attendeeBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ticketBindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ticketData).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ticketBindingSource2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -685,17 +743,9 @@
         private CheckBox ShowPresentations;
         private DataGridView hostedData;
         private BindingSource hostedByBindingSource;
-        private DataGridViewTextBoxColumn hostedIDDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn eventDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn hostDataGridViewTextBoxColumn;
         private Label HostedLabel;
         private CheckBox ShowHosts;
-        private DataGridView ticketData;
-        private DataGridViewTextBoxColumn ticketIDDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn costDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn attendeeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn eventDataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn ticketTypeDataGridViewTextBoxColumn;
         private BindingSource ticketBindingSource;
         private Label TicketsLabel;
         private CheckBox ShowTickets;
@@ -703,5 +753,21 @@
         private TextBox confirmation;
         private Button Confirm;
         private Button Cancel;
+        private TextBox NameBox;
+        private TextBox Choice;
+        private BindingSource attendeeBindingSource;
+        private BindingSource ticketBindingSource1;
+        private DataGridViewTextBoxColumn targetModelDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn upOperationsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn downOperationsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn activeProviderDataGridViewTextBoxColumn;
+        private DataGridView ticketData;
+        private DataGridViewTextBoxColumn ticketIDDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn attendeeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn eventDataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn ticketTypeDataGridViewTextBoxColumn;
+        private BindingSource ticketBindingSource2;
+        private DataGridViewTextBoxColumn eventDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn hostDataGridViewTextBoxColumn;
     }
 }

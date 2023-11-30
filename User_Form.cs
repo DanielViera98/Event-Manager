@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -13,8 +15,10 @@ namespace Event_Manager
 {
     public partial class User_Form : Form
     {
+        public DbSet<UserTicket> userTickets { get; set; }
         int tablesShowing = 0;
-        public User_Form()
+        Attendee currAttendee;
+        public User_Form(Attendee user)
         {
             InitializeComponent();
             presenterData.Hide();
@@ -33,18 +37,76 @@ namespace Event_Manager
             confirmation.Hide();
             Confirm.Hide();
             Cancel.Hide();
+            currAttendee = user;
+
         }
+
+        class Test1
+        {
+            public DataTable table1 = new DataTable("table1");
+            public BindingSource sr = new BindingSource();
+        }
+
 
         private void User_Form_Load(object sender, EventArgs e)
         {
-            //listView1.Items.Add();
+            NameBox.Text = currAttendee.Name;
+            var db = new EventContext();
+            var tickets = db.Tickets.Where(p => p.Attendee == currAttendee);
+            var hosts = db.HostedBy.Where(p => db.Tickets.Any()).ToList();
+            var presents = db.Presents.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).ToList();
+            var presenters = db.Presenters.ToList();
+            var vendors = db.Vendors.ToList();
+            hostedData.DataSource = hosts;
+
+            eventData.DataSource = db.Events.Select(o => new
+            {
+                Name = o.Name,
+                Description = o.Description,
+                StartDate = o.StartDate,
+                EndDate = o.EndDate,
+                Website = o.Website,
+                Location = o.Location.Name
+            }).ToList();
+            presentationData.DataSource = db.Presents.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).Select(o => new
+            {
+                Time = o.Time,
+                Title = o.Title,
+                Description = o.Description,
+                RoomID = o.RoomID,
+                Presenter = o.Presenter.Name,
+                Event = o.Event.Name
+            }).ToList();
+            hostedData.DataSource = db.HostedBy.Where(p => tickets.Select(t => t.Event).Contains(p.Event)).Select(o => new
+            {
+                Event = o.Event.Name,
+                Host = o.Host.Name
+            }).ToList();
+            vendorData.DataSource = db.Vendors.Where(p => db.HasSpace.Any(q => q.Vendor.VendorID == p.VendorID && tickets.Select(t => t.Event).Contains(q.Event))).Select(o => new
+            {
+                Name = o.Name,
+                Fee = o.Fee,
+                Email = o.Email
+            }).ToList();
+            presenterData.DataSource = db.Presenters.Where(p => db.Presents.Any(q => q.Presenter.PresenterID == p.PresenterID && tickets.Select(t => t.Event).Contains(q.Event))).Select(o => new
+            {
+                Name = o.Name,
+                PresenterFee = o.PresenterFee,
+                Email = o.Email
+            }).ToList();
+            ticketData.DataSource = db.Tickets.Where(p => p.Attendee == currAttendee).Select(o => new
+            {
+                TicketID = o.TicketID,
+                Attendee = o.Attendee.Name,
+                Event = o.Event.Name,
+                TicketType = o.TicketType
+            }).ToList();
 
         }
 
         private void PresentersLabel_Click(object sender, EventArgs e)
         {
-            //var entryFormItem = new Entry_Form();
-            //entryFormItem.Show();
+
         }
 
         private void VendorsLabel_Click(object sender, EventArgs e)
@@ -177,6 +239,25 @@ namespace Event_Manager
             Confirm.Hide();
             confirmation.Hide();
             Cancel.Hide();
+
+            var db = new EventContext();
+
+            if (Choice.Text == "Select an Event")
+            {
+                MessageBox.Show("Must select a cell for an Event.");
+                return;
+            }
+
+            db.Tickets.Add(new Ticket(
+                5,
+                db.Attendees.Find(currAttendee.AttendeeID),
+                db.Events.Where(p => p.Name == Choice.Text).First(),
+                "Attendee"
+                ));
+
+            db.SaveChanges();
+            User_Form_Load(null, null);
+
         }
 
         private void Cancel_Click(object sender, EventArgs e)
@@ -184,6 +265,22 @@ namespace Event_Manager
             Confirm.Hide();
             confirmation.Hide();
             Cancel.Hide();
+        }
+
+        private void eventData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach (DataGridViewRow row in eventData.Rows)
+            {
+                foreach (DataGridViewCell cell in eventData.SelectedCells)
+                {
+                    if (row.Cells[0].Value.ToString() == cell.Value.ToString())
+                    {
+                        Choice.Text = row.Cells[0].Value.ToString();
+                        break;
+                    }
+                }
+
+            }
         }
     }
 }
