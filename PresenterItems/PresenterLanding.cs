@@ -29,7 +29,7 @@ namespace Event_Manager.PresenterItems
         }
         private void button_Register_Click(object sender, EventArgs e)
         {
-
+            DialogResult dialogResult = MessageBox.Show("Yes", "Register For Event?", MessageBoxButtons.YesNo);
         }
     }
 }
