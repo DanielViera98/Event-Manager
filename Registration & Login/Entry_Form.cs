@@ -26,7 +26,14 @@ namespace Event_Manager
             }
             else if (accountType == "Host" && textBox1.Text != "" && textBox2.Text != "")
             {
-                var hostZone = new HostLanding();
+                var currHost = db.Hosts.Where(p => p.Name == textBox1.Text).FirstOrDefault();
+                if (currHost == null)
+                {
+                    MessageBox.Show("Must have an account as a Host.");
+                    return;
+                }
+
+                var hostZone = new HostLanding(currHost);
                 hostZone.Show();
             }
 
