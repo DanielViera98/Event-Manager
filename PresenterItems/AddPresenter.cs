@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Event_Manager
+namespace Event_Manager.PresenterItems
 {
-    public partial class Register_Form : Form
+    public partial class AddPresenter : Form
     {
-        public Register_Form()
+        public AddPresenter()
         {
             InitializeComponent();
-        }
-
-        private void radioButton_Attendee_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
