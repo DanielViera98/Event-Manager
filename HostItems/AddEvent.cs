@@ -22,7 +22,7 @@ namespace Event_Manager.HostItems
                 localSource.Add(local);
             }
             comboBox_Locations.DataSource = localSource;
-            
+
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)

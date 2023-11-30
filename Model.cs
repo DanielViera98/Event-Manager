@@ -105,11 +105,16 @@ public class Location                                   //Location Entity Table
 public class Attendee                                   //Attendee Entity Table
 {
     public Attendee() { }
+    public Attendee(string name, string email, string phone)
+    {
+        Name = name;
+        Email = email;
+        PhoneNumber = phone;
+    }
     [Key] public Guid AttendeeID { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    public DateTime CheckinTime { get; set; }
 }
 
 public class Ticket                                     //Ticket Entity Table
@@ -128,6 +133,7 @@ public class Ticket                                     //Ticket Entity Table
     public Attendee Attendee { get; set; }              //FK to Attendee Table
     public Event Event { get; set; }                    //FK to Event Table
     public string TicketType { get; set; }
+    public DateTime CheckInTime { get; set; }
 }
 
 public class UserTicket                                     //Ticket Entity Table
@@ -142,26 +148,23 @@ public class UserTicket                                     //Ticket Entity Tabl
 public class Host                                       //Host Parent Entity Table
 {
     [Key] public Guid HostID { get; set; }
-    public string Website { get; set; }
+    public string? Website { get; set; }
     public string Email { get; set; }
+    public string Name { get; set; }
+    public string PhoneNumber { get; set; }
 
     public List<Event> Events { get; set; }
 }   
 
 public class Person                                     /*Person, inherits parent table Host*/
     : Host
-{
-    public string Name { get; set; }
-    public string PhoneNum { get; set; }
-}
+{   }
 
 public class Organization                               /*Organization, inherits parent table Host*/
     :Host
 {
-    public string OrganizationName { get; set; }                //Name of organization
-    public string OrganizationPhone { get; set; }
-    public string RepresentativeName { get; set; }      //Representative name
-    public string RepresentativePhone { get; set; }
+    public string? RepresentativeName { get; set; }      //Representative name
+    public string? RepresentativePhone { get; set; }
 }
 
 [PrimaryKey(nameof(RoomID), nameof(TableID))]           //Composite primary key for HasSpace
@@ -185,10 +188,12 @@ public class Employee                                   //Employee Entity Table
 {
     [Key] public Guid EmpID { get; set;}
     public string Name { get; set; }
+    public string PhoneNum { get; set; }
+    public string Email { get; set; }
     public decimal Pay { get; set; }
-    public string ShiftSchedule { get; set; }      
-    public Location Location { get; set; }              //FK to location of workplace if applicable
-    public Host Host { get; set; }                      //FK to host they work for if applicable
+    public string? ShiftSchedule { get; set; }      
+    public Location? Location { get; set; }              //FK to location of workplace if applicable
+    public Host? Host { get; set; }                      //FK to host they work for if applicable
 }
 
 public class Presenter
@@ -196,7 +201,8 @@ public class Presenter
     [Key] public int PresenterID { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
-    public float PresenterFee { get; set; }
+    public string Phone { get; set; }
+    public decimal PresenterFee { get; set; }
 }
 
 public class Presents
