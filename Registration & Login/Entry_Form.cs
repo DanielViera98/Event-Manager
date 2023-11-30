@@ -1,4 +1,5 @@
 using Event_Manager.Registration___Login;
+using Event_Manager.VendorItems;
 
 namespace Event_Manager
 {
@@ -34,6 +35,18 @@ namespace Event_Manager
                 }
 
                 var hostZone = new HostLanding(currHost);
+                hostZone.Show();
+            }
+            else if (accountType == "Vendor" && textBox1.Text != "" && textBox2.Text != "")
+            {
+                var currVendor = db.Vendors.Where(p => p.Name == textBox1.Text).FirstOrDefault();
+                if (currVendor == null)
+                {
+                    MessageBox.Show("Must have an account as a Vendor.");
+                    return;
+                }
+
+                var hostZone = new VendorLanding(currVendor);
                 hostZone.Show();
             }
 

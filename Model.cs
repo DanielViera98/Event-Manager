@@ -194,6 +194,14 @@ public class Organization                               /*Organization, inherits
 [PrimaryKey(nameof(RoomID), nameof(TableID))]           //Composite primary key for HasSpace
 public class HasSpace                                   //HasSpace Multi-Multi Relationship Table
 {
+    public HasSpace() { }
+    public HasSpace(int roomID, int tableID, Vendor vendor, Event evnt)
+    {
+        RoomID = roomID;
+        TableID = tableID;
+        Vendor = vendor;
+        Event = evnt;
+    }
     public int RoomID { get; set; }
     public int TableID { get; set; }
     public Vendor Vendor { get; set; }                  //FK for Vendor

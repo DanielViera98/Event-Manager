@@ -21,4 +21,13 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="VendorItems\AddVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="VendorItems\VendorLanding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
