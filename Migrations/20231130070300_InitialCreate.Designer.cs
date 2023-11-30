@@ -11,7 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Event_Manager.Migrations
 {
     [DbContext(typeof(EventContext))]
+<<<<<<<< HEAD:Migrations/20231130070300_InitialCreate.Designer.cs
+    [Migration("20231130070300_InitialCreate")]
+========
     [Migration("20231130070342_InitialCreate")]
+>>>>>>>> 339093cda0d02d9f08781430c8cff717d971c29a:Migrations/20231130070342_InitialCreate.Designer.cs
     partial class InitialCreate
     {
         /// <inheritdoc />
