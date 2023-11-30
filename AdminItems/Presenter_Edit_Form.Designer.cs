@@ -39,6 +39,8 @@
             locationBindingSource = new BindingSource(components);
             textBoxEmail = new TextBox();
             textBoxName = new TextBox();
+            label5 = new Label();
+            textBoxPhone = new TextBox();
             ((System.ComponentModel.ISupportInitialize)locationBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -121,11 +123,29 @@
             textBoxName.Size = new Size(125, 27);
             textBoxName.TabIndex = 68;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(616, 62);
+            label5.Name = "label5";
+            label5.Size = new Size(50, 20);
+            label5.TabIndex = 78;
+            label5.Text = "Phone";
+            // 
+            // textBoxPhone
+            // 
+            textBoxPhone.Location = new Point(606, 109);
+            textBoxPhone.Name = "textBoxPhone";
+            textBoxPhone.Size = new Size(125, 27);
+            textBoxPhone.TabIndex = 77;
+            // 
             // Presenter_Edit_Form
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label5);
+            Controls.Add(textBoxPhone);
             Controls.Add(textBoxPI);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -154,5 +174,7 @@
         private BindingSource locationBindingSource;
         private TextBox textBoxEmail;
         private TextBox textBoxName;
+        private Label label5;
+        private TextBox textBoxPhone;
     }
 }

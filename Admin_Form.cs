@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,9 +14,11 @@ namespace Event_Manager
 {
     public partial class Admin_Form : Form
     {
+        string entityType = "";
         public Admin_Form()
         {
             InitializeComponent();
+            //dataGridView1.AutoGenerateColumns = false;
         }
 
 
@@ -31,31 +34,80 @@ namespace Event_Manager
 
         private void EventsButton_Click(object sender, EventArgs e)
         {
+            entityType = "Event";
             var db = new EventContext();
-            var events = db.Events.ToList();
-            dataGridView1.DataSource = events;
+            //var events = db.Events.ToList();
+            dataGridView1.DataSource = db.Events.Select(o => new
+            {
+                EventID = o.EventId,
+                Name = o.Name,
+                Description = o.Description,
+                StartDate = o.StartDate,
+                EndDate = o.EndDate,
+                Website = o.Website,
+                Location = o.Location.Name.ToString()
+            }).ToList();
         }
 
         private void HostsButton_Click(object sender, EventArgs e)
         {
+            entityType = "Host";
             var db = new EventContext();
-            var hosts = db.Hosts.ToList();
-            dataGridView1.DataSource = hosts;
+            //var hosts = db.Hosts.ToList();
+            dataGridView1.DataSource = db.Hosts.Select(o => new
+            {
+                HostID = o.HostID,
+                Website = o.Website,
+                Email = o.Email,
+                Name = o.Name,
+                PhoneNumber = o.PhoneNumber,
+                Discriminator = o.GetType().ToString()
+            }).ToList();
         }
 
         private void AttendeesButton_Click(object sender, EventArgs e)
         {
+            entityType = "Attendee";
             var db = new EventContext();
-            var attendees = db.Attendees.ToList();
+            //var attendees = db.Attendees.ToList();
+            var attendees = db.Attendees.Select(o => new
+            {
+                AttendeeID = o.AttendeeID,
+                Name = o.Name,
+                Email = o.Email,
+                PhoneNumber = o.PhoneNumber,
+                //CheckinTime = o.CheckinTime
+
+            }).ToList();
             dataGridView1.DataSource = attendees;
+
+            //dataGridView1.DataSource = db.Attendees.Select(o => new
+            //{
+            //  AttendeeID = o.AttendeeID,
+            // Name = o.Name,
+            //Email = o.Email,
+            //PhoneNumber = o.PhoneNumber,
+            //CheckinTime = o.CheckinTime
+
+            //            }).ToList();
         }
 
 
         private void LocationsButton_Click(object sender, EventArgs e)
         {
+            entityType = "Location";
             var db = new EventContext();
-            var locations = db.Locations.ToList();
-            dataGridView1.DataSource = locations;
+            //var locations = db.Locations.ToList();
+            dataGridView1.DataSource = db.Locations.Select(o => new
+            {
+                Address = o.Address,
+                Name = o.Name,
+                Website = o.Website,
+                Email = o.Email,
+                RentalFee = o.RentalFee,
+                VendorCapacity = o.VendorCapacity,
+                AttendeeCapacity = o.AttendeeCapacity
+            }).ToList();
 
             //db.SaveChanges();
             //Close();
@@ -63,31 +115,113 @@ namespace Event_Manager
 
         private void PresentersButton_Click(object sender, EventArgs e)
         {
+            entityType = "Presenter";
             var db = new EventContext();
-            var presenters = db.Presenters.ToList();
-            dataGridView1.DataSource = presenters;
+            //var presenters = db.Presenters.ToList();
+            dataGridView1.DataSource = db.Presenters.Select(o => new
+            {
+                PresenterID = o.PresenterID,
+                Name = o.Name,
+                Email = o.Email,
+                PresenterFee = o.PresenterFee,
+                PhoneNumber = o.Phone,
+            }).ToList();
         }
 
         private void VendorsButton_Click(object sender, EventArgs e)
         {
+            entityType = "Vendor";
             var db = new EventContext();
-            var vendors = db.Vendors.ToList();
-            dataGridView1.DataSource = vendors;
+            //var vendors = db.Vendors.ToList();
+            dataGridView1.DataSource = db.Vendors.Select(o => new
+            {
+                VendorID = o.VendorID,
+                Name = o.Name,
+                Email = o.Email,
+                Phone = o.PhoneNum,
+                Fee = o.Fee
+            }).ToList();
         }
 
         private void EmployeesButton_Click(object sender, EventArgs e)
         {
+            entityType = "Employee";
             var db = new EventContext();
-            var employees = db.Employees.ToList();
-            dataGridView1.DataSource = employees;
+            //var employees = db.Employees.ToList();
+            dataGridView1.DataSource = db.Employees.Select(o => new
+            {
+                EmployeeID = o.EmpID,
+                Name = o.Name,
+                Pay = o.Pay,
+                ShiftSchedule = o.ShiftSchedule,
+                Location = o.Location.Name.ToString(),
+                //HostID = o.Host.,
+            }).ToList();
         }
 
         private void TicketsButton_Click(object sender, EventArgs e)
         {
+            entityType = "Ticket";
             var db = new EventContext();
-            var tickets = db.Tickets.ToList();
-            dataGridView1.DataSource = tickets;
+            //var tickets = db.Tickets.ToList();
+            dataGridView1.DataSource = db.Tickets.Select(o => new
+            {
+                TicketID = o.TicketID,
+                Cost = o.Cost,
+                AttendeeID = o.Attendee.Name,
+                EventID = o.Event.Name,
+                TicketType = o.TicketType,
+                CheckInTime = o.CheckInTime,
+            }).ToList();
         }
+
+
+        private void HasSpaceButton_Click_1(object sender, EventArgs e)
+        {
+            entityType = "HasSpace";
+            var db = new EventContext();
+            //var hasSpace = db.HasSpace.ToList();
+            dataGridView1.DataSource = db.HasSpace.Select(o => new
+            {
+                RoomID = o.RoomID,
+                TableID = o.TableID,
+                VendorID = o.Vendor,
+                EventID = o.Event,
+            }).ToList();
+        }
+
+        private void HostedByButton_Click_1(object sender, EventArgs e)
+        {
+            entityType = "HostedBy";
+            var db = new EventContext();
+            //var hostedBy = db.HostedBy.ToList();
+            //dataGridView1.DataSource = hostedBy;
+            dataGridView1.DataSource = db.HostedBy.Select(o => new
+            {
+                HostedID = o.HostedID,
+                EventID = o.Event,
+                HostID = o.HostedID,
+
+            }).ToList();
+        }
+
+        private void PresentsButton_Click_1(object sender, EventArgs e)
+        {
+            entityType = "Present";
+            var db = new EventContext();
+            //var presents = db.Presents.ToList();
+            dataGridView1.DataSource = db.Presents.Select(o => new
+            {
+                RoomID = o.RoomID,
+                Title = o.Title,
+                Description = o.Description,
+                Time = o.Time,
+                PresenterID = o.Presenter,
+                EventID = o.Event
+            }).ToList();
+        }
+
+
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
@@ -98,10 +232,13 @@ namespace Event_Manager
                     var db = new EventContext();
                     foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                     {
-                        var itemToDelete = row.DataBoundItem;
-                        if (itemToDelete != null)
+                        //var itemToDelete = row.DataBoundItem;
+                        var itemToDelete2 = row.Cells[0].Value;
+
+
+                        if (itemToDelete2 != null)
                         {
-                            DeleteEntity(db, itemToDelete);
+                            DeleteEntity(db, itemToDelete2);
                         }
                     }
 
@@ -118,37 +255,60 @@ namespace Event_Manager
         private void DeleteEntity(EventContext db, object entity)
         {
             // Example: Check the type of entity and remove it from the corresponding DbSet
-            if (entity is Event)
+            if (entityType == "Event")
             {
-                db.Events.Remove(entity as Event);
+                var entityToDelete = db.Events.Find(entity);
+                db.Events.Remove(entityToDelete);
             }
-            else if (entity is Host)
+            else if (entityType == "Host")
             {
-                db.Hosts.Remove(entity as Host);
+                var entityToDelete = db.Hosts.Find(entity);
+                db.Hosts.Remove(entityToDelete);
             }
-            else if (entity is Attendee)
+            else if (entityType == "Attendee")
             {
-                db.Attendees.Remove(entity as Attendee);
+                var entityToDelete = db.Attendees.Find(entity);
+                db.Attendees.Remove(entityToDelete);
             }
-            else if (entity is Employee)
+            else if (entityType == "Employee")
             {
-                db.Employees.Remove(entity as Employee);
+                var entityToDelete = db.Employees.Find(entity);
+                db.Employees.Remove(entityToDelete);
             }
-            else if (entity is Location)
+            else if (entityType == "Location")
             {
-                db.Locations.Remove(entity as Location);
+                var entityToDelete = db.Locations.Find(entity);
+                db.Locations.Remove(entityToDelete);
             }
-            else if (entity is Vendor)
+            else if (entityType == "Vendor")
             {
-                db.Vendors.Remove(entity as Vendor);
+                var entityToDelete = db.Vendors.Find(entity);
+                db.Vendors.Remove(entityToDelete);
             }
-            else if (entity is Presenter)
+            else if (entityType == "Presenter")
             {
-                db.Presenters.Remove(entity as Presenter);
+                var entityToDelete = db.Presenters.Find(entity);
+                db.Presenters.Remove(entityToDelete);
             }
-            else if (entity is Ticket)
+            else if (entityType == "Ticket")
             {
-                db.Tickets.Remove(entity as Ticket);
+                var entityToDelete = db.Tickets.Find(entity);
+                db.Tickets.Remove(entityToDelete);
+            }
+            else if (entityType == "HasSpace")
+            {
+                var entityToDelete = db.HasSpace.Find(entity);
+                db.HasSpace.Remove(entityToDelete);
+            }
+            else if (entityType == "HostedBy")
+            {
+                var entityToDelete = db.HostedBy.Find(entity);
+                db.HostedBy.Remove(entityToDelete);
+            }
+            else if (entityType == "Presents")
+            {
+                var entityToDelete = db.Presents.Find(entity);
+                db.Presents.Remove(entityToDelete);
             }
             // ... handle other entity types similarly
             // else if (entity is AnotherEntityType) { ... }
@@ -157,14 +317,16 @@ namespace Event_Manager
 
         private void ModifyButton_Click(object sender, EventArgs e)
         {
+            var db = new EventContext();
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 var row = dataGridView1.SelectedRows[0];
-                var itemToEdit = row.DataBoundItem;
-                if (itemToEdit != null)
+                //var itemToEdit = row.DataBoundItem;
+                var itemToEdit2 = row.Cells[0].Value;
+                if (itemToEdit2 != null)
                 {
                     // Open a new form or display a section in the current form to edit the selected item
-                    EditItem(itemToEdit);
+                    EditItem(db, itemToEdit2);
                 }
             }
             else
@@ -173,7 +335,7 @@ namespace Event_Manager
             }
         }
 
-        private void EditItem(object item)
+        private void EditItem(EventContext db, object item)
         {
             if (item != null)
             {
@@ -183,37 +345,71 @@ namespace Event_Manager
                 Form editForm = null; // Declare the form variable outside of the if-else statements
 
                 // Determine the type of the entity and instantiate the appropriate form
-                if (item is Event)
+                if (entityType == "Event")
                 {
-                    editForm = new Event_Edit_Form(item);
+                    var entityToEdit = db.Events.Find(item);
+
+                    editForm = new Event_Edit_Form(entityToEdit);
                 }
-                else if (item is Host)
+                else if (entityType == "Host")
                 {
-                    editForm = new Host_Edit_Form(item);
+                    var entityToEdit = db.Hosts.Find(item);
+
+                    editForm = new Host_Edit_Form(entityToEdit);
                 }
-                else if (item is Location)
+                else if (entityType == "Location")
                 {
-                    editForm = new Location_Edit_Form(item);
+                    var entityToEdit = db.Locations.Find(item);
+
+                    editForm = new Location_Edit_Form(entityToEdit);
                 }
-                else if (item is Attendee)
+                else if (entityType == "Attendee")
                 {
-                    editForm = new Attendee_Edit_Form(item);
+                    var entityToEdit = db.Attendees.Find(item);
+
+                    editForm = new Attendee_Edit_Form(entityToEdit);
                 }
-                else if (item is Presenter)
+                else if (entityType == "Presenter")
                 {
-                    editForm = new Presenter_Edit_Form(item);
+                    var entityToEdit = db.Presenters.Find(item);
+
+                    editForm = new Presenter_Edit_Form(entityToEdit);
                 }
-                else if (item is Ticket)
+                else if (entityType == "Ticket")
                 {
-                    editForm = new Ticket_Edit_Form(item);
+                    var entityToEdit = db.Tickets.Find(item);
+
+                    editForm = new Ticket_Edit_Form(entityToEdit);
                 }
-                else if (item is Vendor)
+                else if (entityType == "Vendor")
                 {
-                    editForm = new Vendor_Edit_Form(item);
+                    var entityToEdit = db.Vendors.Find(item);
+
+                    editForm = new Vendor_Edit_Form(entityToEdit);
                 }
-                else if (item is Employee)
+                else if (entityType == "Employee")
                 {
-                    editForm = new Employees_Edit_Form(item);
+                    var entityToEdit = db.Employees.Find(item);
+
+                    editForm = new Employees_Edit_Form(entityToEdit);
+                }
+                else if (entityType == "HasSpace")
+                {
+                    var entityToEdit = db.HasSpace.Find(item);
+
+                    //     editForm = new HasSpace_Edit_Form(entityToEdit);
+                }
+                else if (entityType == "HostedBy")
+                {
+                    var entityToEdit = db.HostedBy.Find(item);
+
+                    //    editForm = new HostedBy_Edit_Form(entityToEdit);
+                }
+                else if (entityType == "Present")
+                {
+                    var entityToEdit = db.Presents.Find(item);
+
+                    //    editForm = new Presents_Edit_Form(entityToEdit);
                 }
                 // ... other types
 
@@ -235,29 +431,15 @@ namespace Event_Manager
 
                 //if (dialogResult == DialogResult.OK)
                 //{
-                    //RefreshDataGridView();
+                //RefreshDataGridView();
                 //}
             }
         }
 
 
 
-        private void SaveEditedItem(object editedItem)
-        {
-            var db = new EventContext();
-            // Assuming you know the type of the edited item, update it in the corresponding DbSet
-            // Example:
-            // if (editedItem is YourEntityType editedEntity)
-            // {
-            //     var originalEntity = db.YourEntitySet.Find(editedEntity.Id);
-            //     if (originalEntity != null)
-            //     {
-            //         ApplyChanges(originalEntity, editedEntity);
-            //         db.SaveChanges();
-            //         RefreshDataGridView(); // Refresh your DataGridView
-            //     }
-            // }
-        }
+
+
 
     }
 }

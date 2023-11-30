@@ -32,7 +32,7 @@ namespace Event_Manager
                 textBoxEmail.Text = vendorToEdit.Email;
                 textBoxPhone.Text = vendorToEdit.PhoneNum;
                 textBoxFee.Text = vendorToEdit.Fee.ToString();
-                
+
             }
         }
 
@@ -64,7 +64,7 @@ namespace Event_Manager
                     return;
                 }
 
- 
+
 
 
                 using (var db = new EventContext())

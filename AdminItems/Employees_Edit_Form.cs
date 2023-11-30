@@ -32,7 +32,7 @@ namespace Event_Manager
                 textBoxName.Text = employeeToEdit.Name;
                 textBoxPay.Text = employeeToEdit.Pay.ToString();
                 textBoxShift.Text = employeeToEdit.ShiftSchedule;
-                if (employeeToEdit.Location != null)
+                /*if (employeeToEdit.Location != null)
                 {
                     textBoxLocation.Text = employeeToEdit.Location.ToString();
                 }
@@ -48,6 +48,7 @@ namespace Event_Manager
                 {
                     textBoxHI.Text = "Empty";
                 }
+                */
 
                 //textBoxHI.Text = employeeToEdit.Host.ToString();
 

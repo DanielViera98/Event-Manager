@@ -42,8 +42,13 @@
             TicketsButton = new Button();
             DeleteButton = new Button();
             ModifyButton = new Button();
+            HasSpaceButton = new Button();
+            HostedByButton = new Button();
+            PresentsButton = new Button();
+            hasSpaceBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)eventBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)hasSpaceBindingSource).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -119,7 +124,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(963, 359);
+            dataGridView1.Size = new Size(963, 453);
             dataGridView1.TabIndex = 7;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -162,7 +167,7 @@
             // 
             // DeleteButton
             // 
-            DeleteButton.Location = new Point(0, 330);
+            DeleteButton.Location = new Point(0, 423);
             DeleteButton.Name = "DeleteButton";
             DeleteButton.Size = new Size(94, 29);
             DeleteButton.TabIndex = 11;
@@ -172,7 +177,7 @@
             // 
             // ModifyButton
             // 
-            ModifyButton.Location = new Point(0, 295);
+            ModifyButton.Location = new Point(0, 388);
             ModifyButton.Name = "ModifyButton";
             ModifyButton.Size = new Size(94, 29);
             ModifyButton.TabIndex = 12;
@@ -180,11 +185,48 @@
             ModifyButton.UseVisualStyleBackColor = true;
             ModifyButton.Click += ModifyButton_Click;
             // 
+            // HasSpaceButton
+            // 
+            HasSpaceButton.Location = new Point(0, 228);
+            HasSpaceButton.Name = "HasSpaceButton";
+            HasSpaceButton.Size = new Size(94, 29);
+            HasSpaceButton.TabIndex = 13;
+            HasSpaceButton.Text = "HasSpace";
+            HasSpaceButton.UseVisualStyleBackColor = true;
+            HasSpaceButton.Click += HasSpaceButton_Click_1;
+            // 
+            // HostedByButton
+            // 
+            HostedByButton.Location = new Point(0, 263);
+            HostedByButton.Name = "HostedByButton";
+            HostedByButton.Size = new Size(94, 29);
+            HostedByButton.TabIndex = 14;
+            HostedByButton.Text = "HostedBy";
+            HostedByButton.UseVisualStyleBackColor = true;
+            HostedByButton.Click += HostedByButton_Click_1;
+            // 
+            // PresentsButton
+            // 
+            PresentsButton.Location = new Point(0, 298);
+            PresentsButton.Name = "PresentsButton";
+            PresentsButton.Size = new Size(94, 29);
+            PresentsButton.TabIndex = 15;
+            PresentsButton.Text = "Presents";
+            PresentsButton.UseVisualStyleBackColor = true;
+            PresentsButton.Click += PresentsButton_Click_1;
+            // 
+            // hasSpaceBindingSource
+            // 
+            hasSpaceBindingSource.DataSource = typeof(HasSpace);
+            // 
             // Admin_Form
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1059, 360);
+            ClientSize = new Size(1059, 464);
+            Controls.Add(PresentsButton);
+            Controls.Add(HostedByButton);
+            Controls.Add(HasSpaceButton);
             Controls.Add(ModifyButton);
             Controls.Add(DeleteButton);
             Controls.Add(TicketsButton);
@@ -202,6 +244,7 @@
             Text = "Admin";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)eventBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)hasSpaceBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -220,5 +263,9 @@
         private Button TicketsButton;
         private Button DeleteButton;
         private Button ModifyButton;
+        private Button HasSpaceButton;
+        private Button HostedByButton;
+        private Button PresentsButton;
+        private BindingSource hasSpaceBindingSource;
     }
 }

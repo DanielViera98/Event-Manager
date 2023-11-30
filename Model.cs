@@ -12,6 +12,7 @@ using System.Diagnostics.SymbolStore;
 using System.Numerics;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Logging;
 
 //Create new class for database context
 public class EventContext : DbContext
@@ -51,7 +52,7 @@ public class EventContext : DbContext
 public class Event                                      //Event Entity Table
 {
     public Event() { }
-    public Event(string name, string desc, DateTime start, DateTime end, string site, Location local) 
+    public Event(string name, string desc, DateTime start, DateTime end, string site, Location local)
     {
         EventId = new Guid();
         Name = name;
@@ -61,12 +62,12 @@ public class Event                                      //Event Entity Table
         Website = site;
         Location = local;
     }
-    [Key] public Guid EventId { get; set; }             
+    [Key] public Guid EventId { get; set; }
     public string Name { get; set; }
     public string? Description { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public string Website {  get; set; }
+    public string Website { get; set; }
     public Location Location { get; set; }              //FK to Location Table
 
     /*public List<Host> Hosts { get; set; }
@@ -78,28 +79,42 @@ public class Event                                      //Event Entity Table
 
 public class Location                                   //Location Entity Table
 {
+    public Location() { }
+    public Location(string address, string name, string website, string email, decimal rentalFee,
+        int vendors, int attendees)
+    {
+        Address = address;
+        Name = name;
+        Website = website;
+        Email = email;
+        RentalFee = rentalFee;
+        VendorCapacity = vendors;
+        AttendeeCapacity = attendees;
+        Events = new List<Event>();
+    }
     [Key] public string Address { get; set; }
     public string Name { get; set; }
-    public string Website { get; set; }
+    public string? Website { get; set; }
     public string Email { get; set; }
     public decimal RentalFee { get; set; }
     public int VendorCapacity { get; set; }
     public int AttendeeCapacity { get; set; }
     public List<Event> Events { get; set; }
-
-    public static explicit operator Location(string v)
-    {
-        throw new NotImplementedException();
-    }
 }
 
 public class Attendee                                   //Attendee Entity Table
 {
+    public Attendee() { }
+    public Attendee(string name, string email, string phone)
+    {
+        Name = name;
+        Email = email;
+        PhoneNumber = phone;
+    }
     [Key] public Guid AttendeeID { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    public DateTime CheckinTime { get; set; }
 }
 
 public class Ticket                                     //Ticket Entity Table
@@ -109,36 +124,29 @@ public class Ticket                                     //Ticket Entity Table
     public Attendee Attendee { get; set; }              //FK to Attendee Table
     public Event Event { get; set; }                    //FK to Event Table
     public string TicketType { get; set; }
+    public DateTime CheckInTime { get; set; }
 }
 
 public class Host                                       //Host Parent Entity Table
 {
     [Key] public Guid HostID { get; set; }
-    public string Website { get; set; }
+    public string? Website { get; set; }
     public string Email { get; set; }
+    public string Name { get; set; }
+    public string PhoneNumber { get; set; }
 
     public List<Event> Events { get; set; }
-
-    public static explicit operator Host(string v)
-    {
-        throw new NotImplementedException();
-    }
 }
 
 public class Person                                     /*Person, inherits parent table Host*/
     : Host
-{
-    public string Name { get; set; }
-    public string PhoneNum { get; set; }
-}
+{ }
 
 public class Organization                               /*Organization, inherits parent table Host*/
-    :Host
+    : Host
 {
-    public string OrganizationName { get; set; }                //Name of organization
-    public string OrganizationPhone { get; set; }
-    public string RepresentativeName { get; set; }      //Representative name
-    public string RepresentativePhone { get; set; }
+    public string? RepresentativeName { get; set; }      //Representative name
+    public string? RepresentativePhone { get; set; }
 }
 
 [PrimaryKey(nameof(RoomID), nameof(TableID))]           //Composite primary key for HasSpace
@@ -160,12 +168,14 @@ public class HostedBy                                   //HostedBy Multi-Multi R
 
 public class Employee                                   //Employee Entity Table
 {
-    [Key] public Guid EmpID { get; set;}
+    [Key] public Guid EmpID { get; set; }
     public string Name { get; set; }
+    public string PhoneNum { get; set; }
+    public string Email { get; set; }
     public decimal Pay { get; set; }
-    public string ShiftSchedule { get; set; }      
-    public Location Location { get; set; }              //FK to location of workplace if applicable
-    public Host Host { get; set; }                      //FK to host they work for if applicable
+    public string? ShiftSchedule { get; set; }
+    public Location? Location { get; set; }              //FK to location of workplace if applicable
+    public Host? Host { get; set; }                      //FK to host they work for if applicable
 }
 
 public class Presenter
@@ -173,7 +183,8 @@ public class Presenter
     [Key] public int PresenterID { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
-    public float PresenterFee { get; set; }
+    public string Phone { get; set; }
+    public decimal PresenterFee { get; set; }
 }
 
 public class Presents

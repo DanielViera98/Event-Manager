@@ -29,24 +29,26 @@ namespace Event_Manager
                 //textBoxEID.Text = eventToEdit.EventId;
                 textBoxTI.Text = ticketToEdit.TicketID.ToString();
                 textBoxCost.Text = ticketToEdit.Cost.ToString();
+                dateTimePickerCheckin.Value = ticketToEdit.CheckInTime;
+
                 //textBoxAI.Text = ticketToEdit.Attendee.ToString();
-                if (ticketToEdit.Attendee != null)
-                {
-                    textBoxAI.Text = ticketToEdit.Attendee.ToString();
-                }
-                else
-                {
-                    textBoxAI.Text = "Empty";
-                }
+                //if (ticketToEdit.Attendee != null)
+                //{
+                //  textBoxAI.Text = ticketToEdit.Attendee.Name;
+                //}
+                //else
+                //{
+                //  textBoxAI.Text = "Empty";
+                //}
                 //textBoxEI.Text = ticketToEdit.Event.ToString();
-                if (ticketToEdit.Event != null)
-                {
-                    textBoxEI.Text = ticketToEdit.Event.ToString();
-                }
-                else
-                {
-                    textBoxAI.Text = "Empty";
-                }
+                //if (ticketToEdit.Event != null)
+                //{
+                //  textBoxEI.Text = ticketToEdit.Event.Name;
+                //}
+                //else
+                //{
+                //  textBoxAI.Text = "Empty";
+                //}
 
                 textBoxType.Text = ticketToEdit.TicketType;
 
@@ -103,7 +105,7 @@ namespace Event_Manager
 
 
 
-       
+
 
         private void Submit_Click_1(object sender, EventArgs e)
         {

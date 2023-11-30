@@ -34,14 +34,14 @@ namespace Event_Manager
                 dateTimePickerED.Value = eventToEdit.EndDate;
                 textBoxWebsite.Text = eventToEdit.Website;
 
-                if (eventToEdit.Location != null)
+                /*if (eventToEdit.Location != null)
                 {
-                    textBoxLocation.Text = eventToEdit.Location.ToString();
+                    textBoxLocation.Text = eventToEdit.Location.Name;
                 }
                 else
                 {
                     textBoxLocation.Text = "Empty";
-                }
+                }*/
             }
         }
 

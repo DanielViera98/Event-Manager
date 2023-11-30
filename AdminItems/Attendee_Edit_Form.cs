@@ -33,7 +33,7 @@ namespace Event_Manager
                 textBoxName.Text = attendeeToEdit.Name;
                 textBoxEmail.Text = attendeeToEdit.Email;
                 textBoxPhone.Text = attendeeToEdit.PhoneNumber;
-                dateTimePickerCheckin.Value = attendeeToEdit.CheckinTime;
+                //dateTimePickerCheckin.Value = attendeeToEdit.CheckinTime;
 
                 //textBoxLocation.Text = eventToEdit.Location;
             }
@@ -50,7 +50,7 @@ namespace Event_Manager
                 attendeeToSave.Name = textBoxName.Text;
                 attendeeToSave.Email = textBoxEmail.Text;
                 attendeeToSave.PhoneNumber = textBoxPhone.Text;
-                attendeeToSave.CheckinTime = DateTime.SpecifyKind(dateTimePickerCheckin.Value, DateTimeKind.Utc);
+                //attendeeToSave.CheckinTime = DateTime.SpecifyKind(dateTimePickerCheckin.Value, DateTimeKind.Utc);
 
 
                 using (var db = new EventContext())

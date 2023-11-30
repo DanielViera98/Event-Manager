@@ -32,6 +32,7 @@ namespace Event_Manager
                 textBoxName.Text = presenterToEdit.Name;
                 textBoxEmail.Text = presenterToEdit.Email;
                 textBoxPF.Text = presenterToEdit.PresenterFee.ToString();
+                textBoxPhone.Text = presenterToEdit.Phone;
                 //textBoxDiscriminator.Text = hostToEdit.Discriminator;
                 //textBoxON.Text = hostToEdit.OrganizationName;
 
@@ -62,7 +63,7 @@ namespace Event_Manager
 
                 presenterToSave.Name = textBoxName.Text;
                 presenterToSave.Email = textBoxEmail.Text;
-                if (float.TryParse(textBoxPF.Text, out float costResult))
+                if (decimal.TryParse(textBoxPF.Text, out decimal costResult))
                 {
                     presenterToSave.PresenterFee = costResult;
                 }

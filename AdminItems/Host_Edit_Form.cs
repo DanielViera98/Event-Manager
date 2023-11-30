@@ -31,7 +31,9 @@ namespace Event_Manager
                 textBoxHI.Text = hostToEdit.HostID.ToString();
                 textBoxWebsite.Text = hostToEdit.Website;
                 textBoxEmail.Text = hostToEdit.Email;
-                //textBoxDiscriminator.Text = hostToEdit.Discriminator;
+                textBoxName.Text = hostToEdit.Name;
+                textBoxPhone.Text = hostToEdit.PhoneNumber;
+                textBoxDiscriminator.Text = hostToEdit.GetType().ToString();
                 //textBoxON.Text = hostToEdit.OrganizationName;
 
                 //textBoxHI.Text = employeeToEdit.Host.ToString();
@@ -47,10 +49,13 @@ namespace Event_Manager
             {
                 // Update locationToSave with values from form controls
 
-                
+
 
                 hostToSave.Website = textBoxWebsite.Text;
                 hostToSave.Email = textBoxEmail.Text;
+                hostToSave.Name = textBoxName.Text;
+                hostToSave.PhoneNumber = textBoxPhone.Text;
+
 
                 //ticketToSave.Attendee = textBoxAI.Text;
 

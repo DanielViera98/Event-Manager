@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
@@ -41,18 +40,8 @@
             label8 = new Label();
             dateTimePickerSD = new DateTimePicker();
             dateTimePickerED = new DateTimePicker();
-            textBoxLocation = new TextBox();
             textBoxWebsite = new TextBox();
             SuspendLayout();
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(720, 70);
-            label6.Name = "label6";
-            label6.Size = new Size(123, 20);
-            label6.TabIndex = 28;
-            label6.Text = "Location Address";
             // 
             // label5
             // 
@@ -75,7 +64,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(885, 70);
+            label3.Location = new Point(756, 70);
             label3.Name = "label3";
             label3.Size = new Size(62, 20);
             label3.TabIndex = 25;
@@ -154,16 +143,9 @@
             dateTimePickerED.Size = new Size(144, 27);
             dateTimePickerED.TabIndex = 32;
             // 
-            // textBoxLocation
-            // 
-            textBoxLocation.Location = new Point(713, 117);
-            textBoxLocation.Name = "textBoxLocation";
-            textBoxLocation.Size = new Size(125, 27);
-            textBoxLocation.TabIndex = 33;
-            // 
             // textBoxWebsite
             // 
-            textBoxWebsite.Location = new Point(844, 117);
+            textBoxWebsite.Location = new Point(724, 117);
             textBoxWebsite.Name = "textBoxWebsite";
             textBoxWebsite.Size = new Size(125, 27);
             textBoxWebsite.TabIndex = 34;
@@ -172,13 +154,11 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1318, 450);
+            ClientSize = new Size(916, 450);
             Controls.Add(textBoxWebsite);
-            Controls.Add(textBoxLocation);
             Controls.Add(dateTimePickerED);
             Controls.Add(dateTimePickerSD);
             Controls.Add(label8);
-            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -195,7 +175,6 @@
         }
 
         #endregion
-        private Label label6;
         private Label label5;
         private Label label4;
         private Label label3;
@@ -208,7 +187,6 @@
         private Label label8;
         private DateTimePicker dateTimePickerSD;
         private DateTimePicker dateTimePickerED;
-        private TextBox textBoxLocation;
         private TextBox textBoxWebsite;
     }
 }
