@@ -14,7 +14,7 @@ namespace Event_Manager
             if (accountType == "Attendee" && textBox1.Text != "" && textBox2.Text != "")
             {
                 var currUser = db.Attendees.Where(p => p.Name == textBox1.Text).FirstOrDefault();
-                if (currUser == null ) 
+                if (currUser == null)
                 {
                     MessageBox.Show("Must have an account as an Attendee.");
                     return;
@@ -28,6 +28,11 @@ namespace Event_Manager
         {
             Register_Form reg = new Register_Form();
             reg.Show();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

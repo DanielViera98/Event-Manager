@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Event_Manager
 {
     public partial class User_Form : Form
     {
+        public DbSet<UserTicket> userTickets { get; set; }
         int tablesShowing = 0;
         Attendee currAttendee;
         public User_Form(Attendee user)
@@ -39,6 +41,13 @@ namespace Event_Manager
 
         }
 
+        class Test1
+        {
+            public DataTable table1 = new DataTable("table1");
+            public BindingSource sr = new BindingSource();
+        }
+
+
         private void User_Form_Load(object sender, EventArgs e)
         {
             NameBox.Text = currAttendee.Name;
@@ -55,31 +64,88 @@ namespace Event_Manager
             presenterData.DataSource = presenters;
             presentationData.DataSource = presents;
             vendorData.DataSource = vendors;
+            ticketData.DataSource = db.Tickets.Select(o => new
+            {
+                TicketID = o.TicketID,
+                Attendee = o.Attendee,
+                //Cost = o.Time,
+                Event = o.Event,
+                TicketType = o.TicketType
+            }).ToList();
+            //Test1 ta = new Test1();
+
+            //DataTable table1 = new DataTable();
+            //table1.Columns.Add("TicketID", typeof(Guid));
+            //table1.Columns.Add("Event", typeof(string));
+            //table1.Columns.Add("TicketType", typeof(string));
+            //ticketData.DataBindings.Add("")
+            //foreach (var item in db.Tickets)
+            //{
+            //    table1.Rows.Add(item.TicketID, item.Event.EventId.ToString(), item.TicketType);
+            //}
+            //ta.table1 = table1;
+            //ticketData.AutoGenerateColumns = false;
+            //ticketData.DataSource = ta.table1;
+            //ticketData.DataBindings.Clear();
+            //ticketData.DataBindings.Add("DataSource", ta.table1, "DataSource");
+            /*
+            var columns = ticketData.Columns;
+
+            for (int i = 0; i < ticketData.ColumnCount; i++)
+            {
+                var names = db.Tickets.ToList().Select(x => x.GetType().GetProperty(columns[i].Name).GetValue(x)).ToList();
+                for (int j = 0; j < names.Count(); j++)
+                {
+                    ticketData.Rows[j].Cells[ticketData.Columns[i].Name].Value = names[j].ToString();
+
+                }
+            }*/
+            //MessageBox.Show(db.Tickets.First().Event.ToString());
+            //foreach (Ticket t in db.Tickets) 
+            //{
+            //    UserTicket newTicket = new UserTicket();
+            //    newTicket.TicketType = t.TicketType;
+            //    newTicket.Cost = t.Cost;
+            //    newTicket.Event = t.Event.Name;
+            //    userTickets.Add();
+            //{
+            //    db.Tickets.Select(p=>p.Attendee)
+            //UserTicket newTicket = new UserTicket();
+            //newTicket.Attendee = db.Attendees.Where(p=>p == t.Attendee).First().ToString();
+            //newTicket.TicketType = t.TicketType;
+            //newTicket.Cost = t.Cost;
+            //newTicket.Event = t.Event.Name;
+
+            //userTickets.Add(newTicket);
+
+            //ticketData.DataSource = userTickets.ToList();
+
+            //UserTicket userTicket = new UserTicket();
             //ticketData.DataSource = tickets;
             //foreach (DataGridViewRow row in ticketData.Rows)
             //{
-                //Ticket ticketItem = row.DataBoundItem as Ticket;
-                //if (ticketItem.Attendee != null)
-                //{
-                //row.Cells[1].ValueType = typeof(string);
-                //row.Cells[1] = new Item("One", 1);//db.Attendees.First().ToString();
-                //row.Cells[1].Tag = "hello";
+            //Ticket ticketItem = row.DataBoundItem as Ticket;
+            //if (ticketItem.Attendee != null)
+            //{
+            //row.Cells[1].ValueType = typeof(string);
+            //row.Cells[1] = new Item("One", 1);//db.Attendees.First().ToString();
+            //row.Cells[1].Tag = "hello";
 
-                //row.Cells[0].Value = "hello";
-                //row.Cells[2].Value = db.Tickets.First().ToString();
-                //}
-                //
-                //Ticket potentialAttendee = db.Tickets.Where(p => p.TicketID.ToString() == row.Cells[0].Value.ToString()).First();
-                //row.Cells[1].Value = potentialAttendee.Attendee.Name;
-                /*if (potentialAttendee == null)
-                {
+            //row.Cells[0].Value = "hello";
+            //row.Cells[2].Value = db.Tickets.First().ToString();
+            //}
+            //
+            //Ticket potentialAttendee = db.Tickets.Where(p => p.TicketID.ToString() == row.Cells[0].Value.ToString()).First();
+            //row.Cells[1].Value = potentialAttendee.Attendee.Name;
+            /*if (potentialAttendee == null)
+            {
 
-                }
-                else
-                {
-                    row.Cells[1].Value = potentialAttendee;
-                }*/
-                //row.Cells[2].Value = db.Tickets.Where(p=>p.TicketID.ToString() == row.Cells[0].Value.ToString()).First().Attendee.Name; // db.Attendees.Where(p => row.Cells[2].Value.ToString() == p.Name.ToString()).Select();
+            }
+            else
+            {
+                row.Cells[1].Value = potentialAttendee;
+            }*/
+            //row.Cells[2].Value = db.Tickets.Where(p=>p.TicketID.ToString() == row.Cells[0].Value.ToString()).First().Attendee.Name; // db.Attendees.Where(p => row.Cells[2].Value.ToString() == p.Name.ToString()).Select();
             //}
 
         }

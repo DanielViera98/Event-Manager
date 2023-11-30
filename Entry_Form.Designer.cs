@@ -67,7 +67,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(21, 89);
             label2.Name = "label2";
-            label2.Size = new Size(87, 25);
+            label2.Size = new Size(70, 20);
             label2.TabIndex = 4;
             label2.Text = "Password";
             // 
@@ -77,7 +77,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(17, 52);
             label1.Name = "label1";
-            label1.Size = new Size(91, 25);
+            label1.Size = new Size(75, 20);
             label1.TabIndex = 3;
             label1.Text = "Username";
             // 
@@ -86,7 +86,7 @@
             textBox2.Anchor = AnchorStyles.None;
             textBox2.Location = new Point(114, 86);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(150, 31);
+            textBox2.Size = new Size(150, 27);
             textBox2.TabIndex = 2;
             // 
             // textBox1
@@ -94,8 +94,9 @@
             textBox1.Anchor = AnchorStyles.None;
             textBox1.Location = new Point(114, 49);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 31);
+            textBox1.Size = new Size(150, 27);
             textBox1.TabIndex = 1;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // button_LogIn
             // 
@@ -126,7 +127,7 @@
             comboBox_Login.Items.AddRange(new object[] { "Attendee", "Employee", "Presenter", "Vendor", "Host" });
             comboBox_Login.Location = new Point(49, 64);
             comboBox_Login.Name = "comboBox_Login";
-            comboBox_Login.Size = new Size(182, 33);
+            comboBox_Login.Size = new Size(182, 28);
             comboBox_Login.TabIndex = 1;
             // 
             // label3
@@ -135,7 +136,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(97, 31);
             label3.Name = "label3";
-            label3.Size = new Size(87, 25);
+            label3.Size = new Size(70, 20);
             label3.TabIndex = 0;
             label3.Text = "Log In As";
             // 

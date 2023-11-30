@@ -104,6 +104,7 @@ public class Location                                   //Location Entity Table
 
 public class Attendee                                   //Attendee Entity Table
 {
+    public Attendee() { }
     [Key] public Guid AttendeeID { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
@@ -126,6 +127,15 @@ public class Ticket                                     //Ticket Entity Table
     public float Cost { get; set; }
     public Attendee Attendee { get; set; }              //FK to Attendee Table
     public Event Event { get; set; }                    //FK to Event Table
+    public string TicketType { get; set; }
+}
+
+public class UserTicket                                     //Ticket Entity Table
+{
+    public UserTicket() { }
+    public float Cost { get; set; }
+    public string Attendee { get; set; }              //FK to Attendee Table
+    public string Event { get; set; }                    //FK to Event Table
     public string TicketType { get; set; }
 }
 
