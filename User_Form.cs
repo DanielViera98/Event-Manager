@@ -242,11 +242,11 @@ namespace Event_Manager
 
             var db = new EventContext();
 
-            //if (Choice.Text == "Select an Event" || db.Tickets.Any(p => p.Attendee == currAttendee))
-            //{
-            //    MessageBox.Show("Must select a cell for an Event. Must not already have ticket.");
-            //    return;
-            //}
+            if (Choice.Text == "Select an Event")
+            {
+                MessageBox.Show("Must select a cell for an Event.");
+                return;
+            }
 
             db.Tickets.Add(new Ticket(
                 5,
