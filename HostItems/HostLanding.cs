@@ -13,16 +13,19 @@ namespace Event_Manager
 {
     public partial class HostLanding : Form
     {
-        public HostLanding()
+        Host hostUser;
+        public HostLanding(Host host)
         {
             InitializeComponent();
 
             refresh_view();
+
+            hostUser = host;
         }
 
         private void button_RegisterEvent_Click(object sender, EventArgs e)
         {
-            var newEvent = new AddEvent();
+            var newEvent = new AddEvent(hostUser);
             newEvent.Show();
         }
 

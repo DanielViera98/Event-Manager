@@ -15,7 +15,6 @@ namespace Event_Manager
 {
     public partial class User_Form : Form
     {
-        public DbSet<UserTicket> userTickets { get; set; }
         int tablesShowing = 0;
         Attendee currAttendee;
         public User_Form(Attendee user)
@@ -39,12 +38,6 @@ namespace Event_Manager
             Cancel.Hide();
             currAttendee = user;
 
-        }
-
-        class Test1
-        {
-            public DataTable table1 = new DataTable("table1");
-            public BindingSource sr = new BindingSource();
         }
 
 
@@ -242,11 +235,11 @@ namespace Event_Manager
 
             var db = new EventContext();
 
-            //if (Choice.Text == "Select an Event" || db.Tickets.Any(p => p.Attendee == currAttendee))
-            //{
-            //    MessageBox.Show("Must select a cell for an Event. Must not already have ticket.");
-            //    return;
-            //}
+            if (Choice.Text == "Select an Event")
+            {
+                MessageBox.Show("Must select a cell for an Event.");
+                return;
+            }
 
             db.Tickets.Add(new Ticket(
                 5,

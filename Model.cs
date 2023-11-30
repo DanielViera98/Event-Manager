@@ -202,6 +202,13 @@ public class HasSpace                                   //HasSpace Multi-Multi R
 
 public class HostedBy                                   //HostedBy Multi-Multi Relationship Table
 {
+    public HostedBy() { }
+
+    public HostedBy(Event evnt, Host host)
+    {
+        Event = evnt;
+        Host = host;
+    }
     [Key] public Guid HostedID { get; set; }
     public Event Event { get; set; }              //FK for Event
     public Host Host { get; set; }                //FK for Host
