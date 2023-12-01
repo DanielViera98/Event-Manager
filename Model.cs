@@ -32,10 +32,14 @@ public class EventContext : DbContext
     public DbSet<Employee> Employees { get; set; }
     public DbSet<PresenterView> PresenterViews { get; set; }
     public DbSet<HostMinView> HostMinViews { get; set; }
+    public DbSet<EventLog> EventLogs { get; set; }
+
     
     public string DbPath { get; }               //Path to the database
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+
+protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // ... other configurations ...
         //VIEW for presenters
@@ -64,11 +68,9 @@ public class EventContext : DbContext
             .HasForeignKey(e => e.HostID) // Assuming there is a HostID foreign key property in Employee
     .OnDelete(DeleteBehavior.Cascade); // Set this if you want to set the foreign key to null instead of deleting the employee
 
-
         // ... configurations for other relationships ...
 
     }
-
     //VIEWS
     public class LocationMinView
     {
@@ -123,6 +125,36 @@ public class EventContext : DbContext
 }
 
 
+
+public class EventLog
+{
+    public EventLog() { }
+
+    public EventLog(int logID, Guid eventId, string operation, string name, string description, DateTime startDate, DateTime endDate, string website, string locationAddress, DateTime logTime)
+    {
+        LogId = logID;
+        EventIdLog = eventId;
+        OperationLog = operation;
+        NameLog = name;
+        DescriptionLog = description;
+        StartDateLog = startDate;
+        EndDateLog = endDate;
+        WebsiteLog = website;
+        LocationAddressLog = locationAddress;
+        LogTimeLog = logTime;
+    }
+
+    [Key] public int LogId { get; set; }
+    public Guid EventIdLog { get; set; } // Reference to the Event
+    public string OperationLog { get; set; } // Operation type: INSERT, UPDATE, DELETE
+    public string NameLog { get; set; } // Name of the event being logged
+    public string? DescriptionLog { get; set; } // Description of the event
+    public DateTime StartDateLog { get; set; } // Start date of the event
+    public DateTime EndDateLog { get; set; } // End date of the event
+    public string WebsiteLog { get; set; } // Website of the event
+    public string LocationAddressLog { get; set; } // Address of the event location
+    public DateTime LogTimeLog { get; set; } // Timestamp when the log was created
+}
 
 public class Event                                      //Event Entity Table
 {
@@ -190,6 +222,22 @@ public class Attendee                                   //Attendee Entity Table
     public string Name { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
+}
+
+public class Account
+{
+    public Account() { }
+    public Account(Guid accountID, string userName, string accountType, string password)
+    {
+        AccountID = accountID;
+        UserName = userName;
+        AccountType = accountType;
+        Password = password;
+    }
+    [Key] public Guid AccountID { get; set; }
+    public string UserName { get; set; }
+    public string AccountType { get; set; }
+    public string Password { get; set; }
 }
 
 public class Ticket                                     //Ticket Entity Table

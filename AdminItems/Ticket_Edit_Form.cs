@@ -21,6 +21,8 @@ namespace Event_Manager
             _entityToEdit = entityToEdit;
             PopulateFields();
         }
+        //Populates the fields in the edit form
+
         private void PopulateFields()
         {
             Ticket ticketToEdit = _entityToEdit as Ticket;
@@ -31,24 +33,7 @@ namespace Event_Manager
                 textBoxCost.Text = ticketToEdit.Cost.ToString();
                 dateTimePickerCheckin.Value = ticketToEdit.CheckInTime;
 
-                //textBoxAI.Text = ticketToEdit.Attendee.ToString();
-                //if (ticketToEdit.Attendee != null)
-                //{
-                //  textBoxAI.Text = ticketToEdit.Attendee.Name;
-                //}
-                //else
-                //{
-                //  textBoxAI.Text = "Empty";
-                //}
-                //textBoxEI.Text = ticketToEdit.Event.ToString();
-                //if (ticketToEdit.Event != null)
-                //{
-                //  textBoxEI.Text = ticketToEdit.Event.Name;
-                //}
-                //else
-                //{
-                //  textBoxAI.Text = "Empty";
-                //}
+                
 
                 textBoxType.Text = ticketToEdit.TicketType;
 
@@ -58,6 +43,7 @@ namespace Event_Manager
             }
         }
 
+        //Saves the changed values back to the database, thereby modifying the entry
         private void SaveTicket()
         {
             Ticket ticketToSave = _entityToEdit as Ticket;
@@ -78,7 +64,16 @@ namespace Event_Manager
                     MessageBox.Show("Pay must be a valid float number.");
                     return;
                 }
-                ticketToSave.TicketType = textBoxType.Text;
+                if (Functions.CheckString(textBoxType.Text))
+                {
+                    ticketToSave.TicketType = textBoxType.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Phone Number is incorrect, please try again.");
+                    return;
+                }
+                
 
                 //ticketToSave.Attendee = textBoxAI.Text;
 

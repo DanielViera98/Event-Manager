@@ -24,24 +24,31 @@ namespace Event_Manager.Registration___Login
             {
                 textBox_Email.Text,
                 textBox_Name.Text,
-                textBox_PhoneNum.Text
+                textBox_PhoneNum.Text,
+                textBox_Username.Text,
+                textBox_Password.Text
             };
-            Functions.CheckNull(check);
-            Functions.CheckMin(check, 2);
+            if (!Functions.CheckNull(check) || !Functions.CheckMin(check, 2) || !Functions.CheckUsernameFree(textBox_Username.Text))
+            {
+                return;
+            }
 
+            Guid hostID;
             if (checkBox1.Checked == false)
             {
-                db.Persons.Add(new Person
+                Person newPerson = new Person
                 {
                     Name = textBox_Name.Text,
                     Email = textBox_Email.Text,
                     PhoneNumber = textBox_PhoneNum.Text,
                     Website = textBox_Website.Text
-                });
+                };
+                db.Persons.Add(newPerson);
+                hostID = newPerson.HostID;
             }
-            else if (checkBox1.Checked == true)
+            else
             {
-                db.Organizations.Add(new Organization
+                Organization newOrg = new Organization
                 {
                     Name = textBox_Name.Text,
                     Email = textBox_Email.Text,
@@ -49,8 +56,11 @@ namespace Event_Manager.Registration___Login
                     Website = textBox_Website.Text,
                     RepresentativeName = label_RName.Text,
                     RepresentativePhone = labelRPNum.Text
-                });
+                };
+                db.Organizations.Add(newOrg);
+                hostID = newOrg.HostID;
             }
+            db.Accounts.Add(new Account(hostID, textBox_Username.Text, "Host", textBox_Password.Text));
 
             db.SaveChanges();
             Close();

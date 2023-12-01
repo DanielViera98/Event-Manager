@@ -21,6 +21,7 @@ namespace Event_Manager
             PopulateFields();
         }
 
+        //Populates the fields in the edit form
 
         private void PopulateFields()
         {
@@ -50,6 +51,8 @@ namespace Event_Manager
         {
             SaveEvent();
         }
+
+        //Saves the changed values back to the database, thereby modifying the entry
         private void SaveEvent()
         {
             Event eventToSave = _entityToEdit as Event;
@@ -57,11 +60,41 @@ namespace Event_Manager
             {
                 // Update locationToSave with values from form controls
                 //locationToSave.Address = textBoxAddress.Text;
-                eventToSave.Name = textBoxName.Text;
-                eventToSave.Description = textBoxDescription.Text;
+
+                if (Functions.CheckString(textBoxName.Text))
+                {
+                    eventToSave.Name = textBoxName.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Name entry is empty, please try again.");
+                    return;
+                }
+
+                if (Functions.CheckString(textBoxDescription.Text))
+                {
+                    eventToSave.Description = textBoxDescription.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Description entry is empty, please try again.");
+                    return;
+                }
+
+                if (Functions.CheckString(textBoxWebsite.Text))
+                {
+                    eventToSave.Website = textBoxWebsite.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Description entry is empty, please try again.");
+                    return;
+                }
+
+
                 eventToSave.StartDate = DateTime.SpecifyKind(dateTimePickerSD.Value, DateTimeKind.Utc);
                 eventToSave.EndDate = DateTime.SpecifyKind(dateTimePickerED.Value, DateTimeKind.Utc);
-                eventToSave.Website = textBoxWebsite.Text;
+                
 
 
                 using (var db = new EventContext())

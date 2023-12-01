@@ -25,10 +25,14 @@ namespace Event_Manager.Registration___Login
             {
                 textBox_Email.Text,
                 textBox_Name.Text,
-                textBox_PhoneNum.Text
+                textBox_PhoneNum.Text,
+                textBox_Username.Text,
+                textBox_Password.Text
             };
-            Functions.CheckNull(check);
-            Functions.CheckMin(check, 2);
+            if (!Functions.CheckNull(check) || !Functions.CheckMin(check, 2) || !Functions.CheckUsernameFree(textBox_Username.Text))
+            {
+                return;
+            }
 
             Presenter p = new Presenter
             {
@@ -38,6 +42,7 @@ namespace Event_Manager.Registration___Login
                 PresenterFee = numericUpDown_Fee.Value
             };
             db.Presenters.Add(p);
+            db.Accounts.Add(new Account(p.PresenterID,textBox_Username.Text, "Presenter", textBox_Password.Text));
             db.SaveChanges();
 
             var form = new PresenterLanding(p);

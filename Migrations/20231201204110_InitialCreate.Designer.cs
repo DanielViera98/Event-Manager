@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Event_Manager.Migrations
 {
     [DbContext(typeof(EventContext))]
-    partial class EventContextModelSnapshot : ModelSnapshot
+    [Migration("20231201204110_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,117 +149,6 @@ namespace Event_Manager.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("EventContext+HostMinView", b =>
-                {
-                    b.Property<Guid>("HostID")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("hostname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("hostwebsite")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("HostID");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("host_view_min", (string)null);
-                });
-
-            modelBuilder.Entity("EventContext+LocationMinView", b =>
-                {
-                    b.Property<string>("Address")
-                        .HasColumnType("text");
-
-                    b.Property<string>("locationaddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("locationwebsite")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Address");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("location_view_min", (string)null);
-                });
-
-            modelBuilder.Entity("EventContext+PresenterView", b =>
-                {
-                    b.Property<Guid>("PresenterID")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("HostID")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("LocationAddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("RoomID")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("eventdescription")
-                        .HasColumnType("text");
-
-                    b.Property<string>("eventname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("eventwebsite")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("hostname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("hostwebsite")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("locationname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("locationwebsite")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("presentationdescription")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("presentername")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("PresenterID");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("presenter_view", (string)null);
             modelBuilder.Entity("EventLog", b =>
                 {
                     b.Property<int>("LogId")
