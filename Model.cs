@@ -110,9 +110,6 @@ public class EventLog
 
 public class Event                                      //Event Entity Table
 {
-
-    
-
     public Event() { }
     public Event(string name, string desc, DateTime start, DateTime end, string site, Location local)
     {

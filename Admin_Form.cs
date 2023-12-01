@@ -435,11 +435,5 @@ namespace Event_Manager
                 //}
             }
         }
-
-
-
-
-
-
     }
 }

@@ -16,6 +16,8 @@ namespace Event_Manager.HostItems
         public AddEvent(Host host)
         {
             InitializeComponent();
+
+            //Create list of 
             var db = new EventContext();
             var localSource = new BindingList<Location>();
             foreach (var local in db.Locations)

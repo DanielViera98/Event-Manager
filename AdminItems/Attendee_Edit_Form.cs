@@ -91,8 +91,4 @@ namespace Event_Manager
             SaveAttendee();
         }
     }
-
-
-
-
 }
