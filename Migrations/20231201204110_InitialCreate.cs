@@ -41,6 +41,27 @@ namespace Event_Manager.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EventLogs",
+                columns: table => new
+                {
+                    LogId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EventIdLog = table.Column<Guid>(type: "uuid", nullable: false),
+                    OperationLog = table.Column<string>(type: "text", nullable: false),
+                    NameLog = table.Column<string>(type: "text", nullable: false),
+                    DescriptionLog = table.Column<string>(type: "text", nullable: true),
+                    StartDateLog = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDateLog = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    WebsiteLog = table.Column<string>(type: "text", nullable: false),
+                    LocationAddressLog = table.Column<string>(type: "text", nullable: false),
+                    LogTimeLog = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventLogs", x => x.LogId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Hosts",
                 columns: table => new
                 {
@@ -341,6 +362,9 @@ namespace Event_Manager.Migrations
 
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "EventLogs");
 
             migrationBuilder.DropTable(
                 name: "HasSpace");

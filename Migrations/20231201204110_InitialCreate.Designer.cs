@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Event_Manager.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20231201192550_InitialCreate")]
+    [Migration("20231201204110_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -147,6 +147,50 @@ namespace Event_Manager.Migrations
                     b.HasIndex("LocationAddress");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("EventLog", b =>
+                {
+                    b.Property<int>("LogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LogId"));
+
+                    b.Property<string>("DescriptionLog")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EndDateLog")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("EventIdLog")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("LocationAddressLog")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("LogTimeLog")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NameLog")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("OperationLog")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("StartDateLog")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("WebsiteLog")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("LogId");
+
+                    b.ToTable("EventLogs");
                 });
 
             modelBuilder.Entity("HasSpace", b =>

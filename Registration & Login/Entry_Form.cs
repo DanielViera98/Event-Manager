@@ -1,3 +1,4 @@
+using Event_Manager.LocationItems;
 using Event_Manager.PresenterItems;
 using Event_Manager.Registration___Login;
 using Event_Manager.VendorItems;
@@ -13,7 +14,6 @@ namespace Event_Manager
 
         private void button_LogIn_Click(object sender, EventArgs e)
         {
-            //TODO: CREATE PASSWORD VERIFICATION
             var db = new EventContext();
             string accountType = comboBox_Login.Text;
             if (textBox1.Text == "" || textBox2.Text == "" || accountType == "" || !db.Accounts.Any(p => p.UserName == textBox1.Text))
@@ -58,6 +58,8 @@ namespace Event_Manager
             {
                 var adminZone = new Admin_Form();
                 adminZone.Show();
+                var locationZone = new AddLocation();
+                locationZone.Show();
             }
         }
 
@@ -72,10 +74,8 @@ namespace Event_Manager
                 reg = new RegisterPresenter_Form();
             else if (radioButton_Vendor.Checked)
                 reg = new RegisterVendor_Form();
-            else if (radioButton_Host.Checked)
-                reg = new RegisterHost_Form();
             else
-                reg = new Admin_Form();
+                reg = new RegisterHost_Form();
             reg.Show();
         }
     }

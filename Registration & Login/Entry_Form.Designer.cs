@@ -42,7 +42,6 @@
             panel7 = new Panel();
             panel8 = new Panel();
             panel5 = new Panel();
-            radioButton_Admin = new RadioButton();
             radioButton_Host = new RadioButton();
             radioButton_Vendor = new RadioButton();
             radioButton_Presenter = new RadioButton();
@@ -199,7 +198,6 @@
             // panel5
             // 
             panel5.BorderStyle = BorderStyle.FixedSingle;
-            panel5.Controls.Add(radioButton_Admin);
             panel5.Controls.Add(radioButton_Host);
             panel5.Controls.Add(radioButton_Vendor);
             panel5.Controls.Add(radioButton_Presenter);
@@ -213,18 +211,6 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(148, 190);
             panel5.TabIndex = 6;
-            // 
-            // radioButton_Admin
-            // 
-            radioButton_Admin.AutoSize = true;
-            radioButton_Admin.Location = new Point(10, 166);
-            radioButton_Admin.Margin = new Padding(2);
-            radioButton_Admin.Name = "radioButton_Admin";
-            radioButton_Admin.Size = new Size(74, 24);
-            radioButton_Admin.TabIndex = 5;
-            radioButton_Admin.TabStop = true;
-            radioButton_Admin.Text = "Admin";
-            radioButton_Admin.UseVisualStyleBackColor = true;
             // 
             // radioButton_Host
             // 
@@ -374,6 +360,5 @@
         private Label label4;
         private Panel panel7;
         private Panel panel8;
-        private RadioButton radioButton_Admin;
     }
 }

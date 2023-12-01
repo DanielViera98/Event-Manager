@@ -72,7 +72,7 @@ public DbSet<Event> Events { get; set; }    //Table containing Stock classes
     // special "local" folder for your platform.
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=Najam2002!;Database=EventDatabase;Include Error Detail=True");
+        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=passw0rd;Database=EventDatabase;Include Error Detail=True");
         base.OnConfiguring(options);
     }
 
