@@ -84,24 +84,24 @@ public class EventContext : DbContext
     }
     public class PresenterView
     {
-        public Guid PresenterID { get; set; }
-        public int RoomID { get; set; }
-        public Guid EventId { get; set; }
-        public string eventname { get; set; }
+        public Guid? PresenterID { get; set; }
+        public int? RoomID { get; set; }
+        public Guid? EventId { get; set; }
+        public string? eventname { get; set; }
         public string? eventdescription { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public string eventwebsite { get; set; }
-        public string LocationAddress { get; set; }
-        public Guid HostID { get; set; }
-        public string Title { get; set; }
-        public string presentationdescription { get; set; }
-        public DateTime Time { get; set; }
-        public string presentername { get; set; }
-        public string locationname { get; set; }
-        public string locationwebsite { get; set; }
-        public string hostwebsite { get; set; }
-        public string hostname { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public string? eventwebsite { get; set; }
+        public string? LocationAddress { get; set; }
+        public Guid? HostID { get; set; }
+        public string? Title { get; set; }
+        public string? presentationdescription { get; set; }
+        public DateTime? Time { get; set; }
+        public string? presentername { get; set; }
+        public string? locationname { get; set; }
+        public string? locationwebsite { get; set; }
+        public string? hostwebsite { get; set; }
+        public string? hostname { get; set; }
     }
 
     public EventContext()                               //Constructor for EventContext

@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Event_Manager.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20231201184451_InitialCreate")]
+    [Migration("20231201213442_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -180,7 +180,7 @@ namespace Event_Manager.Migrations
                     b.Property<Guid>("HostID")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("PresenterName")
+                    b.Property<string>("LocationAddress")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -216,10 +216,6 @@ namespace Event_Manager.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("locationaddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("locationname")
                         .IsRequired()
                         .HasColumnType("text");
@@ -229,6 +225,10 @@ namespace Event_Manager.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("presentationdescription")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("presentername")
                         .IsRequired()
                         .HasColumnType("text");
 

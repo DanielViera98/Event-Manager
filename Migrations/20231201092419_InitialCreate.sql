@@ -30,7 +30,7 @@ CREATE VIEW presenter_view AS
         "H"."hostwebsite",
         "H"."hostname"
     FROM "Presents" AS "P"
-    INNER JOIN "Presenters" AS "Pr" ON "P"."PresenterID" = "Pr"."PresenterID"
-    INNER JOIN events_renamed AS "E" ON "E"."EventId" = "P"."EventId"
-    INNER JOIN location_view_min AS "L" ON "L"."Address" = "E"."LocationAddress"
-    INNER JOIN hosts_view_min AS "H" ON "H"."HostID" = "E"."HostID";
+    FULL OUTER JOIN "Presenters" AS "Pr" ON "P"."PresenterID" = "Pr"."PresenterID"
+    FULL OUTER JOIN events_renamed AS "E" ON "E"."EventId" = "P"."EventId"
+    FULL OUTER JOIN location_view_min AS "L" ON "L"."Address" = "E"."LocationAddress"
+    FULL OUTER JOIN hosts_view_min AS "H" ON "H"."HostID" = "E"."HostID";

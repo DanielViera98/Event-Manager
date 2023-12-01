@@ -177,7 +177,7 @@ namespace Event_Manager.Migrations
                     b.Property<Guid>("HostID")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("PresenterName")
+                    b.Property<string>("LocationAddress")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -213,10 +213,6 @@ namespace Event_Manager.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("locationaddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("locationname")
                         .IsRequired()
                         .HasColumnType("text");
@@ -226,6 +222,10 @@ namespace Event_Manager.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("presentationdescription")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("presentername")
                         .IsRequired()
                         .HasColumnType("text");
 

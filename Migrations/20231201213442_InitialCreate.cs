@@ -318,7 +318,6 @@ namespace Event_Manager.Migrations
                 name: "IX_Tickets_EventId",
                 table: "Tickets",
                 column: "EventId");
-
             var assembly = Assembly.GetExecutingAssembly();
             string resourceName = typeof(InitialCreate).Namespace + ".20231201092419_InitialCreate.sql";
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
