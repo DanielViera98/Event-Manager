@@ -1,3 +1,5 @@
+using Event_Manager.LocationItems;
+using Event_Manager.PresenterItems;
 using Event_Manager.Registration___Login;
 using Event_Manager.VendorItems;
 
@@ -12,45 +14,53 @@ namespace Event_Manager
 
         private void button_LogIn_Click(object sender, EventArgs e)
         {
-                                                                            //TODO: CREATE PASSWORD VERIFICATION
             var db = new EventContext();
-            var accountType = comboBox_Login.Text;
-            if (accountType == "Attendee" && textBox1.Text != "" && textBox2.Text != "")
+            string accountType = comboBox_Login.Text;
+            if (textBox1.Text == "" || textBox2.Text == "" || accountType == "" || !db.Accounts.Any(p => p.UserName == textBox1.Text))
             {
-                var currUser = db.Attendees.Where(p => p.Name == textBox1.Text).FirstOrDefault();
-                if (currUser == null)
-                {
-                    MessageBox.Show("Must have an account as an Attendee.");
-                    return;
-                }
+                MessageBox.Show($"Must have an account as {accountType}, and must type username and password.");
+                return;
+            }
+            var account = db.Accounts.Where(p => p.UserName == textBox1.Text && p.Password == textBox2.Text && accountType == p.AccountType).FirstOrDefault();
+            if (account == null)
+            {
+                MessageBox.Show("Account not found.");
+                return;
+            }
+            if (accountType == "Attendee")
+            {
+                Attendee currUser = db.Attendees.Where(p => p.AttendeeID == account.AccountID).First();
                 User_Form user = new User_Form(currUser);
                 user.Show();
             }
-            else if (accountType == "Host" && textBox1.Text != "" && textBox2.Text != "")
+            else if (accountType == "Host")
             {
-                var currHost = db.Hosts.Where(p => p.Name == textBox1.Text).FirstOrDefault();
-                if (currHost == null)
-                {
-                    MessageBox.Show("Must have an account as a Host.");
-                    return;
-                }
+                var currHost = db.Hosts.Where(p => p.HostID == account.AccountID).First();
 
                 var hostZone = new HostLanding(currHost);
                 hostZone.Show();
             }
-            else if (accountType == "Vendor" && textBox1.Text != "" && textBox2.Text != "")
+            else if (accountType == "Vendor")
             {
-                var currVendor = db.Vendors.Where(p => p.Name == textBox1.Text).FirstOrDefault();
-                if (currVendor == null)
-                {
-                    MessageBox.Show("Must have an account as a Vendor.");
-                    return;
-                }
+                var currVendor = db.Vendors.Where(p => p.VendorID == account.AccountID).First();
 
                 var hostZone = new VendorLanding(currVendor);
                 hostZone.Show();
             }
+            else if (accountType == "Presenter")
+            {
+                var currPresenter = db.Presenters.Where(p => p.PresenterID == account.AccountID).First();
 
+                var presenterZone = new PresenterLanding(currPresenter);
+                presenterZone.Show();
+            }
+            else if (accountType == "Admin")
+            {
+                var adminZone = new Admin_Form();
+                adminZone.Show();
+                var locationZone = new AddLocation();
+                locationZone.Show();
+            }
         }
 
         private void button_Register_Click(object sender, EventArgs e)
@@ -64,11 +74,8 @@ namespace Event_Manager
                 reg = new RegisterPresenter_Form();
             else if (radioButton_Vendor.Checked)
                 reg = new RegisterVendor_Form();
-            else if (radioButton_Host.Checked)
+            else
                 reg = new RegisterHost_Form();
-            //else reg = new Entry_Form();
-            else//(radioButton_Admin.Checked)
-                reg = new Admin_Form();
             reg.Show();
         }
     }

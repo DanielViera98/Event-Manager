@@ -30,19 +30,14 @@
         {
             components = new System.ComponentModel.Container();
             dataGridView_Presenters = new DataGridView();
-            panel1 = new Panel();
-            button_register = new Button();
             eventBindingSource = new BindingSource(components);
-            eventIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            startDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            endDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            websiteDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            locationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            panel1 = new Panel();
+            button_ShowPresenters = new Button();
+            button_Cancel = new Button();
+            button_register = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Presenters).BeginInit();
-            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)eventBindingSource).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView_Presenters
@@ -51,10 +46,7 @@
             dataGridView_Presenters.AllowUserToDeleteRows = false;
             dataGridView_Presenters.AllowUserToResizeColumns = false;
             dataGridView_Presenters.AllowUserToResizeRows = false;
-            dataGridView_Presenters.AutoGenerateColumns = false;
             dataGridView_Presenters.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Presenters.Columns.AddRange(new DataGridViewColumn[] { eventIdDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, endDateDataGridViewTextBoxColumn, websiteDataGridViewTextBoxColumn, locationDataGridViewTextBoxColumn });
-            dataGridView_Presenters.DataSource = eventBindingSource;
             dataGridView_Presenters.Dock = DockStyle.Top;
             dataGridView_Presenters.Location = new Point(0, 0);
             dataGridView_Presenters.Name = "dataGridView_Presenters";
@@ -64,15 +56,42 @@
             dataGridView_Presenters.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView_Presenters.Size = new Size(800, 317);
             dataGridView_Presenters.TabIndex = 0;
+            dataGridView_Presenters.DataError += dataGridView_Presenters_DataError;
+            // 
+            // eventBindingSource
+            // 
+            eventBindingSource.DataSource = typeof(Event);
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_ShowPresenters);
+            panel1.Controls.Add(button_Cancel);
             panel1.Controls.Add(button_register);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 317);
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 133);
             panel1.TabIndex = 1;
+            // 
+            // button_ShowPresenters
+            // 
+            button_ShowPresenters.Location = new Point(179, 31);
+            button_ShowPresenters.Name = "button_ShowPresenters";
+            button_ShowPresenters.Size = new Size(160, 70);
+            button_ShowPresenters.TabIndex = 3;
+            button_ShowPresenters.Text = "Show Presenters for Event";
+            button_ShowPresenters.UseVisualStyleBackColor = true;
+            button_ShowPresenters.Click += button_ShowPresenters_Click;
+            // 
+            // button_Cancel
+            // 
+            button_Cancel.Location = new Point(461, 31);
+            button_Cancel.Name = "button_Cancel";
+            button_Cancel.Size = new Size(110, 70);
+            button_Cancel.TabIndex = 2;
+            button_Cancel.Text = "Cancel";
+            button_Cancel.UseVisualStyleBackColor = true;
+            button_Cancel.Click += button_Cancel_Click;
             // 
             // button_register
             // 
@@ -84,66 +103,6 @@
             button_register.UseVisualStyleBackColor = true;
             button_register.Click += button_register_Click;
             // 
-            // eventBindingSource
-            // 
-            eventBindingSource.DataSource = typeof(Event);
-            // 
-            // eventIdDataGridViewTextBoxColumn
-            // 
-            eventIdDataGridViewTextBoxColumn.DataPropertyName = "EventId";
-            eventIdDataGridViewTextBoxColumn.HeaderText = "EventId";
-            eventIdDataGridViewTextBoxColumn.MinimumWidth = 8;
-            eventIdDataGridViewTextBoxColumn.Name = "eventIdDataGridViewTextBoxColumn";
-            eventIdDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.MinimumWidth = 8;
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            nameDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            descriptionDataGridViewTextBoxColumn.MinimumWidth = 8;
-            descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            descriptionDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // startDateDataGridViewTextBoxColumn
-            // 
-            startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
-            startDateDataGridViewTextBoxColumn.HeaderText = "StartDate";
-            startDateDataGridViewTextBoxColumn.MinimumWidth = 8;
-            startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
-            startDateDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // endDateDataGridViewTextBoxColumn
-            // 
-            endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            endDateDataGridViewTextBoxColumn.HeaderText = "EndDate";
-            endDateDataGridViewTextBoxColumn.MinimumWidth = 8;
-            endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
-            endDateDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // websiteDataGridViewTextBoxColumn
-            // 
-            websiteDataGridViewTextBoxColumn.DataPropertyName = "Website";
-            websiteDataGridViewTextBoxColumn.HeaderText = "Website";
-            websiteDataGridViewTextBoxColumn.MinimumWidth = 8;
-            websiteDataGridViewTextBoxColumn.Name = "websiteDataGridViewTextBoxColumn";
-            websiteDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // locationDataGridViewTextBoxColumn
-            // 
-            locationDataGridViewTextBoxColumn.DataPropertyName = "Location";
-            locationDataGridViewTextBoxColumn.HeaderText = "Location";
-            locationDataGridViewTextBoxColumn.MinimumWidth = 8;
-            locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
-            locationDataGridViewTextBoxColumn.Width = 150;
-            // 
             // PresenterLanding
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -154,8 +113,8 @@
             Name = "PresenterLanding";
             Text = "PresenterLanding";
             ((System.ComponentModel.ISupportInitialize)dataGridView_Presenters).EndInit();
-            panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)eventBindingSource).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -165,13 +124,8 @@
         private Panel panel1;
         private Button button_addPresenter;
         private Button button_register;
-        private DataGridViewTextBoxColumn eventIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn websiteDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn locationDataGridViewTextBoxColumn;
         private BindingSource eventBindingSource;
+        private Button button_Cancel;
+        private Button button_ShowPresenters;
     }
 }

@@ -20,7 +20,6 @@ namespace Event_Manager
         public User_Form(Attendee user)
         {
             InitializeComponent();
-            presenterData.Hide();
             vendorData.Hide();
             eventData.Hide();
             presentationData.Hide();
@@ -75,17 +74,13 @@ namespace Event_Manager
                 Event = o.Event.Name,
                 Host = o.Host.Name
             }).ToList();
-            vendorData.DataSource = db.Vendors.Where(p => db.HasSpace.Any(q => q.Vendor.VendorID == p.VendorID && tickets.Select(t => t.Event).Contains(q.Event))).Select(o => new
+            vendorData.DataSource = db.HasSpace.Where(p => db.HasSpace.Any(q => q.Vendor.VendorID == p.Vendor.VendorID && tickets.Select(t => t.Event).Contains(q.Event))).Select(o => new
             {
-                Name = o.Name,
-                Fee = o.Fee,
-                Email = o.Email
-            }).ToList();
-            presenterData.DataSource = db.Presenters.Where(p => db.Presents.Any(q => q.Presenter.PresenterID == p.PresenterID && tickets.Select(t => t.Event).Contains(q.Event))).Select(o => new
-            {
-                Name = o.Name,
-                PresenterFee = o.PresenterFee,
-                Email = o.Email
+                Event = o.Event.Name,
+                TableID = o.TableID,
+                RoomID = o.RoomID,
+                Vendor = o.Vendor.Name
+
             }).ToList();
             ticketData.DataSource = db.Tickets.Where(p => p.Attendee == currAttendee).Select(o => new
             {
@@ -110,24 +105,6 @@ namespace Event_Manager
         private void vendorData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void showPresenters_CheckedChanged(object sender, EventArgs e)
-        {
-            if (presenterData.Visible)
-            {
-                presenterData.Hide();
-                PresentersLabel.Hide();
-                tablesShowing -= 1;
-            }
-            else
-            {
-                presenterData.Location = new Point(400, 200 * tablesShowing);
-                PresentersLabel.Location = new Point(320, 200 * tablesShowing);
-                presenterData.Show();
-                PresentersLabel.Show();
-                tablesShowing += 1;
-            }
         }
 
         private void showVendors_CheckedChanged(object sender, EventArgs e)

@@ -20,17 +20,24 @@ namespace Event_Manager.Registration___Login
         private void button_Register_Click(object sender, EventArgs e)
         {
             var db = new EventContext();
+            string email = textBox_Email.Text;
+            string name = textBox_Name.Text;
+            string phoneNum = textBox_PhoneNum.Text;
+            string username = textBox_Username.Text;
+            string password = textBox_Password.Text;
             var check = new List<string>()
             {
-                textBox_Email.Text,
-                textBox_Name.Text,
-                textBox_PhoneNum.Text
+                email, name, phoneNum, username, password
             };
-            Functions.CheckNull( check );
-            Functions.CheckMin(check, 2);
-            db.Attendees.Add(new Attendee { Name = textBox_Name.Text, Email = textBox_Email.Text, PhoneNumber = textBox_PhoneNum.Text });
+            if (!Functions.CheckNull(check) || !Functions.CheckMin(check, 2) || !Functions.CheckUsernameFree(username))
+            {
+                return;
+            }
+            Attendee newAttendee = new Attendee { Name = name, Email = email, PhoneNumber = phoneNum };
+            db.Attendees.Add(newAttendee);
+            db.Accounts.Add(new Account(newAttendee.AttendeeID, username, "Attendee", password));
             db.SaveChanges();
-            if (textBox_Name.Text != null)
+            if (username != null)
             {
                 var userForm = new User_Form(db.Attendees.Where(s => s.Name == textBox_Name.Text).First());
                 userForm.Show();

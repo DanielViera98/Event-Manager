@@ -22,18 +22,22 @@ namespace Event_Manager
             PopulateFields();
         }
 
+        //USER CANNOT EDIT THIS PAGE
+
         private void PopulateFields()
         {
             Host hostToEdit = _entityToEdit as Host;
             if (hostToEdit != null)
             {
                 //textBoxEID.Text = eventToEdit.EventId;
-                textBoxHI.Text = hostToEdit.HostID.ToString();
+                /*
+                    textBoxHI.Text = hostToEdit.HostID.ToString();
                 textBoxWebsite.Text = hostToEdit.Website;
                 textBoxEmail.Text = hostToEdit.Email;
                 textBoxName.Text = hostToEdit.Name;
                 textBoxPhone.Text = hostToEdit.PhoneNumber;
                 textBoxDiscriminator.Text = hostToEdit.GetType().ToString();
+                */
                 //textBoxON.Text = hostToEdit.OrganizationName;
 
                 //textBoxHI.Text = employeeToEdit.Host.ToString();
@@ -50,11 +54,52 @@ namespace Event_Manager
                 // Update locationToSave with values from form controls
 
 
+                /*
+                 if (Functions.CheckString(textBoxWebsite.Text))
+                {
+                    hostToSave.Website = textBoxWebsite.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Website entry is empty, please try again.");
+                    return;
+                }
 
-                hostToSave.Website = textBoxWebsite.Text;
-                hostToSave.Email = textBoxEmail.Text;
-                hostToSave.Name = textBoxName.Text;
-                hostToSave.PhoneNumber = textBoxPhone.Text;
+                if (Functions.CheckEmail(textBoxEmail.Text))
+                {
+                    hostToSave.Email = textBoxEmail.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Email entry is incorrect, please try again.");
+                    return;
+                }
+
+                if (Functions.CheckString(textBoxName.Text))
+                {
+                    hostToSave.Name = textBoxName.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Website entry is empty, please try again.");
+                    return;
+                }
+
+                if (Functions.CheckString(textBoxPhone.Text))
+                {
+                    hostToSave.PhoneNumber = textBoxPhone.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Phone Number is incorrect, please try again.");
+                    return;
+                }
+
+
+                */
+
+
+                
 
 
                 //ticketToSave.Attendee = textBoxAI.Text;

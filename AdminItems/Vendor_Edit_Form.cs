@@ -22,6 +22,7 @@ namespace Event_Manager
             PopulateFields();
         }
 
+        //Populates the fields in the edit form
         private void PopulateFields()
         {
             Vendor vendorToEdit = _entityToEdit as Vendor;
@@ -36,6 +37,7 @@ namespace Event_Manager
             }
         }
 
+        //Saves the changed values back to the database, thereby modifying the entry
         private void SaveVendor()
         {
             Vendor vendorToSave = _entityToEdit as Vendor;
@@ -52,8 +54,27 @@ namespace Event_Manager
                     MessageBox.Show("Name must be a valid string.");
                     return;
                 }
-                vendorToSave.Email = textBoxEmail.Text;
-                vendorToSave.PhoneNum = textBoxPhone.Text;
+
+                if (Functions.CheckEmail(textBoxEmail.Text))
+                {
+                    vendorToSave.Email = textBoxEmail.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Email is incorrect, please try again.");
+                    return;
+                }
+                if (Functions.CheckPhone(textBoxPhone.Text))
+                {
+                    vendorToSave.PhoneNum = textBoxPhone.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Phone Number is incorrect, please try again.");
+                    return;
+                }
+
+                
                 if (decimal.TryParse(textBoxFee.Text, out decimal costResult))
                 {
                     vendorToSave.Fee = costResult;

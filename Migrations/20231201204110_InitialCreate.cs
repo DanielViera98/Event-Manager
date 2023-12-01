@@ -13,6 +13,20 @@ namespace Event_Manager.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    AccountID = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    AccountType = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.AccountID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Attendees",
                 columns: table => new
                 {
@@ -24,6 +38,27 @@ namespace Event_Manager.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Attendees", x => x.AttendeeID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventLogs",
+                columns: table => new
+                {
+                    LogId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EventIdLog = table.Column<Guid>(type: "uuid", nullable: false),
+                    OperationLog = table.Column<string>(type: "text", nullable: false),
+                    NameLog = table.Column<string>(type: "text", nullable: false),
+                    DescriptionLog = table.Column<string>(type: "text", nullable: true),
+                    StartDateLog = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDateLog = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    WebsiteLog = table.Column<string>(type: "text", nullable: false),
+                    LocationAddressLog = table.Column<string>(type: "text", nullable: false),
+                    LogTimeLog = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventLogs", x => x.LogId);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,8 +100,7 @@ namespace Event_Manager.Migrations
                 name: "Presenters",
                 columns: table => new
                 {
-                    PresenterID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PresenterID = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
@@ -211,7 +245,7 @@ namespace Event_Manager.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    PresenterID = table.Column<int>(type: "integer", nullable: false),
+                    PresenterID = table.Column<Guid>(type: "uuid", nullable: false),
                     EventId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -324,7 +358,13 @@ namespace Event_Manager.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Accounts");
+
+            migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "EventLogs");
 
             migrationBuilder.DropTable(
                 name: "HasSpace");

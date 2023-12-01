@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Event_Manager.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20231130165114_InitialCreate")]
+    [Migration("20231201213442_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -126,6 +126,119 @@ namespace Event_Manager.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("EventContext+HostMinView", b =>
+                {
+                    b.Property<Guid>("HostID")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("hostname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("hostwebsite")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("HostID");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("host_view_min", (string)null);
+                });
+
+            modelBuilder.Entity("EventContext+LocationMinView", b =>
+                {
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("locationaddress")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("locationwebsite")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Address");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("location_view_min", (string)null);
+                });
+
+            modelBuilder.Entity("EventContext+PresenterView", b =>
+                {
+                    b.Property<Guid>("PresenterID")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("HostID")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("LocationAddress")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("RoomID")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("eventdescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("eventname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("eventwebsite")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("hostname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("hostwebsite")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("locationname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("locationwebsite")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("presentationdescription")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("presentername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("PresenterID");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("presenter_view", (string)null);
+                });
+
             modelBuilder.Entity("HasSpace", b =>
                 {
                     b.Property<int>("RoomID")
@@ -236,11 +349,9 @@ namespace Event_Manager.Migrations
 
             modelBuilder.Entity("Presenter", b =>
                 {
-                    b.Property<int>("PresenterID")
+                    b.Property<Guid>("PresenterID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PresenterID"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -277,8 +388,8 @@ namespace Event_Manager.Migrations
                     b.Property<Guid>("EventId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("PresenterID")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("PresenterID")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("timestamp with time zone");

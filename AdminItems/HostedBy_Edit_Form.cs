@@ -21,6 +21,7 @@ namespace Event_Manager.AdminItems
             PopulateFields();
 
         }
+        //USER CANNOT EDIT THIS PAGE
 
         private void PopulateFields()
         {
