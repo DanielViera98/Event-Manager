@@ -17,6 +17,23 @@ using Microsoft.Extensions.Logging;
 //Create new class for database context
 public class EventContext : DbContext
 {
+    public DbSet<Event> Events { get; set; }    //Table containing Stock classes
+    public DbSet<Location> Locations { get; set; }    //Table containing Stock classes
+    public DbSet<Attendee> Attendees { get; set; }
+    public DbSet<Ticket> Tickets { get; set; }
+    public DbSet<Host> Hosts { get; set; }
+    public DbSet<Person> Persons { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
+    public DbSet<Presenter> Presenters { get; set; }
+    public DbSet<Presents> Presents { get; set; }
+    public DbSet<Vendor> Vendors { get; set; }
+    public DbSet<HasSpace> HasSpace { get; set; }
+    public DbSet<HostedBy> HostedBy { get; set; }
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<PresenterView> PresenterViews { get; set; }
+    public DbSet<HostMinView> HostMinViews { get; set; }
+    public DbSet<EventLog> EventLogs { get; set; }
+    public DbSet<Account> Accounts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -243,6 +260,7 @@ public class Presenter
     public decimal PresenterFee { get; set; }
 }
 
+[PrimaryKey(nameof(RoomID), nameof(Time))]
 public class Presents
 {
     [Key] public int RoomID { set; get; }
