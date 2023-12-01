@@ -30,7 +30,9 @@ public class EventContext : DbContext
     public DbSet<HasSpace> HasSpace { get; set; }
     public DbSet<HostedBy> HostedBy { get; set; }
     public DbSet<Employee> Employees { get; set; }
-    public DbSet<PresenterView> presenterViews { get; set; }
+    public DbSet<PresenterView> PresenterViews { get; set; }
+    public DbSet<HostMinView> HostMinViews { get; set; }
+    
     public string DbPath { get; }               //Path to the database
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,12 +43,15 @@ public class EventContext : DbContext
           .Entity<PresenterView>()
           .ToView("presenter_view")
           .HasKey(t => t.PresenterID);
-
-        base.OnModelCreating(modelBuilder);
         modelBuilder
-           .Entity<Host>()
-           .ToView("expensebytotal")
-           .HasKey(t => t.HostID);
+          .Entity<HostMinView>()
+          .ToView("host_view_min")
+          .HasKey(t => t.HostID);
+        modelBuilder
+          .Entity<LocationMinView>()
+          .ToView("location_view_min")
+          .HasKey(t => t.Address);
+
 
         modelBuilder.Entity<Host>()
             .HasMany(h => h.Events)
@@ -62,6 +67,41 @@ public class EventContext : DbContext
 
         // ... configurations for other relationships ...
 
+    }
+
+    //VIEWS
+    public class LocationMinView
+    {
+        public string Address { get; set; }
+        public string locationaddress { get; set; }
+        public string locationwebsite { get; set; }
+    }
+    public class HostMinView
+    {
+        public Guid HostID { get; set; }
+        public string hostwebsite { get; set; }
+        public string hostname { get; set; }
+    }
+    public class PresenterView
+    {
+        public Guid PresenterID { get; set; }
+        public int RoomID { get; set; }
+        public Guid EventId { get; set; }
+        public string eventname { get; set; }
+        public string? eventdescription { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string eventwebsite { get; set; }
+        public string LocationAddress { get; set; }
+        public Guid HostID { get; set; }
+        public string Title { get; set; }
+        public string presentationdescription { get; set; }
+        public DateTime Time { get; set; }
+        public string presentername { get; set; }
+        public string locationname { get; set; }
+        public string locationwebsite { get; set; }
+        public string hostwebsite { get; set; }
+        public string hostname { get; set; }
     }
 
     public EventContext()                               //Constructor for EventContext
@@ -82,28 +122,7 @@ public class EventContext : DbContext
 
 }
 
-//VIEWS
-public class PresenterView
-{
-    public Guid PresenterID { get; set; }
-    public int RoomID { get; set; }
-    public Guid EventId { get; set; }
-    public string eventname { get; set; }
-    public string? eventdescription { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public string eventwebsite { get; set; }
-    public string locationaddress { get; set; }
-    public Guid HostID { get; set; }
-    public string Title { get; set; }
-    public string presentationdescription { get; set; }
-    public DateTime Time { get; set; }
-    public string PresenterName { get; set; }
-    public string locationname { get; set; }
-    public string locationwebsite { get; set; }
-    public string hostwebsite { get; set; }
-    public string hostname { get; set; }
-}
+
 
 public class Event                                      //Event Entity Table
 {
@@ -293,3 +312,4 @@ public class Vendor
     public string PhoneNum { get; set; }            //Phone number of vendor
     public decimal Fee { get; set; }                //Fee for space (charged to vendor)
 }
+

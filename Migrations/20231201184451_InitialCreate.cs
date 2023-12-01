@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -24,6 +25,24 @@ namespace Event_Manager.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Attendees", x => x.AttendeeID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Hosts",
+                columns: table => new
+                {
+                    HostID = table.Column<Guid>(type: "uuid", nullable: false),
+                    Website = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                    Discriminator = table.Column<string>(type: "text", nullable: false),
+                    RepresentativeName = table.Column<string>(type: "text", nullable: true),
+                    RepresentativePhone = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hosts", x => x.HostID);
                 });
 
             migrationBuilder.CreateTable(
@@ -90,6 +109,12 @@ namespace Event_Manager.Migrations
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmpID);
                     table.ForeignKey(
+                        name: "FK_Employees_Hosts_HostID",
+                        column: x => x.HostID,
+                        principalTable: "Hosts",
+                        principalColumn: "HostID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Employees_Locations_LocationAddress",
                         column: x => x.LocationAddress,
                         principalTable: "Locations",
@@ -112,6 +137,12 @@ namespace Event_Manager.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.EventId);
+                    table.ForeignKey(
+                        name: "FK_Events_Hosts_HostID",
+                        column: x => x.HostID,
+                        principalTable: "Hosts",
+                        principalColumn: "HostID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Events_Locations_LocationAddress",
                         column: x => x.LocationAddress,
@@ -162,6 +193,12 @@ namespace Event_Manager.Migrations
                         column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "EventId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HostedBy_Hosts_HostID",
+                        column: x => x.HostID,
+                        principalTable: "Hosts",
+                        principalColumn: "HostID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -282,48 +319,27 @@ namespace Event_Manager.Migrations
                 table: "Tickets",
                 column: "EventId");
 
-            migrationBuilder.Sql(@"
-    CREATE VIEW hosts_view_min AS SELECT ""HostID"", ""Website"" AS HostWebsite, ""Name"" AS HostName FROM ""Hosts"";
-    CREATE VIEW location_view_min AS
-        SELECT
-            ""Address"", 
-            ""Name"" AS LocationName,
-            ""Website"" AS LocationWebsite
-        FROM ""Locations"";
-    CREATE VIEW events_renamed AS
-        SELECT
-            ""EventId"",
-            ""Name"" AS EventName,
-            ""Description"" AS EventDescription,
-            ""StartDate"",
-            ""EndDate"",
-            ""Website"" AS EventWebsite,
-            ""LocationAddress"",
-            ""HostID""
-        FROM ""Events"";
-    CREATE VIEW presenter_view AS
-        SELECT
-            ""Pr"".""PresenterID"",
-            ""P"".""RoomID"",
-            ""E"".*,
-            ""P"".""Title"",
-            ""P"".""Description"" AS PresentationDescription,
-            ""P"".""Time"",
-            ""Pr"".""Name"" AS PresenterName,
-            ""L"".""locationname"",
-            ""L"".""locationwebsite"",
-            ""H"".""hostwebsite"",
-            ""H"".""hostname""
-        FROM ""Presents"" AS ""P""
-        INNER JOIN ""Presenters"" AS ""Pr"" ON ""P"".""PresenterID"" = ""Pr"".""PresenterID""
-        INNER JOIN events_renamed AS ""E"" ON ""E"".""EventId"" = ""P"".""EventId""
-        INNER JOIN location_view_min AS ""L"" ON ""L"".""Address"" = ""E"".""LocationAddress""
-        INNER JOIN hosts_view_min AS ""H"" ON ""H"".""HostID"" = ""E"".""HostID"";");
+            var assembly = Assembly.GetExecutingAssembly();
+            string resourceName = typeof(InitialCreate).Namespace + ".20231201092419_InitialCreate.sql";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string sqlResult = reader.ReadToEnd();
+                    migrationBuilder.Sql(sqlResult);
+                }
+            }
+
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.Sql(@"DROP VIEW public.presenter_view;");
+            migrationBuilder.Sql(@"DROP VIEW public.location_view_min;");
+            migrationBuilder.Sql(@"DROP VIEW public.hosts_view_min;");
+            migrationBuilder.Sql(@"DROP VIEW public.events_renamed;");
+
             migrationBuilder.DropTable(
                 name: "Employees");
 
@@ -350,6 +366,9 @@ namespace Event_Manager.Migrations
 
             migrationBuilder.DropTable(
                 name: "Events");
+
+            migrationBuilder.DropTable(
+                name: "Hosts");
 
             migrationBuilder.DropTable(
                 name: "Locations");
