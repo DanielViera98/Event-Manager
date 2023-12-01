@@ -32,6 +32,7 @@ namespace Event_Manager
 
         }
 
+        //Clicking this button will show the Events Table
         private void EventsButton_Click(object sender, EventArgs e)
         {
             entityType = "Event";
@@ -49,6 +50,7 @@ namespace Event_Manager
             }).ToList();
         }
 
+        //Clicking this button will show the Hosts Table
         private void HostsButton_Click(object sender, EventArgs e)
         {
             entityType = "Host";
@@ -65,6 +67,7 @@ namespace Event_Manager
             }).ToList();
         }
 
+        //Clicking this button will show the Attendees Table
         private void AttendeesButton_Click(object sender, EventArgs e)
         {
             entityType = "Attendee";
@@ -81,18 +84,10 @@ namespace Event_Manager
             }).ToList();
             dataGridView1.DataSource = attendees;
 
-            //dataGridView1.DataSource = db.Attendees.Select(o => new
-            //{
-            //  AttendeeID = o.AttendeeID,
-            // Name = o.Name,
-            //Email = o.Email,
-            //PhoneNumber = o.PhoneNumber,
-            //CheckinTime = o.CheckinTime
-
-            //            }).ToList();
+            
         }
 
-
+        //Clicking this button will show the Locations Table
         private void LocationsButton_Click(object sender, EventArgs e)
         {
             entityType = "Location";
@@ -113,6 +108,7 @@ namespace Event_Manager
             //Close();
         }
 
+        //Clicking this button will show the Presenters Table
         private void PresentersButton_Click(object sender, EventArgs e)
         {
             entityType = "Presenter";
@@ -128,6 +124,7 @@ namespace Event_Manager
             }).ToList();
         }
 
+        //Clicking this button will show the Vendors Table
         private void VendorsButton_Click(object sender, EventArgs e)
         {
             entityType = "Vendor";
@@ -143,6 +140,7 @@ namespace Event_Manager
             }).ToList();
         }
 
+        //Clicking this button will show the Employees Table
         private void EmployeesButton_Click(object sender, EventArgs e)
         {
             entityType = "Employee";
@@ -159,6 +157,7 @@ namespace Event_Manager
             }).ToList();
         }
 
+        //Clicking this button will show the Tickets Table
         private void TicketsButton_Click(object sender, EventArgs e)
         {
             entityType = "Ticket";
@@ -175,7 +174,7 @@ namespace Event_Manager
             }).ToList();
         }
 
-
+        //Clicking this button will show the HasSpace Table
         private void HasSpaceButton_Click_1(object sender, EventArgs e)
         {
             entityType = "HasSpace";
@@ -190,6 +189,7 @@ namespace Event_Manager
             }).ToList();
         }
 
+        //Clicking this button will show the HostedBy Table
         private void HostedByButton_Click_1(object sender, EventArgs e)
         {
             entityType = "HostedBy";
@@ -205,6 +205,7 @@ namespace Event_Manager
             }).ToList();
         }
 
+        //Clicking this button will show the Presents Table
         private void PresentsButton_Click_1(object sender, EventArgs e)
         {
             entityType = "Present";
@@ -222,7 +223,7 @@ namespace Event_Manager
         }
 
 
-
+        //This function takes the entries selected from the table, and compare its ID to the ID stored in the DB. Then it goes to the DeleteEntity Function to remove the selected entries
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -232,7 +233,7 @@ namespace Event_Manager
                     var db = new EventContext();
                     foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                     {
-                        //var itemToDelete = row.DataBoundItem;
+                        
                         var itemToDelete2 = row.Cells[0].Value;
 
 
@@ -252,6 +253,7 @@ namespace Event_Manager
             }
         }
 
+        //Based on the type of entries selected, it will conditionally delete it by choosing the entity type
         private void DeleteEntity(EventContext db, object entity)
         {
             // Example: Check the type of entity and remove it from the corresponding DbSet
@@ -310,11 +312,10 @@ namespace Event_Manager
                 var entityToDelete = db.Presents.Find(entity);
                 db.Presents.Remove(entityToDelete);
             }
-            // ... handle other entity types similarly
-            // else if (entity is AnotherEntityType) { ... }
+            
         }
 
-
+        //This will check the ID of the selected entry, and compare it to the DB. Then it will open up the correct form for the selected entry type, and allow the user to modify values
         private void ModifyButton_Click(object sender, EventArgs e)
         {
             var db = new EventContext();
@@ -335,11 +336,12 @@ namespace Event_Manager
             }
         }
 
+        //Opens up the correct form based on the entity type of the entry selected
         private void EditItem(EventContext db, object item)
         {
             if (item != null)
             {
-                //EntityType entityType = EntityType.Unknown;
+                
 
                 // Determine the type of the entity
                 Form editForm = null; // Declare the form variable outside of the if-else statements
@@ -416,23 +418,7 @@ namespace Event_Manager
                 // Now show the form if it was instantiated
                 editForm?.ShowDialog(this);
 
-                // ... other types
-
-                //Admin_Edit_Form editForm = new Admin_Edit_Form(item);
-                //Attendee_Edit_Form editForm = new Attendee_Edit_Form(item);
-                //Employees_Edit_Form editForm = new Employees_Edit_Form(item);
-                //Ticket_Edit_Form editForm = new Ticket_Edit_Form(item);
-                //Host_Edit_Form editForm = new Host_Edit_Form(item);
-                //Presenter_Edit_Form editForm = new Presenter_Edit_Form(item);
-                //Vendor_Edit_Form editForm = new Vendor_Edit_Form(item);
-
-
-                //var dialogResult = editForm.ShowDialog(this);
-
-                //if (dialogResult == DialogResult.OK)
-                //{
-                //RefreshDataGridView();
-                //}
+                
             }
         }
     }

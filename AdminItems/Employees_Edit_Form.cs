@@ -22,52 +22,39 @@ namespace Event_Manager
             PopulateFields();
         }
 
+        //Populates the fields in the edit form
         private void PopulateFields()
         {
             Employee employeeToEdit = _entityToEdit as Employee;
             if (employeeToEdit != null)
             {
-                //textBoxEID.Text = eventToEdit.EventId;
                 textBoxEI.Text = employeeToEdit.EmpID.ToString();
                 textBoxName.Text = employeeToEdit.Name;
                 textBoxPay.Text = employeeToEdit.Pay.ToString();
                 textBoxShift.Text = employeeToEdit.ShiftSchedule;
-                /*if (employeeToEdit.Location != null)
-                {
-                    textBoxLocation.Text = employeeToEdit.Location.ToString();
-                }
-                else
-                {
-                    textBoxLocation.Text = "Empty";
-                }
-                if (employeeToEdit.Host != null)
-                {
-                    textBoxHI.Text = employeeToEdit.Host.ToString();
-                }
-                else
-                {
-                    textBoxHI.Text = "Empty";
-                }
-                */
-
-                //textBoxHI.Text = employeeToEdit.Host.ToString();
-
-                //textBoxLocation.Text = eventToEdit.Location;
+               
             }
         }
 
+        //Saves the changed values back to the database, thereby modifying the entry
         private void SaveEmployee()
         {
             Employee employeeToSave = _entityToEdit as Employee;
             if (employeeToSave != null)
             {
-                // Update locationToSave with values from form controls
 
-                //attendeeToSave.AttendeeID = textBoxAI.Text;
+                //employeeToSave.EmpID = Guid.Parse(textBoxEI.Text);
 
-                //textBoxEI.Text = textBoxEI.Text.ToString();
-                employeeToSave.EmpID = Guid.Parse(textBoxEI.Text);
-                employeeToSave.Name = textBoxName.Text;
+                if (Functions.CheckString(textBoxName.Text))
+                {
+                    employeeToSave.Name = textBoxName.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Name entry is empty, please try again.");
+                    return;
+                }
+                
                 if (decimal.TryParse(textBoxPay.Text, out decimal payResult))
                 {
                     employeeToSave.Pay = payResult;
@@ -77,10 +64,18 @@ namespace Event_Manager
                     MessageBox.Show("Pay must be a valid decimal number.");
                     return;
                 }
+                if (Functions.CheckString(textBoxShift.Text))
+                {
+                    employeeToSave.ShiftSchedule = textBoxShift.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Shift entry is empty, please try again.");
+                    return;
+                }
 
-                employeeToSave.ShiftSchedule = textBoxShift.Text;
-                //employeeToSave.Location = (Location) textBoxLocation.Text;
-                //employeeToSave.Host = (Host) textBoxHI.Text;
+                
+              
 
 
                 using (var db = new EventContext())
