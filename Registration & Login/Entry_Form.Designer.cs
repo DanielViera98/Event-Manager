@@ -42,6 +42,7 @@
             panel7 = new Panel();
             panel8 = new Panel();
             panel5 = new Panel();
+            radioButton_Admin = new RadioButton();
             radioButton_Host = new RadioButton();
             radioButton_Vendor = new RadioButton();
             radioButton_Presenter = new RadioButton();
@@ -51,7 +52,6 @@
             panel6 = new Panel();
             richTextBox1 = new RichTextBox();
             panel4 = new Panel();
-            radioButton_Admin = new RadioButton();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -138,7 +138,7 @@
             // 
             comboBox_Login.Anchor = AnchorStyles.None;
             comboBox_Login.FormattingEnabled = true;
-            comboBox_Login.Items.AddRange(new object[] { "Attendee", "Employee", "Presenter", "Vendor", "Host" });
+            comboBox_Login.Items.AddRange(new object[] { "Attendee", "Presenter", "Vendor", "Host", "Admin" });
             comboBox_Login.Location = new Point(40, 78);
             comboBox_Login.Name = "comboBox_Login";
             comboBox_Login.Size = new Size(182, 28);
@@ -181,7 +181,7 @@
             panel7.Controls.Add(panel5);
             panel7.Dock = DockStyle.Fill;
             panel7.Location = new Point(0, 150);
-            panel7.Margin = new Padding(2, 2, 2, 2);
+            panel7.Margin = new Padding(2);
             panel7.Name = "panel7";
             panel7.Size = new Size(266, 190);
             panel7.TabIndex = 7;
@@ -191,7 +191,7 @@
             panel8.Controls.Add(button_Register);
             panel8.Dock = DockStyle.Fill;
             panel8.Location = new Point(148, 0);
-            panel8.Margin = new Padding(2, 2, 2, 2);
+            panel8.Margin = new Padding(2);
             panel8.Name = "panel8";
             panel8.Size = new Size(118, 190);
             panel8.TabIndex = 7;
@@ -208,17 +208,29 @@
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Left;
             panel5.Location = new Point(0, 0);
-            panel5.Margin = new Padding(2, 2, 2, 2);
+            panel5.Margin = new Padding(2);
             panel5.MinimumSize = new Size(148, 173);
             panel5.Name = "panel5";
             panel5.Size = new Size(148, 190);
             panel5.TabIndex = 6;
             // 
+            // radioButton_Admin
+            // 
+            radioButton_Admin.AutoSize = true;
+            radioButton_Admin.Location = new Point(10, 166);
+            radioButton_Admin.Margin = new Padding(2);
+            radioButton_Admin.Name = "radioButton_Admin";
+            radioButton_Admin.Size = new Size(74, 24);
+            radioButton_Admin.TabIndex = 5;
+            radioButton_Admin.TabStop = true;
+            radioButton_Admin.Text = "Admin";
+            radioButton_Admin.UseVisualStyleBackColor = true;
+            // 
             // radioButton_Host
             // 
             radioButton_Host.AutoSize = true;
             radioButton_Host.Location = new Point(10, 142);
-            radioButton_Host.Margin = new Padding(2, 2, 2, 2);
+            radioButton_Host.Margin = new Padding(2);
             radioButton_Host.Name = "radioButton_Host";
             radioButton_Host.Size = new Size(61, 24);
             radioButton_Host.TabIndex = 4;
@@ -230,7 +242,7 @@
             // 
             radioButton_Vendor.AutoSize = true;
             radioButton_Vendor.Location = new Point(10, 114);
-            radioButton_Vendor.Margin = new Padding(2, 2, 2, 2);
+            radioButton_Vendor.Margin = new Padding(2);
             radioButton_Vendor.Name = "radioButton_Vendor";
             radioButton_Vendor.Size = new Size(77, 24);
             radioButton_Vendor.TabIndex = 3;
@@ -242,7 +254,7 @@
             // 
             radioButton_Presenter.AutoSize = true;
             radioButton_Presenter.Location = new Point(10, 86);
-            radioButton_Presenter.Margin = new Padding(2, 2, 2, 2);
+            radioButton_Presenter.Margin = new Padding(2);
             radioButton_Presenter.Name = "radioButton_Presenter";
             radioButton_Presenter.Size = new Size(91, 24);
             radioButton_Presenter.TabIndex = 2;
@@ -254,7 +266,7 @@
             // 
             radioButton_Employee.AutoSize = true;
             radioButton_Employee.Location = new Point(10, 58);
-            radioButton_Employee.Margin = new Padding(2, 2, 2, 2);
+            radioButton_Employee.Margin = new Padding(2);
             radioButton_Employee.Name = "radioButton_Employee";
             radioButton_Employee.Size = new Size(96, 24);
             radioButton_Employee.TabIndex = 1;
@@ -266,7 +278,7 @@
             // 
             radioButton_Attendee.AutoSize = true;
             radioButton_Attendee.Location = new Point(10, 30);
-            radioButton_Attendee.Margin = new Padding(2, 2, 2, 2);
+            radioButton_Attendee.Margin = new Padding(2);
             radioButton_Attendee.Name = "radioButton_Attendee";
             radioButton_Attendee.Size = new Size(91, 24);
             radioButton_Attendee.TabIndex = 0;
@@ -289,7 +301,7 @@
             panel6.Controls.Add(richTextBox1);
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 0);
-            panel6.Margin = new Padding(2, 2, 2, 2);
+            panel6.Margin = new Padding(2);
             panel6.Name = "panel6";
             panel6.Size = new Size(266, 150);
             panel6.TabIndex = 5;
@@ -312,18 +324,6 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(262, 342);
             panel4.TabIndex = 3;
-            // 
-            // radioButton_Admin
-            // 
-            radioButton_Admin.AutoSize = true;
-            radioButton_Admin.Location = new Point(10, 166);
-            radioButton_Admin.Margin = new Padding(2);
-            radioButton_Admin.Name = "radioButton_Admin";
-            radioButton_Admin.Size = new Size(74, 24);
-            radioButton_Admin.TabIndex = 5;
-            radioButton_Admin.TabStop = true;
-            radioButton_Admin.Text = "Admin";
-            radioButton_Admin.UseVisualStyleBackColor = true;
             // 
             // Entry_Form
             // 

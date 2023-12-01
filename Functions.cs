@@ -26,5 +26,14 @@ namespace Event_Manager
             }
             return true;
         }
+        public static bool CheckUsernameFree(string username)
+        {
+            var db = new EventContext();
+            if (db.Accounts.Any(p=>p.UserName == username)) {
+                MessageBox.Show($"username '{username}' is already taken.");
+                return false;
+            }
+            return true;
+        }
     }
 }

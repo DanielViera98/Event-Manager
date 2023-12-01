@@ -21,6 +21,29 @@ namespace Event_Manager.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Account", b =>
+                {
+                    b.Property<Guid>("AccountID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AccountType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("AccountID");
+
+                    b.ToTable("Accounts");
+                });
+
             modelBuilder.Entity("Attendee", b =>
                 {
                     b.Property<Guid>("AttendeeID")
@@ -233,11 +256,9 @@ namespace Event_Manager.Migrations
 
             modelBuilder.Entity("Presenter", b =>
                 {
-                    b.Property<int>("PresenterID")
+                    b.Property<Guid>("PresenterID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PresenterID"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -274,8 +295,8 @@ namespace Event_Manager.Migrations
                     b.Property<Guid>("EventId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("PresenterID")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("PresenterID")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("timestamp with time zone");

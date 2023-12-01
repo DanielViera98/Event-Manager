@@ -43,8 +43,10 @@ namespace Event_Manager.Registration___Login
                 textBox_Name.Text,
                 textBox_PhoneNum.Text
             };
-            Functions.CheckNull(check);
-            Functions.CheckMin(check, 2);
+            if (!Functions.CheckNull(check) || !Functions.CheckMin(check, 2) || Functions.CheckUsernameFree(textBox_Username.Text))
+            {
+                return;
+            }
 
             var selectedLocationId = ((Location)comboBox_Location.SelectedItem);
             Location existingLocation = null;
@@ -54,7 +56,7 @@ namespace Event_Manager.Registration___Login
             Host existingHost = null;
             if (selectedHostId != null)
                 existingHost = db.Hosts.Find(selectedHostId.HostID);
-            db.Employees.Add(new Employee
+            Employee newEmp = new Employee
             {
                 Name = textBox_Name.Text,
                 Email = textBox_Email.Text,
@@ -63,7 +65,9 @@ namespace Event_Manager.Registration___Login
                 Pay = numericUpDown_Pay.Value,
                 Location = existingLocation,
                 Host = existingHost
-            }) ;
+            };
+            db.Employees.Add(newEmp);
+            db.Accounts.Add(new Account(newEmp.EmpID, textBox_Username.Text, "Employee", textBox_Password.Text));
             db.SaveChanges();
             Close();
         }

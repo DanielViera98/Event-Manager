@@ -24,19 +24,23 @@ namespace Event_Manager.Registration___Login
             {
                 textBox_Email.Text,
                 textBox_Name.Text,
-                textBox_PhoneNum.Text
+                textBox_PhoneNum.Text,
+                textBox_Username.Text,
+                textBox_Password.Text
             };
-            Functions.CheckNull(check);
-            Functions.CheckMin(check, 2);
-
-
-            db.Vendors.Add(new Vendor
+            if (!Functions.CheckNull(check) || !Functions.CheckMin(check, 2) || !Functions.CheckUsernameFree(textBox_Username.Text))
+            {
+                return;
+            }
+            Vendor newVend = new Vendor
             {
                 Name = textBox_Name.Text,
                 Email = textBox_Email.Text,
                 PhoneNum = textBox_PhoneNum.Text,
                 Fee = numericUpDown_Fee.Value
-            });
+            };
+            db.Vendors.Add(newVend);
+            db.Accounts.Add(new Account(newVend.VendorID, textBox_Username.Text, "Vendor", textBox_Password.Text));
             db.SaveChanges();
             Close();
         }

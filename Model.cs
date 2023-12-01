@@ -43,6 +43,7 @@ public class EventContext : DbContext
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Host> Hosts { get; set; }
     public DbSet<Person> Persons { get; set; }
+    public DbSet<Account> Accounts { get; set; }
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<Presenter> Presenters { get; set; }
     public DbSet<Presents> Presents { get; set; }
@@ -135,6 +136,22 @@ public class Attendee                                   //Attendee Entity Table
     public string Name { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
+}
+
+public class Account
+{
+    public Account() { }
+    public Account(Guid accountID, string userName, string accountType, string password)
+    {
+        AccountID = accountID;
+        UserName = userName;
+        AccountType = accountType;
+        Password = password;
+    }
+    [Key] public Guid AccountID { get; set; }
+    public string UserName { get; set; }
+    public string AccountType { get; set; }
+    public string Password { get; set; }
 }
 
 public class Ticket                                     //Ticket Entity Table
@@ -236,7 +253,7 @@ public class Employee                                   //Employee Entity Table
 
 public class Presenter
 {
-    [Key] public int PresenterID { get; set; }
+    [Key] public Guid PresenterID { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
     public string Phone { get; set; }

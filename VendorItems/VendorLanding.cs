@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Event_Manager.PresenterItems;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,11 +38,6 @@ namespace Event_Manager.VendorItems
                 MessageBox.Show("Must Select an Event.");
                 return;
             }
-            string selection = "";
-            for (int i = 0; i < selected.Count; i++)
-            {
-                selection = selection + "\n" + selected[i].Cells[1].Value;
-            }
             var db = new EventContext();
             for (int i = 0; i < selected.Count; i++)
             {
@@ -49,8 +45,12 @@ namespace Event_Manager.VendorItems
                 var temp = db.Events.Where(s => s.EventId == (Guid)dataGridView_Vendors.SelectedRows[i].Cells[0].Value).First();
                 if (temp != null)
                 {
-                    db.HasSpace.Add(new HasSpace(3, 5, db.Vendors.Find(currVendor.VendorID), temp));
+                    var addVendor = new AddVendor(temp, currVendor);
+                    addVendor.Show();
+                    //db.HasSpace.Add(new HasSpace(3, 5, db.Vendors.Find(currVendor.VendorID), temp));
                 }
+                else
+                    MessageBox.Show("Error finding Event");
             }
             db.SaveChanges();
         }
