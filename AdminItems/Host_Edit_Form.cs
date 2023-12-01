@@ -22,18 +22,22 @@ namespace Event_Manager
             PopulateFields();
         }
 
+        //USER CANNOT EDIT THIS PAGE
+
         private void PopulateFields()
         {
             Host hostToEdit = _entityToEdit as Host;
             if (hostToEdit != null)
             {
                 //textBoxEID.Text = eventToEdit.EventId;
-                textBoxHI.Text = hostToEdit.HostID.ToString();
+                /*
+                    textBoxHI.Text = hostToEdit.HostID.ToString();
                 textBoxWebsite.Text = hostToEdit.Website;
                 textBoxEmail.Text = hostToEdit.Email;
                 textBoxName.Text = hostToEdit.Name;
                 textBoxPhone.Text = hostToEdit.PhoneNumber;
                 textBoxDiscriminator.Text = hostToEdit.GetType().ToString();
+                */
                 //textBoxON.Text = hostToEdit.OrganizationName;
 
                 //textBoxHI.Text = employeeToEdit.Host.ToString();
@@ -50,7 +54,8 @@ namespace Event_Manager
                 // Update locationToSave with values from form controls
 
 
-                if (Functions.CheckString(textBoxWebsite.Text))
+                /*
+                 if (Functions.CheckString(textBoxWebsite.Text))
                 {
                     hostToSave.Website = textBoxWebsite.Text;
                 }
@@ -91,7 +96,7 @@ namespace Event_Manager
                 }
 
 
-
+                */
 
 
                 

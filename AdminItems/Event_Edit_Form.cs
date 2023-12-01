@@ -21,6 +21,7 @@ namespace Event_Manager
             PopulateFields();
         }
 
+        //Populates the fields in the edit form
 
         private void PopulateFields()
         {
@@ -50,6 +51,8 @@ namespace Event_Manager
         {
             SaveEvent();
         }
+
+        //Saves the changed values back to the database, thereby modifying the entry
         private void SaveEvent()
         {
             Event eventToSave = _entityToEdit as Event;

@@ -22,6 +22,8 @@ namespace Event_Manager
             PopulateFields();
         }
 
+        //Populates the fields in the edit form
+
         private void PopulateFields()
         {
             Presenter presenterToEdit = _entityToEdit as Presenter;
@@ -38,6 +40,8 @@ namespace Event_Manager
   
             }
         }
+
+        //Saves the changed values back to the database, thereby modifying the entry
 
         private void SavePresenter()
         {

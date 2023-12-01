@@ -22,12 +22,12 @@ namespace Event_Manager
             PopulateFields();
         }
 
+        //Populates the fields in the edit form
         private void PopulateFields()
         {
             Employee employeeToEdit = _entityToEdit as Employee;
             if (employeeToEdit != null)
             {
-                //textBoxEID.Text = eventToEdit.EventId;
                 textBoxEI.Text = employeeToEdit.EmpID.ToString();
                 textBoxName.Text = employeeToEdit.Name;
                 textBoxPay.Text = employeeToEdit.Pay.ToString();
@@ -36,6 +36,7 @@ namespace Event_Manager
             }
         }
 
+        //Saves the changed values back to the database, thereby modifying the entry
         private void SaveEmployee()
         {
             Employee employeeToSave = _entityToEdit as Employee;

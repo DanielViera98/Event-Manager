@@ -22,7 +22,7 @@ namespace Event_Manager.AdminItems
             PopulateFields();
 
         }
-
+        //USER CANNOT EDIT THIS PAGE
         private void PopulateFields()
         {
             HasSpace hasSpaceToEdit = _entityToEdit as HasSpace;

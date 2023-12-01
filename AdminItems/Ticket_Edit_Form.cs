@@ -21,6 +21,8 @@ namespace Event_Manager
             _entityToEdit = entityToEdit;
             PopulateFields();
         }
+        //Populates the fields in the edit form
+
         private void PopulateFields()
         {
             Ticket ticketToEdit = _entityToEdit as Ticket;
@@ -41,6 +43,7 @@ namespace Event_Manager
             }
         }
 
+        //Saves the changed values back to the database, thereby modifying the entry
         private void SaveTicket()
         {
             Ticket ticketToSave = _entityToEdit as Ticket;
