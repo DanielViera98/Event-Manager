@@ -18,7 +18,9 @@ using Microsoft.Extensions.Logging;
 public class EventContext : DbContext
 {
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+
+protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // ... other configurations ...
 
@@ -33,11 +35,16 @@ public class EventContext : DbContext
             .HasForeignKey(e => e.HostID) // Assuming there is a HostID foreign key property in Employee
     .       OnDelete(DeleteBehavior.Cascade); // Set this if you want to set the foreign key to null instead of deleting the employee
 
+        
+
+
 
         // ... configurations for other relationships ...
 
     }
-    public DbSet<Event> Events { get; set; }    //Table containing Stock classes
+
+
+public DbSet<Event> Events { get; set; }    //Table containing Stock classes
     public DbSet<Location> Locations { get; set; }    //Table containing Stock classes
     public DbSet<Attendee> Attendees { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
@@ -50,6 +57,7 @@ public class EventContext : DbContext
     public DbSet<HasSpace> HasSpace { get; set; }
     public DbSet<HostedBy> HostedBy { get; set; }
     public DbSet<Employee> Employees { get; set; }
+    public DbSet<EventLog> EventLogs { get; set; }
     public string DbPath { get; }               //Path to the database
 
     public EventContext()                               //Constructor for EventContext
@@ -63,10 +71,41 @@ public class EventContext : DbContext
     // special "local" folder for your platform.
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=passw0rd;Database=EventDatabase;Include Error Detail=True");
+        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=Najam2002!;Database=EventDatabase;Include Error Detail=True");
         base.OnConfiguring(options);
     }
 
+}
+
+
+public class EventLog
+{
+    public EventLog() { }
+
+    public EventLog(int logID, Guid eventId, string operation, string name, string description, DateTime startDate, DateTime endDate, string website, string locationAddress, DateTime logTime)
+    {
+        LogId = logID;
+        EventIdLog = eventId;
+        OperationLog = operation;
+        NameLog = name;
+        DescriptionLog = description;
+        StartDateLog = startDate;
+        EndDateLog = endDate;
+        WebsiteLog = website;
+        LocationAddressLog = locationAddress;
+        LogTimeLog = logTime;
+    }
+
+    [Key] public int LogId { get; set; }
+    public Guid EventIdLog { get; set; } // Reference to the Event
+    public string OperationLog { get; set; } // Operation type: INSERT, UPDATE, DELETE
+    public string NameLog { get; set; } // Name of the event being logged
+    public string? DescriptionLog { get; set; } // Description of the event
+    public DateTime StartDateLog { get; set; } // Start date of the event
+    public DateTime EndDateLog { get; set; } // End date of the event
+    public string WebsiteLog { get; set; } // Website of the event
+    public string LocationAddressLog { get; set; } // Address of the event location
+    public DateTime LogTimeLog { get; set; } // Timestamp when the log was created
 }
 
 public class Event                                      //Event Entity Table

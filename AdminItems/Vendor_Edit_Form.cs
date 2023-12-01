@@ -52,8 +52,27 @@ namespace Event_Manager
                     MessageBox.Show("Name must be a valid string.");
                     return;
                 }
-                vendorToSave.Email = textBoxEmail.Text;
-                vendorToSave.PhoneNum = textBoxPhone.Text;
+
+                if (Functions.CheckEmail(textBoxEmail.Text))
+                {
+                    vendorToSave.Email = textBoxEmail.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Email is incorrect, please try again.");
+                    return;
+                }
+                if (Functions.CheckPhone(textBoxPhone.Text))
+                {
+                    vendorToSave.PhoneNum = textBoxPhone.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Phone Number is incorrect, please try again.");
+                    return;
+                }
+
+                
                 if (decimal.TryParse(textBoxFee.Text, out decimal costResult))
                 {
                     vendorToSave.Fee = costResult;

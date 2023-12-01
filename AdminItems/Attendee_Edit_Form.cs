@@ -48,9 +48,24 @@ namespace Event_Manager
 
                 //attendeeToSave.AttendeeID = textBoxAI.Text;
                 attendeeToSave.Name = textBoxName.Text;
-                attendeeToSave.Email = textBoxEmail.Text;
-                attendeeToSave.PhoneNumber = textBoxPhone.Text;
-                //attendeeToSave.CheckinTime = DateTime.SpecifyKind(dateTimePickerCheckin.Value, DateTimeKind.Utc);
+                if(Functions.CheckString(textBoxName.Text)) {
+                    
+                    attendeeToSave.Name = textBoxName.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Cannot leave name empty, please try again"
+                        );
+                }
+                if (Functions.CheckPhone(textBoxPhone.Text))
+                {
+
+                    attendeeToSave.PhoneNumber = textBoxPhone.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Phone format incorrect, please try again");
+                }
 
 
                 using (var db = new EventContext())

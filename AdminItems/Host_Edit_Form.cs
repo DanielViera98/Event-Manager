@@ -50,11 +50,51 @@ namespace Event_Manager
                 // Update locationToSave with values from form controls
 
 
+                if (Functions.CheckString(textBoxWebsite.Text))
+                {
+                    hostToSave.Website = textBoxWebsite.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Website entry is empty, please try again.");
+                    return;
+                }
 
-                hostToSave.Website = textBoxWebsite.Text;
-                hostToSave.Email = textBoxEmail.Text;
-                hostToSave.Name = textBoxName.Text;
-                hostToSave.PhoneNumber = textBoxPhone.Text;
+                if (Functions.CheckEmail(textBoxEmail.Text))
+                {
+                    hostToSave.Email = textBoxEmail.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Email entry is incorrect, please try again.");
+                    return;
+                }
+
+                if (Functions.CheckString(textBoxName.Text))
+                {
+                    hostToSave.Name = textBoxName.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Website entry is empty, please try again.");
+                    return;
+                }
+
+                if (Functions.CheckString(textBoxPhone.Text))
+                {
+                    hostToSave.PhoneNumber = textBoxPhone.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Phone Number is incorrect, please try again.");
+                    return;
+                }
+
+
+
+
+
+                
 
 
                 //ticketToSave.Attendee = textBoxAI.Text;

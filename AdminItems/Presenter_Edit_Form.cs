@@ -28,17 +28,14 @@ namespace Event_Manager
             if (presenterToEdit != null)
             {
                 //textBoxEID.Text = eventToEdit.EventId;
+
+
                 textBoxPI.Text = presenterToEdit.PresenterID.ToString();
                 textBoxName.Text = presenterToEdit.Name;
                 textBoxEmail.Text = presenterToEdit.Email;
                 textBoxPF.Text = presenterToEdit.PresenterFee.ToString();
                 textBoxPhone.Text = presenterToEdit.Phone;
-                //textBoxDiscriminator.Text = hostToEdit.Discriminator;
-                //textBoxON.Text = hostToEdit.OrganizationName;
-
-                //textBoxHI.Text = employeeToEdit.Host.ToString();
-
-                //textBoxLocation.Text = eventToEdit.Location;
+  
             }
         }
 
@@ -59,10 +56,28 @@ namespace Event_Manager
                     MessageBox.Show("Name must be a valid string.");
                     return;
                 }
+                if (Functions.CheckString(textBoxName.Text))
+                {
+                    presenterToSave.Name = textBoxName.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Name entry is empty, please try again.");
+                    return;
+                }
+                if (Functions.CheckEmail(textBoxEmail.Text))
+                {
+                    presenterToSave.Email = textBoxEmail.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Email is incorrect, please try again.");
+                    return;
+                }
 
 
-                presenterToSave.Name = textBoxName.Text;
-                presenterToSave.Email = textBoxEmail.Text;
+
+                
                 if (decimal.TryParse(textBoxPF.Text, out decimal costResult))
                 {
                     presenterToSave.PresenterFee = costResult;
@@ -73,7 +88,7 @@ namespace Event_Manager
                     return;
                 }
 
-                //ticketToSave.Attendee = textBoxAI.Text;
+               
 
 
                 using (var db = new EventContext())
