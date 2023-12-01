@@ -17,12 +17,45 @@ using Microsoft.Extensions.Logging;
 //Create new class for database context
 public class EventContext : DbContext
 {
+    public DbSet<Event> Events { get; set; }    //Table containing Stock classes
+    public DbSet<Location> Locations { get; set; }    //Table containing Stock classes
+    public DbSet<Attendee> Attendees { get; set; }
+    public DbSet<Ticket> Tickets { get; set; }
+    public DbSet<Host> Hosts { get; set; }
+    public DbSet<Person> Persons { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
+    public DbSet<Presenter> Presenters { get; set; }
+    public DbSet<Presents> Presents { get; set; }
+    public DbSet<Vendor> Vendors { get; set; }
+    public DbSet<HasSpace> HasSpace { get; set; }
+    public DbSet<HostedBy> HostedBy { get; set; }
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<PresenterView> PresenterViews { get; set; }
+    public DbSet<HostMinView> HostMinViews { get; set; }
+    public DbSet<EventLog> EventLogs { get; set; }
+
+    
+    public string DbPath { get; }               //Path to the database
 
 
 
 protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // ... other configurations ...
+        //VIEW for presenters
+        modelBuilder
+          .Entity<PresenterView>()
+          .ToView("presenter_view")
+          .HasKey(t => t.PresenterID);
+        modelBuilder
+          .Entity<HostMinView>()
+          .ToView("host_view_min")
+          .HasKey(t => t.HostID);
+        modelBuilder
+          .Entity<LocationMinView>()
+          .ToView("location_view_min")
+          .HasKey(t => t.Address);
+
 
         modelBuilder.Entity<Host>()
             .HasMany(h => h.Events)
@@ -33,33 +66,45 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .HasOne(e => e.Host)
             .WithMany() // Assuming there is no collection navigation property in Host for Employees
             .HasForeignKey(e => e.HostID) // Assuming there is a HostID foreign key property in Employee
-    .       OnDelete(DeleteBehavior.Cascade); // Set this if you want to set the foreign key to null instead of deleting the employee
-
-        
-
-
+    .OnDelete(DeleteBehavior.Cascade); // Set this if you want to set the foreign key to null instead of deleting the employee
 
         // ... configurations for other relationships ...
 
     }
-
-
-public DbSet<Event> Events { get; set; }    //Table containing Stock classes
-    public DbSet<Location> Locations { get; set; }    //Table containing Stock classes
-    public DbSet<Attendee> Attendees { get; set; }
-    public DbSet<Ticket> Tickets { get; set; }
-    public DbSet<Host> Hosts { get; set; }
-    public DbSet<Person> Persons { get; set; }
-    public DbSet<Account> Accounts { get; set; }
-    public DbSet<Organization> Organizations { get; set; }
-    public DbSet<Presenter> Presenters { get; set; }
-    public DbSet<Presents> Presents { get; set; }
-    public DbSet<Vendor> Vendors { get; set; }
-    public DbSet<HasSpace> HasSpace { get; set; }
-    public DbSet<HostedBy> HostedBy { get; set; }
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<EventLog> EventLogs { get; set; }
-    public string DbPath { get; }               //Path to the database
+    //VIEWS
+    public class LocationMinView
+    {
+        public string Address { get; set; }
+        public string locationaddress { get; set; }
+        public string locationwebsite { get; set; }
+    }
+    public class HostMinView
+    {
+        public Guid HostID { get; set; }
+        public string hostwebsite { get; set; }
+        public string hostname { get; set; }
+    }
+    public class PresenterView
+    {
+        public Guid? PresenterID { get; set; }
+        public int? RoomID { get; set; }
+        public Guid? EventId { get; set; }
+        public string? eventname { get; set; }
+        public string? eventdescription { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public string? eventwebsite { get; set; }
+        public string? LocationAddress { get; set; }
+        public Guid? HostID { get; set; }
+        public string? Title { get; set; }
+        public string? presentationdescription { get; set; }
+        public DateTime? Time { get; set; }
+        public string? presentername { get; set; }
+        public string? locationname { get; set; }
+        public string? locationwebsite { get; set; }
+        public string? hostwebsite { get; set; }
+        public string? hostname { get; set; }
+    }
 
     public EventContext()                               //Constructor for EventContext
     {
@@ -72,11 +117,13 @@ public DbSet<Event> Events { get; set; }    //Table containing Stock classes
     // special "local" folder for your platform.
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=passw0rd;Database=EventDatabase;Include Error Detail=True");
+    //options.LogTo(message => Debug.WriteLine(message));
+    options.UseNpgsql(connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=passw0rd;Database=EventDatabase;Include Error Detail=True");
         base.OnConfiguring(options);
     }
 
 }
+
 
 
 public class EventLog
@@ -236,7 +283,6 @@ public class Person                                     /*Person, inherits paren
     : Host
 { }
 
-
 public class Organization                               /*Organization, inherits parent table Host*/
     : Host
 {
@@ -275,7 +321,6 @@ public class HostedBy                                   //HostedBy Multi-Multi R
     public Host Host { get; set; }                //FK for Host
 }
 
-
 public class Employee                                   //Employee Entity Table
 {
     [Key] public Guid EmpID { get; set; }
@@ -289,7 +334,6 @@ public class Employee                                   //Employee Entity Table
     public Host Host { get; set; }
     public Guid? HostID { get; set; }                      //FK to host they work for if applicable
 }
-
 public class Presenter
 {
     [Key] public Guid PresenterID { get; set; }
@@ -316,3 +360,4 @@ public class Vendor
     public string PhoneNum { get; set; }            //Phone number of vendor
     public decimal Fee { get; set; }                //Fee for space (charged to vendor)
 }
+
