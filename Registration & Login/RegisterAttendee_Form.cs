@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Event_Manager.Registration___Login
 {
@@ -17,7 +19,7 @@ namespace Event_Manager.Registration___Login
             InitializeComponent();
         }
 
-        private void button_Register_Click(object sender, EventArgs e)
+        private async void button_Register_Click(object sender, EventArgs e)
         {
             var db = new EventContext();
             string email = textBox_Email.Text;
@@ -33,9 +35,18 @@ namespace Event_Manager.Registration___Login
             {
                 return;
             }
+            if (textBox_Username.Text.Contains('\'') || textBox_Username.Text.Contains('\"') || textBox_Password.Text.Contains('\'') || textBox_Password.Text.Contains('\"'))
+            {
+                MessageBox.Show("Must not include: \'");
+                return;
+            }
             Attendee newAttendee = new Attendee { Name = name, Email = email, PhoneNumber = phoneNum };
             db.Attendees.Add(newAttendee);
-            db.Accounts.Add(new Account(newAttendee.AttendeeID, username, "Attendee", password));
+            try
+            {
+                await db.Attendees.FromSqlRaw($"CALL \"AddUser\" (\'{newAttendee.AttendeeID}\', \'{textBox_Username.Text}\',\'{textBox_Password.Text}\','Attendee')").ToListAsync();
+            }
+            catch { }
             db.SaveChanges();
             if (username != null)
             {

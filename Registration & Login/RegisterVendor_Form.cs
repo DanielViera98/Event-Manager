@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Event_Manager.Registration___Login
 {
@@ -17,7 +19,7 @@ namespace Event_Manager.Registration___Login
             InitializeComponent();
         }
 
-        private void button_Register_Click(object sender, EventArgs e)
+        private async void button_Register_Click(object sender, EventArgs e)
         {
             var db = new EventContext();
             var check = new List<string>()
@@ -32,6 +34,11 @@ namespace Event_Manager.Registration___Login
             {
                 return;
             }
+            if (textBox_Username.Text.Contains('\'') || textBox_Username.Text.Contains('\"') || textBox_Password.Text.Contains('\'') || textBox_Password.Text.Contains('\"'))
+            {
+                MessageBox.Show("Must not include: \'");
+                return;
+            }
             Vendor newVend = new Vendor
             {
                 Name = textBox_Name.Text,
@@ -40,7 +47,11 @@ namespace Event_Manager.Registration___Login
                 Fee = numericUpDown_Fee.Value
             };
             db.Vendors.Add(newVend);
-            db.Accounts.Add(new Account(newVend.VendorID, textBox_Username.Text, "Vendor", textBox_Password.Text));
+            try 
+            {
+                await db.Vendors.FromSqlRaw($"CALL \"AddUser\" (\'{newVend.VendorID}\', \'{textBox_Username.Text}\',\'{textBox_Password.Text}\','Vendor')").ToListAsync();
+            } catch { }
+                
             db.SaveChanges();
             Close();
         }

@@ -362,7 +362,10 @@ namespace Event_Manager.Migrations
                     migrationBuilder.Sql(sqlResult);
                 }
             }
+<<<<<<<< HEAD:Migrations/20231202022214_InitialCreate.cs
+========
 
+>>>>>>>> 69fb18b1defcd3832b6d0032e1661c021820e034:Migrations/20231201223638_InitialCreate.cs
         }
 
         /// <inheritdoc />
@@ -374,6 +377,13 @@ namespace Event_Manager.Migrations
             migrationBuilder.Sql(@"DROP VIEW public.vendor_view");
             migrationBuilder.Sql(@"DROP VIEW public.hosts_view");
             migrationBuilder.Sql(@"DROP VIEW public.events_renamed;");
+<<<<<<<< HEAD:Migrations/20231202023942_InitialCreate.cs
+========
+<<<<<<<< HEAD:Migrations/20231202022214_InitialCreate.cs
+========
+
+>>>>>>>> 69fb18b1defcd3832b6d0032e1661c021820e034:Migrations/20231201223638_InitialCreate.cs
+>>>>>>>> 3147b8cce9c0ce210e93f3ab384d96bca35a9cb9:Migrations/20231202022214_InitialCreate.cs
             migrationBuilder.DropTable(
                 name: "Accounts");
 

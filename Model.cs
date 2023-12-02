@@ -26,7 +26,7 @@ public class EventContext : DbContext
     public DbSet<EventLog> EventLogs { get; set; }
     public DbSet<Account> Accounts { get; set; }
 
-    
+    //RawSqlCommand
     public string DbPath { get; }               //Path to the database
 
 

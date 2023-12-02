@@ -1,4 +1,5 @@
 ﻿using Event_Manager.PresenterItems;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,7 @@ namespace Event_Manager.Registration___Login
             InitializeComponent();
         }
 
-        private void button_Register_Click(object sender, EventArgs e)
+        private async void button_Register_Click(object sender, EventArgs e)
         {
             var db = new EventContext();
             var check = new List<string>()
@@ -33,7 +34,11 @@ namespace Event_Manager.Registration___Login
             {
                 return;
             }
-
+            if (textBox_Username.Text.Contains('\'') || textBox_Username.Text.Contains('\"') || textBox_Password.Text.Contains('\'') || textBox_Password.Text.Contains('\"'))
+            {
+                MessageBox.Show("Must not include: \'");
+                return;
+            }
             Presenter p = new Presenter
             {
                 Name = textBox_Name.Text,
@@ -42,7 +47,12 @@ namespace Event_Manager.Registration___Login
                 PresenterFee = numericUpDown_Fee.Value
             };
             db.Presenters.Add(p);
-            db.Accounts.Add(new Account(p.PresenterID,textBox_Username.Text, "Presenter", textBox_Password.Text));
+
+            try
+            {
+                await db.Presenters.FromSqlRaw($"CALL \"AddUser\" (\'{p.PresenterID}\', \'{textBox_Username.Text}\',\'{textBox_Password.Text}\','Presenter')").ToListAsync();
+            }
+            catch { }
             db.SaveChanges();
 
             var form = new PresenterLanding(p);
