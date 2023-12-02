@@ -34,6 +34,71 @@ CREATE VIEW presenter_view AS
     FULL OUTER JOIN events_renamed AS "E" ON "E"."EventId" = "P"."EventId"
     FULL OUTER JOIN location_view_min AS "L" ON "L"."Address" = "E"."LocationAddress"
     FULL OUTER JOIN hosts_view_min AS "H" ON "H"."HostID" = "E"."HostID";
+
+--Vendors should be able to see everything in events, Hosts name/site/email, Everything from location,
+--TicketCount, and everything in vendors
+CREATE OR ALTER VIEW vendor_view AS  
+	Select
+		"E"."EventId" AS "EventID",
+	    "E"."eventname",
+	    "E"."eventdescription",
+    	"E"."StartDate",
+    	"E"."EndDate",
+	    "E"."eventwebsite",
+    	"L"."Address",
+		"L"."Name" AS "LocationName",
+	    "L"."Website" AS "LocationWebsite",
+		"L"."Email" AS "LocationEmail",
+		"L"."RentalFee",
+		"L"."VendorCapacity",
+		"L"."AttendeeCapacity",
+    	"H"."HostID",
+		"H"."Name" AS "HostName",
+    	"H"."Website" AS "HostWebsite",
+		"H"."Email" AS "HostEmail",
+		"H"."Discriminator" AS "HostType",
+		--"T"."TicketID" AS "TicketID",
+		"V"."VendorID" AS "VendorID",
+		"V"."Name" AS "VendorName",
+		"V"."Email" AS "VendorEmail",
+		"V"."PhoneNum" AS "VendorPhoneNumber",
+		"V"."Fee" AS "VendorFee",
+		"HS"."RoomID",
+		"HS"."TableID",
+		COUNT("T"."TicketID") AS "TicketCount"
+	FROM events_renamed AS "E" 
+	FULL OUTER JOIN "Hosts" AS "H" ON "H"."HostID" = "E"."HostID"
+	FULL OUTER JOIN "Locations" AS "L" ON "L"."Address" = "E"."LocationAddress"
+	FULL OUTER JOIN "Tickets" AS "T" ON "T"."EventId" = "E"."EventId"
+	FULL OUTER JOIN "HasSpace" AS "HS" ON "HS"."EventId" = "E"."EventId"
+	FULL OUTER JOIN "Vendors" AS "V" ON "V"."VendorID" = "HS"."VendorID"
+	GROUP BY
+    "E"."EventId",
+    "E"."eventname",
+    "E"."eventdescription",
+    "E"."StartDate",
+    "E"."EndDate",
+    "E"."eventwebsite",
+    "L"."Address",
+    "L"."Name",
+    "L"."Website",
+    "L"."Email",
+    "L"."RentalFee",
+    "L"."VendorCapacity",
+    "L"."AttendeeCapacity",
+    "H"."HostID",
+    "H"."Name",
+    "H"."Website",
+    "H"."Email",
+    "H"."Discriminator",
+	"V"."VendorID",
+	"V"."Name",
+	"V"."Email",
+	"V"."PhoneNum",
+	"V"."Fee",
+	"HS"."RoomID",
+	"HS"."TableID",
+	"T"."TicketID";
 CREATE OR REPLACE PROCEDURE "LoginUser"
 (IN pusername text, IN ppassword text, IN paccounttype text,
  INOUT "AccountID" uuid default 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',

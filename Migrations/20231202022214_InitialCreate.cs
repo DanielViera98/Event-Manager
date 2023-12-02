@@ -241,17 +241,16 @@ namespace Event_Manager.Migrations
                 name: "Presents",
                 columns: table => new
                 {
-                    RoomID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoomID = table.Column<int>(type: "integer", nullable: false),
+                    Time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    Time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     PresenterID = table.Column<Guid>(type: "uuid", nullable: false),
                     EventId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Presents", x => x.RoomID);
+                    table.PrimaryKey("PK_Presents", x => new { x.RoomID, x.Time });
                     table.ForeignKey(
                         name: "FK_Presents_Events_EventId",
                         column: x => x.EventId,
@@ -363,6 +362,10 @@ namespace Event_Manager.Migrations
                     migrationBuilder.Sql(sqlResult);
                 }
             }
+<<<<<<<< HEAD:Migrations/20231202022214_InitialCreate.cs
+========
+
+>>>>>>>> 69fb18b1defcd3832b6d0032e1661c021820e034:Migrations/20231201223638_InitialCreate.cs
         }
 
         /// <inheritdoc />
@@ -372,6 +375,10 @@ namespace Event_Manager.Migrations
             migrationBuilder.Sql(@"DROP VIEW public.location_view_min;");
             migrationBuilder.Sql(@"DROP VIEW public.hosts_view_min;");
             migrationBuilder.Sql(@"DROP VIEW public.events_renamed;");
+<<<<<<<< HEAD:Migrations/20231202022214_InitialCreate.cs
+========
+
+>>>>>>>> 69fb18b1defcd3832b6d0032e1661c021820e034:Migrations/20231201223638_InitialCreate.cs
             migrationBuilder.DropTable(
                 name: "Accounts");
 

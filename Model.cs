@@ -34,6 +34,7 @@ public class EventContext : DbContext
     public DbSet<Account> Accounts { get; set; }
     public DbSet<HostMinView> HostMinViews { get; set; }
     public DbSet<EventLog> EventLogs { get; set; }
+    public DbSet<Account> Accounts { get; set; }
 
     //RawSqlCommand
     public string DbPath { get; }               //Path to the database
@@ -344,6 +345,7 @@ public class Presenter
     public decimal PresenterFee { get; set; }
 }
 
+[PrimaryKey(nameof(RoomID), nameof(Time))]
 public class Presents
 {
     [Key] public int RoomID { set; get; }

@@ -47,16 +47,24 @@ namespace Event_Manager.PresenterItems
             Event ev = db.Events.Find(this.e.EventId);
             Presenter pr = db.Presenters.Find(this.p.PresenterID);
             DateTime d = DateTime.Parse(comboBox_Timeslot.SelectedItem.ToString());
-            db.Presents.Add(new Presents
+            try
             {
-                RoomID = (int)comboBox_Room.SelectedItem,
-                Title = textBox_Title.Text,
-                Description = textBox_description.Text,
-                Event = db.Events.Find(this.e.EventId),
-                Presenter = db.Presenters.Find(this.p.PresenterID),
-                Time = DateTime.Parse(comboBox_Timeslot.SelectedItem.ToString()).ToUniversalTime()
-            });
-            db.SaveChanges();
+                db.Presents.Add(new Presents
+                {
+                    RoomID = (int)comboBox_Room.SelectedItem,
+                    Title = textBox_Title.Text,
+                    Description = textBox_description.Text,
+                    Event = db.Events.Find(this.e.EventId),
+                    Presenter = db.Presenters.Find(this.p.PresenterID),
+                    Time = DateTime.Parse(comboBox_Timeslot.SelectedItem.ToString()).ToUniversalTime()
+                });
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"ERROR: {ex.Message}");
+            }
+            
             Close();
         }
     }

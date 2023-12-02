@@ -430,10 +430,10 @@ namespace Event_Manager.Migrations
             modelBuilder.Entity("Presents", b =>
                 {
                     b.Property<int>("RoomID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoomID"));
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -445,14 +445,11 @@ namespace Event_Manager.Migrations
                     b.Property<Guid>("PresenterID")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("RoomID");
+                    b.HasKey("RoomID", "Time");
 
                     b.HasIndex("EventId");
 
