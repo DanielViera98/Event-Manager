@@ -188,68 +188,58 @@ namespace Event_Manager.Migrations
 
             modelBuilder.Entity("EventContext+PresenterView", b =>
                 {
-                    b.Property<Guid>("PresenterID")
+                    b.Property<Guid?>("PresenterID")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("EventId")
+                    b.Property<Guid?>("EventId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("HostID")
+                    b.Property<Guid?>("HostID")
                         .HasColumnType("uuid");
 
                     b.Property<string>("LocationAddress")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("RoomID")
+                    b.Property<int?>("RoomID")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("Time")
+                    b.Property<DateTime?>("Time")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("eventdescription")
                         .HasColumnType("text");
 
                     b.Property<string>("eventname")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("eventwebsite")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("hostname")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("hostwebsite")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("locationname")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("locationwebsite")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("presentationdescription")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("presentername")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("PresenterID");
@@ -257,6 +247,8 @@ namespace Event_Manager.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("presenter_view", (string)null);
+                });
+
             modelBuilder.Entity("EventLog", b =>
                 {
                     b.Property<int>("LogId")

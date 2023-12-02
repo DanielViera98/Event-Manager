@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +18,7 @@ namespace Event_Manager.Registration___Login
             InitializeComponent();
         }
 
-        private void button_Register_Click(object sender, EventArgs e)
+        private async void button_Register_Click(object sender, EventArgs e)
         {
             var db = new EventContext();
             var check = new List<string>()
@@ -30,6 +31,11 @@ namespace Event_Manager.Registration___Login
             };
             if (!Functions.CheckNull(check) || !Functions.CheckMin(check, 2) || !Functions.CheckUsernameFree(textBox_Username.Text))
             {
+                return;
+            }
+            if (textBox_Username.Text.Contains('\'') || textBox_Username.Text.Contains('\"') || textBox_Password.Text.Contains('\'') || textBox_Password.Text.Contains('\"'))
+            {
+                MessageBox.Show("Must not include: \'");
                 return;
             }
 
@@ -60,8 +66,11 @@ namespace Event_Manager.Registration___Login
                 db.Organizations.Add(newOrg);
                 hostID = newOrg.HostID;
             }
-            db.Accounts.Add(new Account(hostID, textBox_Username.Text, "Host", textBox_Password.Text));
-
+            try
+            {
+                await db.Hosts.FromSqlRaw($"CALL \"AddUser\" (\'{hostID}\', \'{textBox_Username.Text}\',\'{textBox_Password.Text}\','Host')").ToListAsync();
+            }
+            catch { }
             db.SaveChanges();
             Close();
         }

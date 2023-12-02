@@ -2,6 +2,9 @@ using Event_Manager.LocationItems;
 using Event_Manager.PresenterItems;
 using Event_Manager.Registration___Login;
 using Event_Manager.VendorItems;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Event_Manager
 {
@@ -11,20 +14,27 @@ namespace Event_Manager
         {
             InitializeComponent();
         }
-
-        private void button_LogIn_Click(object sender, EventArgs e)
+        
+        private async void button_LogIn_Click(object sender, EventArgs e)
         {
+            
             var db = new EventContext();
+
             string accountType = comboBox_Login.Text;
             if (textBox1.Text == "" || textBox2.Text == "" || accountType == "" || !db.Accounts.Any(p => p.UserName == textBox1.Text))
             {
                 MessageBox.Show($"Must have an account as {accountType}, and must type username and password.");
                 return;
             }
-            var account = db.Accounts.Where(p => p.UserName == textBox1.Text && p.Password == textBox2.Text && accountType == p.AccountType).FirstOrDefault();
-            if (account == null)
+            if (textBox1.Text.Contains('\'') || textBox1.Text.Contains('\"') || textBox2.Text.Contains('\'') || textBox2.Text.Contains('\"'))
             {
-                MessageBox.Show("Account not found.");
+                MessageBox.Show("Must not include: \'");
+                return;
+            }
+            Account account = (await db.Accounts.FromSqlRaw($"CALL \"LoginUser\" (\'{textBox1.Text}\', \'{textBox2.Text}\', \'{comboBox_Login.Text}\')").ToListAsync()).First();
+            if (account.AccountType == "hello")
+            {
+                MessageBox.Show("Cannot confirm account details.");
                 return;
             }
             if (accountType == "Attendee")

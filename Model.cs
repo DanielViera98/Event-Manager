@@ -31,10 +31,11 @@ public class EventContext : DbContext
     public DbSet<HostedBy> HostedBy { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<PresenterView> PresenterViews { get; set; }
+    public DbSet<Account> Accounts { get; set; }
     public DbSet<HostMinView> HostMinViews { get; set; }
     public DbSet<EventLog> EventLogs { get; set; }
 
-    
+    //RawSqlCommand
     public string DbPath { get; }               //Path to the database
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -352,11 +353,25 @@ namespace Event_Manager.Migrations
                 name: "IX_Tickets_EventId",
                 table: "Tickets",
                 column: "EventId");
+            var assembly = Assembly.GetExecutingAssembly();
+            string resourceName = typeof(InitialCreate).Namespace + ".20231201092419_InitialCreate.sql";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string sqlResult = reader.ReadToEnd();
+                    migrationBuilder.Sql(sqlResult);
+                }
+            }
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.Sql(@"DROP VIEW public.presenter_view;");
+            migrationBuilder.Sql(@"DROP VIEW public.location_view_min;");
+            migrationBuilder.Sql(@"DROP VIEW public.hosts_view_min;");
+            migrationBuilder.Sql(@"DROP VIEW public.events_renamed;");
             migrationBuilder.DropTable(
                 name: "Accounts");
 
