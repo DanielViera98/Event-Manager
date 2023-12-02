@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Event_Manager.HostItems
 {
     public partial class AddEvent : Form
     {
-        Host hostUser;
+        private EventContext db = new EventContext();
+        private Host hostUser;
+        private DbSet<EventContext.HostView> view;
+        private BindingList<object> items;
         public AddEvent(Host host)
         {
             InitializeComponent();
-
-            //Create list of 
-            var db = new EventContext();
-            var localSource = new BindingList<Location>();
-            foreach (var local in db.Locations)
-            {
-                localSource.Add(local);
-            }
-            comboBox_Locations.DataSource = localSource;
             hostUser = host;
+            view = db.HostViews;
+
+            //Create list of Locations, bind to combobox
+            var temp = db.Locations.ToList();
+            items = new BindingList<object>(temp.Cast<object>().ToList());
+            comboBox_Locations.DataSource = items;
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)
@@ -35,30 +29,34 @@ namespace Event_Manager.HostItems
 
         private void button_AddEvent_Click(object sender, EventArgs e)
         {
-            var db = new EventContext();
+            //Check if name empty
             if (string.IsNullOrWhiteSpace(textBox_Name.Text))
             {
                 MessageBox.Show("Must enter a value for Event name, start date, and end date.");
                 return;
             }
-            var selectedLocationId = ((Location)comboBox_Locations.SelectedItem).Address;
-            var existingLocation = db.Locations.Find(selectedLocationId);
-            if (existingLocation == null)
+            //Get address, grab the view corresponding
+            var selectedLocation = ((Location)comboBox_Locations.SelectedItem).Address;
+            var viewFound = view.Where(s => s.Address == selectedLocation);
+            if (viewFound == null)
             {
                 MessageBox.Show("Selected location does not exist in the database.");
                 return;
             }
 
+            //Create an event based on the location address. Separated with view to avoid tampering. 
             Event addedEvent = new Event(
                 textBox_Name.Text,
                 richTextBox_Description.Text,
                 dateTimePicker_Start.Value.ToUniversalTime(),
                 dateTimePicker_End.Value.ToUniversalTime(),
                 textBox_Website.Text,
-                existingLocation);
+                db.Locations.Find(selectedLocation));
 
+            //Add to events table.
             db.Events.Add(addedEvent);
 
+            //Add new entry to hostedby table
             db.HostedBy.Add(new HostedBy(
                 addedEvent,
                 db.Hosts.Find(hostUser.HostID)
@@ -66,11 +64,6 @@ namespace Event_Manager.HostItems
 
             db.SaveChanges();
             Close();
-        }
-
-        private void AddEvent_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

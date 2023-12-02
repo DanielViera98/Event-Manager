@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-
-namespace Event_Manager.PresenterItems
+﻿namespace Event_Manager.PresenterItems
 {
     public partial class AddPresenter : Form
     {
-        EventContext db = new EventContext();
+        private EventContext db = new EventContext();
         private Event e;
         private Presenter p;
-        private int DateTimes;
         public AddPresenter(Event e, Presenter p)
         {
             this.e = e;

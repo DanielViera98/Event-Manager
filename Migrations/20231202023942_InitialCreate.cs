@@ -371,8 +371,9 @@ namespace Event_Manager.Migrations
             migrationBuilder.Sql(@"DROP VIEW public.presenter_view;");
             migrationBuilder.Sql(@"DROP VIEW public.location_view_min;");
             migrationBuilder.Sql(@"DROP VIEW public.hosts_view_min;");
+            migrationBuilder.Sql(@"DROP VIEW public.vendor_view");
+            migrationBuilder.Sql(@"DROP VIEW public.hosts_view");
             migrationBuilder.Sql(@"DROP VIEW public.events_renamed;");
-
             migrationBuilder.DropTable(
                 name: "Accounts");
 

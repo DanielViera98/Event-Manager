@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Reflection;
-using System.Diagnostics.SymbolStore;
-using System.Numerics;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.Logging;
 
 //Create new class for database context
 public class EventContext : DbContext
@@ -31,6 +20,8 @@ public class EventContext : DbContext
     public DbSet<HostedBy> HostedBy { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<PresenterView> PresenterViews { get; set; }
+    public DbSet<HostView> HostViews { get; set; }
+    public DbSet<VendorView> VendorViews { get; set; }
     public DbSet<HostMinView> HostMinViews { get; set; }
     public DbSet<EventLog> EventLogs { get; set; }
     public DbSet<Account> Accounts { get; set; }
@@ -56,6 +47,14 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
           .Entity<LocationMinView>()
           .ToView("location_view_min")
           .HasKey(t => t.Address);
+        modelBuilder
+          .Entity<VendorView>()
+          .ToView("vendor_view")
+          .HasKey(t => t.VendorID);
+        modelBuilder
+          .Entity<HostView>()
+          .ToView("host_view")
+          .HasKey(t => t.HostID);
 
 
         modelBuilder.Entity<Host>()
@@ -105,6 +104,60 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         public string? locationwebsite { get; set; }
         public string? hostwebsite { get; set; }
         public string? hostname { get; set; }
+    }
+    public class HostView
+    {
+        public Guid? EventID { get; set; }
+        public string? eventname { get; set; }
+        public string? eventdescription { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public string? eventwebsite { get; set; }
+        public string? Address { get; set; }
+        public Guid? HostID { get; set; }
+        public string? LocationName { get; set; }
+        public string? LocationWebsite { get; set; }
+        public string? LocationEmail { get; set; }
+        public decimal? RentalFee { get; set; }
+        public int? VendorCapacity { get; set; }
+        public int? AttendeeCapacity { get; set; }
+        public string? HostWebsite { get; set; }
+        public string? HostName { get; set; }
+        public string? HostEmail { get; set; }
+        public string? HostPhoneNumber { get; set; }
+        public string? HostType { get; set; }
+        public string? RepresentativeName { get; set; }
+        public string? RepresentativePhone { get; set; }
+    }
+    public class VendorView
+    {
+        public Guid EventId { get; set; }
+	    public string eventname { get; set; }
+        public string eventdescription { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public string? eventwebsite { get; set; }
+        public string Address { get; set; }
+        public string LocationName { get; set; }
+        public string LocationWebsite { get; set; }
+        public string LocationEmail { get; set; }
+        public decimal RentalFee { get; set; }
+        public int VendorCapacity { get; set; }
+        public int AttendeeCapactity { get; set; }
+        public Guid HostID { get; set; }
+        public string Hostname { get; set; }
+        public string HostWebsite { get; set; }
+        public string HostEmail { get; set; }
+        public string HostType { get; set; }
+        public Guid VendorID { get; set; }
+        public string VendorName { get; set; }
+        public string VendorEmail { get; set; }
+        public string VendorPhoneNumber { get; set; }
+        public decimal VendorFee { get; set; }
+        public int RoomID { get; set; }
+
+        public int TableID { get; set; }
+        public int TicketCount { get; set; }
     }
 
     public EventContext()                               //Constructor for EventContext

@@ -35,9 +35,36 @@ CREATE VIEW presenter_view AS
     FULL OUTER JOIN location_view_min AS "L" ON "L"."Address" = "E"."LocationAddress"
     FULL OUTER JOIN hosts_view_min AS "H" ON "H"."HostID" = "E"."HostID";
 
+CREATE OR REPLACE VIEW host_view AS
+    Select
+        "E"."EventId" AS "EventID",
+        "E"."eventname",
+        "E"."eventdescription",
+        "E"."StartDate",
+        "E"."EndDate",
+        "E"."eventwebsite",
+        "L"."Address",
+        "L"."Name" AS "LocationName",
+        "L"."Website" AS "LocationWebsite",
+        "L"."Email" AS "LocationEmail",
+        "L"."RentalFee",
+        "L"."VendorCapacity",
+        "L"."AttendeeCapacity",
+        "H"."HostID",
+        "H"."Name" AS "HostName",
+        "H"."Website" AS "HostWebsite",
+        "H"."Email" AS "HostEmail",
+        "H"."PhoneNumber" AS "HostPhoneNumber",
+        "H"."Discriminator" AS "HostType",
+        "H"."RepresentativeName",
+        "H"."RepresentativePhone"
+    FROM events_renamed AS "E" 
+    FULL OUTER JOIN "Hosts" AS "H" ON "H"."HostID" = "E"."HostID"
+    FULL OUTER JOIN "Locations" AS "L" ON "L"."Address" = "E"."LocationAddress";
+
 --Vendors should be able to see everything in events, Hosts name/site/email, Everything from location,
 --TicketCount, and everything in vendors
-CREATE OR ALTER VIEW vendor_view AS  
+CREATE VIEW vendor_view AS  
 	Select
 		"E"."EventId" AS "EventID",
 	    "E"."eventname",

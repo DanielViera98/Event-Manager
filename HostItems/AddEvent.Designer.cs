@@ -222,7 +222,6 @@
             MaximizeBox = false;
             Name = "AddEvent";
             Text = "AddEvent";
-            Load += AddEvent_Load;
             ((System.ComponentModel.ISupportInitialize)locationBindingSource).EndInit();
             panel1.ResumeLayout(false);
             ResumeLayout(false);

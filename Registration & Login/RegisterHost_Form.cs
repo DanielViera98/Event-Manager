@@ -61,8 +61,9 @@ namespace Event_Manager.Registration___Login
                 hostID = newOrg.HostID;
             }
             db.Accounts.Add(new Account(hostID, textBox_Username.Text, "Host", textBox_Password.Text));
-
             db.SaveChanges();
+            var newForm = new HostLanding(db.Hosts.Find(hostID));
+            newForm.Show();
             Close();
         }
 

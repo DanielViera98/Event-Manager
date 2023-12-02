@@ -1,26 +1,23 @@
 ﻿using Event_Manager.HostItems;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Event_Manager
 {
     public partial class HostLanding : Form
     {
-        Host hostUser;
+        //Initialize class variables
+        private EventContext db = new EventContext();
+        private DbSet<EventContext.HostView> view;
+        private BindingList<object> items;
+        private Host hostUser;
         public HostLanding(Host host)
         {
-            InitializeComponent();
-
-            refresh_view();
-
             hostUser = host;
+            view = db.HostViews;
+            InitializeComponent();
+            refresh_view();
         }
 
         private void button_RegisterEvent_Click(object sender, EventArgs e)
@@ -36,13 +33,31 @@ namespace Event_Manager
 
         private void refresh_view()
         {
-            var db = new EventContext();
-            var eventSource = new BindingList<Event>();
-            foreach (var local in db.Events)
+            //Get all the desired items in the view and present it to the user
+            var temp = view.Select(s => new
             {
-                eventSource.Add(local);
-            }
-            dataGridView_Events.DataSource = eventSource;
+                EventID = s.EventID,
+                EventName = s.eventname,
+                EventDescription = s.eventdescription,
+                StartDate = s.StartDate,
+                EndDate = s.EndDate,
+                EventWebsite = s.eventwebsite,
+                Location = s.LocationName,
+                Address = s.Address,
+                LocationWebsite = s.LocationWebsite,
+                LocationEmail = s.LocationEmail,
+                RentalFee = s.RentalFee,
+                VendorCapacity = s.VendorCapacity,
+                AttendeeCapacity = s.AttendeeCapacity,
+                HostName = s.HostName,
+                HostWebsite = s.HostWebsite,
+                HostEmail = s.HostEmail,
+                HostPhoneNumber = s.HostPhoneNumber,
+                RepresentativeName = s.RepresentativeName,
+                RepresentativePhone = s.RepresentativePhone
+            }).Where(s => s.EventID != null).ToList();
+            items = new BindingList<object>(temp.Cast<object>().ToList());
+            dataGridView_Events.DataSource = items;
         }
     }
 }
