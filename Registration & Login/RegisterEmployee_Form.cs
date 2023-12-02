@@ -43,7 +43,7 @@ namespace Event_Manager.Registration___Login
                 textBox_Name.Text,
                 textBox_PhoneNum.Text
             };
-            if (!Functions.CheckNull(check) || !Functions.CheckMin(check, 2) || Functions.CheckUsernameFree(textBox_Username.Text))
+            if (!Functions.CheckNull(check) || !Functions.CheckMin(check, 2) || !Functions.CheckUsernameFree(textBox_Username.Text))
             {
                 return;
             }

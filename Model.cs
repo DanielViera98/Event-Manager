@@ -387,7 +387,7 @@ public class Employee                                   //Employee Entity Table
     public string? ShiftSchedule { get; set; }      
     public Location? Location { get; set; }              //FK to location of workplace if applicable
 
-    public Host Host { get; set; }
+    public Host? Host { get; set; }
     public Guid? HostID { get; set; }                      //FK to host they work for if applicable
 }
 public class Presenter
