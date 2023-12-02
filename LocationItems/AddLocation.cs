@@ -41,6 +41,7 @@ namespace Event_Manager.LocationItems
                 textBox_email.Text,
                 decimal.Parse(textBox_fee.Text),
                 int.Parse(textBox_vendorCapacity.Text),
+                int.Parse(textBox_Rooms.Text),
                 int.Parse(textBox_AttendeeCapacity.Text)
                 ));
 

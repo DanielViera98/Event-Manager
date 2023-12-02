@@ -12,38 +12,51 @@ namespace Event_Manager.VendorItems
 {
     public partial class AddVendor : Form
     {
-        EventContext db = new EventContext();
-        Vendor currVendor;
-        Event currEvent;
+        private EventContext db = new EventContext();
+        private Vendor currVendor;
+        private Event currEvent;
         public AddVendor(Event e, Vendor v)
         {
             InitializeComponent();
             currVendor = v;
             currEvent = e;
 
+            //Concat welcome label to show event which is being registered
             label_Welcome.Text.Concat(e.Name);
-            Location l = db.Locations.Find(e.Location);
+            Location l = db.Locations.Find(e.Location.Address);
+            var roomsTaken = db.HasSpace.Select(s => s.RoomID).ToList();
+            var tablesTaken = db.HasSpace.Select(s => s.RoomID).ToList();
 
-            for (int i = 0; i < 20; i++)
+            //Get list of all non taken rooms and tables, add to combobox
+            for (int i = 0; i < l.VendorCapacity; i++)
             {
-                comboBox_Room.Items.Add(i);
-                comboBox_Table.Items.Add(i);
+                if (!tablesTaken.Contains(i))
+                    comboBox_Table.Items.Add(i);
+            }
+            for (int i = 0; i < l.Rooms; i++)
+            {
+                if (roomsTaken.Count(x => x == i) < l.VendorCapacity/ l.Rooms)    //Assume vendors are evenly spaced
+                    comboBox_Room.Items.Add(i);
             }
         }
 
         private void button_register_Click(object sender, EventArgs e)
         {
-            int roomID = (int)comboBox_Room.SelectedItem;
-            int tableID = (int)comboBox_Table.SelectedItem;
-            Event ev = db.Events.Find(this.currEvent.EventId);
-            db.HasSpace.Add(new HasSpace
+            try
             {
-                RoomID = (int)comboBox_Room.SelectedItem,
-                TableID = (int)comboBox_Table.SelectedItem,
-                Event = db.Events.Find(this.currEvent.EventId),
-                Vendor = db.Vendors.Find(this.currVendor.VendorID)
-            });
-            db.SaveChanges();
+                db.HasSpace.Add(new HasSpace
+                {
+                    RoomID = (int)comboBox_Room.SelectedItem,
+                    TableID = (int)comboBox_Table.SelectedItem,
+                    Event = db.Events.Find(this.currEvent.EventId),
+                    Vendor = db.Vendors.Find(this.currVendor.VendorID)
+                });
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"ERROR: {ex.Message}");
+            }
             Close();
         }
     }

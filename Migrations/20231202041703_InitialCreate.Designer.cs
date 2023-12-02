@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Event_Manager.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20231202023942_InitialCreate")]
+    [Migration("20231202041703_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -174,16 +174,22 @@ namespace Event_Manager.Migrations
                     b.Property<Guid?>("HostID")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
                     b.Property<int?>("AttendeeCapacity")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("EventId")
+                    b.Property<Guid?>("EventID")
                         .HasColumnType("uuid");
 
                     b.Property<string>("HostEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HostName")
                         .HasColumnType("text");
 
                     b.Property<string>("HostPhoneNumber")
@@ -192,7 +198,16 @@ namespace Event_Manager.Migrations
                     b.Property<string>("HostType")
                         .HasColumnType("text");
 
-                    b.Property<string>("LocationAddress")
+                    b.Property<string>("HostWebsite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LocationEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LocationName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LocationWebsite")
                         .HasColumnType("text");
 
                     b.Property<decimal?>("RentalFee")
@@ -203,6 +218,9 @@ namespace Event_Manager.Migrations
 
                     b.Property<string>("RepresentativePhone")
                         .HasColumnType("text");
+
+                    b.Property<int?>("Rooms")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("timestamp with time zone");
@@ -217,21 +235,6 @@ namespace Event_Manager.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("eventwebsite")
-                        .HasColumnType("text");
-
-                    b.Property<string>("hostname")
-                        .HasColumnType("text");
-
-                    b.Property<string>("hostwebsite")
-                        .HasColumnType("text");
-
-                    b.Property<string>("locationemail")
-                        .HasColumnType("text");
-
-                    b.Property<string>("locationname")
-                        .HasColumnType("text");
-
-                    b.Property<string>("locationwebsite")
                         .HasColumnType("text");
 
                     b.HasKey("HostID");
@@ -326,92 +329,79 @@ namespace Event_Manager.Migrations
 
             modelBuilder.Entity("EventContext+VendorView", b =>
                 {
-                    b.Property<Guid>("VendorID")
+                    b.Property<Guid?>("VendorID")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("AttendeeCapactity")
+                    b.Property<int?>("AttendeeCapacity")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("EventId")
+                    b.Property<Guid?>("EventID")
                         .HasColumnType("uuid");
 
                     b.Property<string>("HostEmail")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("HostID")
+                    b.Property<Guid?>("HostID")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("HostName")
+                        .HasColumnType("text");
+
                     b.Property<string>("HostType")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("HostWebsite")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Hostname")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LocationEmail")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LocationName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LocationWebsite")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("RentalFee")
+                    b.Property<decimal?>("RentalFee")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("RoomID")
+                    b.Property<int?>("RoomID")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("TableID")
+                    b.Property<int?>("TableID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TicketCount")
+                    b.Property<int?>("TicketCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("VendorCapacity")
+                    b.Property<int?>("VendorCapacity")
                         .HasColumnType("integer");
 
                     b.Property<string>("VendorEmail")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("VendorFee")
+                    b.Property<decimal?>("VendorFee")
                         .HasColumnType("numeric");
 
                     b.Property<string>("VendorName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("VendorPhoneNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("eventdescription")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("eventname")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("eventwebsite")
@@ -564,6 +554,9 @@ namespace Event_Manager.Migrations
 
                     b.Property<decimal>("RentalFee")
                         .HasColumnType("numeric");
+
+                    b.Property<int>("Rooms")
+                        .HasColumnType("integer");
 
                     b.Property<int>("VendorCapacity")
                         .HasColumnType("integer");

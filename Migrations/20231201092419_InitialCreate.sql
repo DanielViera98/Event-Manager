@@ -49,6 +49,7 @@ CREATE OR REPLACE VIEW host_view AS
         "L"."Email" AS "LocationEmail",
         "L"."RentalFee",
         "L"."VendorCapacity",
+        "L"."Rooms",
         "L"."AttendeeCapacity",
         "H"."HostID",
         "H"."Name" AS "HostName",
@@ -78,6 +79,7 @@ CREATE VIEW vendor_view AS
 		"L"."Email" AS "LocationEmail",
 		"L"."RentalFee",
 		"L"."VendorCapacity",
+        "L"."Rooms",
 		"L"."AttendeeCapacity",
     	"H"."HostID",
 		"H"."Name" AS "HostName",
@@ -126,6 +128,7 @@ CREATE VIEW vendor_view AS
 	"HS"."RoomID",
 	"HS"."TableID",
 	"T"."TicketID";
+
 CREATE OR REPLACE PROCEDURE "LoginUser"
 (IN pusername text, IN ppassword text, IN paccounttype text,
  INOUT "AccountID" uuid default 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',

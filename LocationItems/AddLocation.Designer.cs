@@ -45,6 +45,8 @@
             textBox_vendorCapacity = new TextBox();
             label5 = new Label();
             textBox_AttendeeCapacity = new TextBox();
+            textBox_Rooms = new TextBox();
+            label8 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,7 +56,7 @@
             panel1.Controls.Add(button_Cancel);
             panel1.Controls.Add(button_AddEvent);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 447);
+            panel1.Location = new Point(0, 515);
             panel1.Name = "panel1";
             panel1.Size = new Size(409, 69);
             panel1.TabIndex = 27;
@@ -178,7 +180,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(126, 382);
+            label5.Location = new Point(129, 444);
             label5.Name = "label5";
             label5.Size = new Size(156, 25);
             label5.TabIndex = 34;
@@ -186,16 +188,34 @@
             // 
             // textBox_AttendeeCapacity
             // 
-            textBox_AttendeeCapacity.Location = new Point(129, 410);
+            textBox_AttendeeCapacity.Location = new Point(131, 472);
             textBox_AttendeeCapacity.Name = "textBox_AttendeeCapacity";
             textBox_AttendeeCapacity.Size = new Size(150, 31);
             textBox_AttendeeCapacity.TabIndex = 35;
+            // 
+            // textBox_Rooms
+            // 
+            textBox_Rooms.Location = new Point(131, 410);
+            textBox_Rooms.Name = "textBox_Rooms";
+            textBox_Rooms.Size = new Size(150, 31);
+            textBox_Rooms.TabIndex = 37;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(151, 382);
+            label8.Name = "label8";
+            label8.Size = new Size(113, 25);
+            label8.TabIndex = 36;
+            label8.Text = "Room Count";
             // 
             // AddLocation
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(409, 516);
+            ClientSize = new Size(409, 584);
+            Controls.Add(textBox_Rooms);
+            Controls.Add(label8);
             Controls.Add(textBox_AttendeeCapacity);
             Controls.Add(label5);
             Controls.Add(textBox_vendorCapacity);
@@ -238,5 +258,7 @@
         private TextBox textBox_vendorCapacity;
         private Label label5;
         private TextBox textBox_AttendeeCapacity;
+        private TextBox textBox_Rooms;
+        private Label label8;
     }
 }

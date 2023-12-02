@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 //Create new class for database context
 public class EventContext : DbContext
 {
-    public DbSet<Event> Events { get; set; }    //Table containing Stock classes
-    public DbSet<Location> Locations { get; set; }    //Table containing Stock classes
+    public DbSet<Event> Events { get; set; }
+    public DbSet<Location> Locations { get; set; }
     public DbSet<Attendee> Attendees { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Host> Hosts { get; set; }
@@ -120,6 +120,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         public string? LocationEmail { get; set; }
         public decimal? RentalFee { get; set; }
         public int? VendorCapacity { get; set; }
+        public int? Rooms {  get; set; }
         public int? AttendeeCapacity { get; set; }
         public string? HostWebsite { get; set; }
         public string? HostName { get; set; }
@@ -131,33 +132,32 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
     }
     public class VendorView
     {
-        public Guid EventId { get; set; }
-	    public string eventname { get; set; }
-        public string eventdescription { get; set; }
+        public Guid? EventID { get; set; }
+	    public string? eventname { get; set; }
+        public string? eventdescription { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string? eventwebsite { get; set; }
-        public string Address { get; set; }
-        public string LocationName { get; set; }
-        public string LocationWebsite { get; set; }
-        public string LocationEmail { get; set; }
-        public decimal RentalFee { get; set; }
-        public int VendorCapacity { get; set; }
-        public int AttendeeCapactity { get; set; }
-        public Guid HostID { get; set; }
-        public string Hostname { get; set; }
-        public string HostWebsite { get; set; }
-        public string HostEmail { get; set; }
-        public string HostType { get; set; }
-        public Guid VendorID { get; set; }
-        public string VendorName { get; set; }
-        public string VendorEmail { get; set; }
-        public string VendorPhoneNumber { get; set; }
-        public decimal VendorFee { get; set; }
-        public int RoomID { get; set; }
-
-        public int TableID { get; set; }
-        public int TicketCount { get; set; }
+        public string? Address { get; set; }
+        public string? LocationName { get; set; }
+        public string? LocationWebsite { get; set; }
+        public string? LocationEmail { get; set; }
+        public decimal? RentalFee { get; set; }
+        public int? VendorCapacity { get; set; }
+        public int? AttendeeCapacity { get; set; }
+        public Guid? HostID { get; set; }
+        public string? HostName { get; set; }
+        public string? HostWebsite { get; set; }
+        public string? HostEmail { get; set; }
+        public string? HostType { get; set; }
+        public Guid? VendorID { get; set; }
+        public string? VendorName { get; set; }
+        public string? VendorEmail { get; set; }
+        public string? VendorPhoneNumber { get; set; }
+        public decimal? VendorFee { get; set; }
+        public int? RoomID { get; set; }
+        public int? TableID { get; set; }
+        public int? TicketCount { get; set; }
     }
 
     public EventContext()                               //Constructor for EventContext
@@ -242,7 +242,7 @@ public class Location                                   //Location Entity Table
 {
     public Location() { }
     public Location(string address, string name, string website, string email, decimal rentalFee, 
-        int vendors, int attendees)
+        int vendors, int rooms, int attendees)
     {
         Address = address;
         Name = name;
@@ -250,6 +250,7 @@ public class Location                                   //Location Entity Table
         Email = email;
         RentalFee = rentalFee;
         VendorCapacity = vendors;
+        Rooms = rooms;
         AttendeeCapacity = attendees;
         Events = new List<Event>();
     }
@@ -259,6 +260,7 @@ public class Location                                   //Location Entity Table
     public string Email { get; set; }
     public decimal RentalFee { get; set; }
     public int VendorCapacity { get; set; }
+    public int Rooms { get; set; }
     public int AttendeeCapacity { get; set; }
     public List<Event> Events { get; set; }
 }

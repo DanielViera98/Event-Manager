@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Event_Manager.VendorItems;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,6 +54,8 @@ namespace Event_Manager.Registration___Login
             } catch { }
                 
             db.SaveChanges();
+            var newForm = new VendorLanding(db.Vendors.Find(newVend.VendorID));
+            newForm.Show();
             Close();
         }
     }

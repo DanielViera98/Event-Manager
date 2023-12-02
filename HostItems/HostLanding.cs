@@ -36,25 +36,26 @@ namespace Event_Manager
             //Get all the desired items in the view and present it to the user
             var temp = view.Select(s => new
             {
-                EventID = s.EventID,
+                s.EventID,
                 EventName = s.eventname,
                 EventDescription = s.eventdescription,
-                StartDate = s.StartDate,
-                EndDate = s.EndDate,
+                s.StartDate,
+                s.EndDate,
                 EventWebsite = s.eventwebsite,
                 Location = s.LocationName,
-                Address = s.Address,
-                LocationWebsite = s.LocationWebsite,
-                LocationEmail = s.LocationEmail,
-                RentalFee = s.RentalFee,
-                VendorCapacity = s.VendorCapacity,
-                AttendeeCapacity = s.AttendeeCapacity,
-                HostName = s.HostName,
-                HostWebsite = s.HostWebsite,
-                HostEmail = s.HostEmail,
-                HostPhoneNumber = s.HostPhoneNumber,
-                RepresentativeName = s.RepresentativeName,
-                RepresentativePhone = s.RepresentativePhone
+                s.Address,
+                s.LocationWebsite,
+                s.LocationEmail,
+                s.RentalFee,
+                s.VendorCapacity,
+                s.Rooms,
+                s.AttendeeCapacity,
+                s.HostName,
+                s.HostWebsite,
+                s.HostEmail,
+                s.HostPhoneNumber,
+                s.RepresentativeName,
+                s.RepresentativePhone
             }).Where(s => s.EventID != null).ToList();
             items = new BindingList<object>(temp.Cast<object>().ToList());
             dataGridView_Events.DataSource = items;

@@ -28,12 +28,6 @@
 
         private void button_register_Click(object sender, EventArgs e)
         {
-            int roomID = (int)comboBox_Room.SelectedItem;
-            string Title = textBox_Title.Text;
-            string Description = textBox_description.Text;
-            Event ev = db.Events.Find(this.e.EventId);
-            Presenter pr = db.Presenters.Find(this.p.PresenterID);
-            DateTime d = DateTime.Parse(comboBox_Timeslot.SelectedItem.ToString());
             try
             {
                 db.Presents.Add(new Presents
