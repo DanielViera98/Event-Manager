@@ -32,6 +32,7 @@
             dataGridView_Presenters = new DataGridView();
             eventBindingSource = new BindingSource(components);
             panel1 = new Panel();
+            button_refresh = new Button();
             button_ShowPresenters = new Button();
             button_Cancel = new Button();
             button_register = new Button();
@@ -64,6 +65,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_refresh);
             panel1.Controls.Add(button_ShowPresenters);
             panel1.Controls.Add(button_Cancel);
             panel1.Controls.Add(button_register);
@@ -73,9 +75,21 @@
             panel1.Size = new Size(800, 133);
             panel1.TabIndex = 1;
             // 
+            // button_refresh
+            // 
+            button_refresh.Anchor = AnchorStyles.Top;
+            button_refresh.Location = new Point(544, 31);
+            button_refresh.Name = "button_refresh";
+            button_refresh.Size = new Size(110, 70);
+            button_refresh.TabIndex = 4;
+            button_refresh.Text = "Refresh View";
+            button_refresh.UseVisualStyleBackColor = true;
+            button_refresh.Click += button_refresh_Click;
+            // 
             // button_ShowPresenters
             // 
-            button_ShowPresenters.Location = new Point(179, 31);
+            button_ShowPresenters.Anchor = AnchorStyles.Top;
+            button_ShowPresenters.Location = new Point(146, 31);
             button_ShowPresenters.Name = "button_ShowPresenters";
             button_ShowPresenters.Size = new Size(160, 70);
             button_ShowPresenters.TabIndex = 3;
@@ -85,7 +99,8 @@
             // 
             // button_Cancel
             // 
-            button_Cancel.Location = new Point(461, 31);
+            button_Cancel.Anchor = AnchorStyles.Top;
+            button_Cancel.Location = new Point(428, 31);
             button_Cancel.Name = "button_Cancel";
             button_Cancel.Size = new Size(110, 70);
             button_Cancel.TabIndex = 2;
@@ -95,7 +110,8 @@
             // 
             // button_register
             // 
-            button_register.Location = new Point(345, 31);
+            button_register.Anchor = AnchorStyles.Top;
+            button_register.Location = new Point(312, 31);
             button_register.Name = "button_register";
             button_register.Size = new Size(110, 70);
             button_register.TabIndex = 1;
@@ -127,5 +143,6 @@
         private BindingSource eventBindingSource;
         private Button button_Cancel;
         private Button button_ShowPresenters;
+        private Button button_refresh;
     }
 }

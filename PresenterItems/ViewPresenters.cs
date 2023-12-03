@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -14,27 +15,57 @@ namespace Event_Manager.PresenterItems
 {
     public partial class ViewPresenters : Form
     {
-        public ViewPresenters(DbSet<EventContext.PresenterView> view, List<Guid> guids)
+        DbSet<EventContext.PresenterView> view;
+        Presenter p;
+        public ViewPresenters(DbSet<EventContext.PresenterView> view, List<Guid> guids, Presenter p)
         {
             InitializeComponent();
+            this.p = p;
+            this.view = view;
+            refresh_view();
+            
+        }
 
+        private void refresh_view()
+        {
             //Select columns, add as datasource to datagridview
-            var temp = view.Select(s => new
+            if (!checkBox_ViewUserPresents.Checked)
             {
-                EventName = s.eventname,
-                StartDate = s.StartDate,
-                EndDate = s.EndDate,
-                HostName = s.hostname,
-                Presenter = s.presentername,
-                PresentationDescription = s.presentationdescription,
-                PresentationTime = s.Time,
-                PresentationRoom = s.RoomID
-            }).Where(s => s.EventName != null && s.StartDate != null && s.EndDate != null &&
-                s.HostName != null && s.Presenter != null && s.PresentationDescription != null &&
-                s.PresentationTime != null && s.PresentationRoom != null)
-            .ToList();
-            BindingList<object> items = new BindingList<object>(temp.Cast<object>().ToList());
-            dataGridView_Presenters.DataSource = items;
+                var temp = view.Select(s => new
+                {
+                    EventID = s.EventId,
+                    EventName = s.eventname,
+                    StartDate = s.StartDate,
+                    EndDate = s.EndDate,
+                    HostName = s.hostname,
+                    Presenter = s.presentername,
+                    PresentationDescription = s.presentationdescription,
+                    PresentationTime = s.Time,
+                    PresentationRoom = s.RoomID
+                }).Where(s => s.EventName != null)
+                .ToList();
+                BindingList<object> items = new BindingList<object>(temp.Cast<object>().ToList());
+                dataGridView_Presenters.DataSource = items;
+            }
+            else
+            {
+                var temp = view.Select(s => new
+                {
+                    EventID = s.EventId,
+                    s.PresenterID,
+                    EventName = s.eventname,
+                    StartDate = s.StartDate,
+                    EndDate = s.EndDate,
+                    HostName = s.hostname,
+                    Presenter = s.presentername,
+                    PresentationDescription = s.presentationdescription,
+                    PresentationTime = s.Time,
+                    PresentationRoom = s.RoomID
+                }).Where(s => s.EventName != null && (s.PresenterID == p.PresenterID))
+                .ToList();
+                BindingList<object> items = new BindingList<object>(temp.Cast<object>().ToList());
+                dataGridView_Presenters.DataSource = items;
+            }
         }
 
         private void button_close_Click(object sender, EventArgs e)
@@ -46,6 +77,11 @@ namespace Event_Manager.PresenterItems
         {
             e.ThrowException = false;
             e.Cancel = true;
+        }
+
+        private void button_refresh_Click(object sender, EventArgs e)
+        {
+            refresh_view();
         }
     }
 }

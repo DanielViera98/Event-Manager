@@ -38,7 +38,7 @@ namespace Event_Manager.PresenterItems
                 LocationWebsite = s.locationwebsite,
                 HostName = s.hostname,
                 HostWebsite = s.hostwebsite
-            }).Where(s => s.EventID != null).ToList();
+            }).Where(s => s.EventID != null).Distinct().ToList();
             items = new BindingList<object>(temp.Cast<object>().ToList());
             dataGridView_Presenters.DataSource = items;
         }
@@ -70,6 +70,7 @@ namespace Event_Manager.PresenterItems
             {
                 MessageBox.Show(ex.Message);
             }
+            refresh_view();
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)
@@ -90,7 +91,7 @@ namespace Event_Manager.PresenterItems
             List<Guid> guids = new List<Guid>();
             for (int i = 0; i < selected.Count; i++)
                 items.Add((Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value);
-            ViewPresenters newForm = new ViewPresenters(view, guids);
+            ViewPresenters newForm = new ViewPresenters(view, guids, p);
             newForm.Show();
         }
 
@@ -99,6 +100,11 @@ namespace Event_Manager.PresenterItems
         {
             e.ThrowException = false;
             e.Cancel = true;
+        }
+
+        private void button_refresh_Click(object sender, EventArgs e)
+        {
+            refresh_view();
         }
     }
 }

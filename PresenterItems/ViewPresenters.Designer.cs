@@ -31,8 +31,10 @@
             dataGridView_Presenters = new DataGridView();
             panel1 = new Panel();
             panel2 = new Panel();
-            button_close = new Button();
+            checkBox_ViewUserPresents = new CheckBox();
             button1 = new Button();
+            button_close = new Button();
+            button_refresh = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Presenters).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -64,6 +66,8 @@
             // panel2
             // 
             panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel2.Controls.Add(button_refresh);
+            panel2.Controls.Add(checkBox_ViewUserPresents);
             panel2.Controls.Add(button1);
             panel2.Controls.Add(button_close);
             panel2.Dock = DockStyle.Bottom;
@@ -72,10 +76,30 @@
             panel2.Size = new Size(716, 100);
             panel2.TabIndex = 2;
             // 
+            // checkBox_ViewUserPresents
+            // 
+            checkBox_ViewUserPresents.AutoSize = true;
+            checkBox_ViewUserPresents.Location = new Point(12, 3);
+            checkBox_ViewUserPresents.Name = "checkBox_ViewUserPresents";
+            checkBox_ViewUserPresents.Size = new Size(144, 54);
+            checkBox_ViewUserPresents.TabIndex = 4;
+            checkBox_ViewUserPresents.Text = "View User's \r\nPresentations";
+            checkBox_ViewUserPresents.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.None;
+            button1.Location = new Point(171, 13);
+            button1.Name = "button1";
+            button1.Size = new Size(126, 70);
+            button1.TabIndex = 1;
+            button1.Text = "Delete Presentation";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // button_close
             // 
             button_close.Anchor = AnchorStyles.None;
-            button_close.Location = new Point(303, 13);
+            button_close.Location = new Point(311, 13);
             button_close.Name = "button_close";
             button_close.Size = new Size(110, 70);
             button_close.TabIndex = 0;
@@ -83,15 +107,16 @@
             button_close.UseVisualStyleBackColor = true;
             button_close.Click += button_close_Click;
             // 
-            // button1
+            // button_refresh
             // 
-            button1.Anchor = AnchorStyles.None;
-            button1.Location = new Point(171, 13);
-            button1.Name = "button1";
-            button1.Size = new Size(110, 70);
-            button1.TabIndex = 1;
-            button1.Text = "Close";
-            button1.UseVisualStyleBackColor = true;
+            button_refresh.Anchor = AnchorStyles.None;
+            button_refresh.Location = new Point(435, 13);
+            button_refresh.Name = "button_refresh";
+            button_refresh.Size = new Size(110, 70);
+            button_refresh.TabIndex = 5;
+            button_refresh.Text = "Refresh View";
+            button_refresh.UseVisualStyleBackColor = true;
+            button_refresh.Click += button_refresh_Click;
             // 
             // ViewPresenters
             // 
@@ -105,6 +130,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView_Presenters).EndInit();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -116,5 +142,7 @@
         private Panel panel2;
         private Button button_close;
         private Button button1;
+        private CheckBox checkBox_ViewUserPresents;
+        private Button button_refresh;
     }
 }

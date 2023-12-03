@@ -42,7 +42,6 @@ namespace Event_Manager.PresenterItems
                     Time = DateTime.Parse(comboBox_Timeslot.SelectedItem.ToString()).ToUniversalTime()
                 });
                 db.SaveChanges();
-                throw new Exception("Timeslot/Room taken");
             }
             catch (Exception ex)
             {
