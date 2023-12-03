@@ -90,7 +90,7 @@ namespace Event_Manager.PresenterItems
             //get event guids, sent to new viewpresenters form
             List<Guid> guids = new List<Guid>();
             for (int i = 0; i < selected.Count; i++)
-                items.Add((Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value);
+                guids.Add((Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value);
             ViewPresenters newForm = new ViewPresenters(view, guids, p);
             newForm.Show();
         }

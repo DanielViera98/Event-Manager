@@ -18,11 +18,13 @@ namespace Event_Manager.PresenterItems
         DbSet<EventContext.PresenterView> view;
         Presenter p;
         EventContext db;
+        List<Guid> ids;
         public ViewPresenters(DbSet<EventContext.PresenterView> view, List<Guid> guids, Presenter p)
         {
             InitializeComponent();
             this.p = p;
             this.view = view;
+            ids = guids;
             db = new EventContext();
             refresh_view();
         }
@@ -43,7 +45,7 @@ namespace Event_Manager.PresenterItems
                     PresentationDescription = s.presentationdescription,
                     PresentationTime = s.Time,
                     PresentationRoom = s.RoomID
-                }).Where(s => s.EventName != null)
+                }).Where(s => s.EventName != null && ids.Contains((Guid)s.EventID) == true)
                 .ToList();
                 BindingList<object> items = new BindingList<object>(temp.Cast<object>().ToList());
                 dataGridView_Presenters.DataSource = items;
