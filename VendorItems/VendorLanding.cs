@@ -78,5 +78,15 @@ namespace Event_Manager.VendorItems
                     MessageBox.Show("Error finding Event");
             }
         }
+
+        private void button_Refresh_Click(object sender, EventArgs e)
+        {
+            refresh_view();
+        }
+
+        private void button_ViewPresenters_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

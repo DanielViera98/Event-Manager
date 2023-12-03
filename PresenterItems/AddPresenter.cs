@@ -31,6 +31,8 @@ namespace Event_Manager.PresenterItems
         {
             try
             {
+                if (comboBox_Room.SelectedIndex == -1 || comboBox_Timeslot.SelectedIndex == -1)
+                    throw new Exception("Must select a room and a timeslot.");
                 //Add to presents table
                 db.Presents.Add(new Presents
                 {
@@ -47,7 +49,6 @@ namespace Event_Manager.PresenterItems
             {
                 MessageBox.Show($"ERROR: {ex.Message}");
             }
-            
             Close();
         }
     }

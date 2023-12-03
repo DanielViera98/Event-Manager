@@ -32,6 +32,8 @@
             dataGridView_Vendors = new DataGridView();
             eventBindingSource = new BindingSource(components);
             panel1 = new Panel();
+            button_ViewVendors = new Button();
+            button_Refresh = new Button();
             button_register = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Vendors).BeginInit();
             ((System.ComponentModel.ISupportInitialize)eventBindingSource).BeginInit();
@@ -62,6 +64,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button_ViewVendors);
+            panel1.Controls.Add(button_Refresh);
             panel1.Controls.Add(button_register);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 318);
@@ -69,6 +73,28 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 132);
             panel1.TabIndex = 1;
+            // 
+            // button_ViewVendors
+            // 
+            button_ViewVendors.Anchor = AnchorStyles.Top;
+            button_ViewVendors.Location = new Point(230, 31);
+            button_ViewVendors.Name = "button_ViewVendors";
+            button_ViewVendors.Size = new Size(110, 70);
+            button_ViewVendors.TabIndex = 3;
+            button_ViewVendors.Text = "View Vendors";
+            button_ViewVendors.UseVisualStyleBackColor = true;
+            button_ViewVendors.Click += button_ViewPresenters_Click;
+            // 
+            // button_Refresh
+            // 
+            button_Refresh.Anchor = AnchorStyles.Top;
+            button_Refresh.Location = new Point(460, 31);
+            button_Refresh.Name = "button_Refresh";
+            button_Refresh.Size = new Size(110, 70);
+            button_Refresh.TabIndex = 2;
+            button_Refresh.Text = "Refresh View";
+            button_Refresh.UseVisualStyleBackColor = true;
+            button_Refresh.Click += button_Refresh_Click;
             // 
             // button_register
             // 
@@ -104,5 +130,7 @@
         private Button button_addPresenter;
         private Button button_register;
         private BindingSource eventBindingSource;
+        private Button button_Refresh;
+        private Button button_ViewVendors;
     }
 }
