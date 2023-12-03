@@ -44,26 +44,31 @@ namespace Event_Manager.PresenterItems
         }
         private void button_register_Click(object sender, EventArgs e)
         {
-            //Get all selected rows, if no rows selected prompt messagebox and return
+            //Get all selected rows, if no rows selected throw exception
             var selected = dataGridView_Presenters.SelectedRows;
-            if (selected.Count <= 0)
+            try
             {
-                MessageBox.Show("Must Select an Event.");
-                return;
-            }
+                if (selected.Count <= 0)
+                    throw new Exception("Must Select an Event.");
 
-            //take the eventid from every row, add the current presenter to addpresents for the events
-            for (int i = 0; i < selected.Count; i++)
-            {
-                var temp2 = (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value;
-                var temp = db.Events.First(s => s.EventId == temp2);
-                if (temp != null)
+                //take the eventid from every row, add the current presenter to addpresents for the events
+                for (int i = 0; i < selected.Count; i++)
                 {
-                    var addPresent = new AddPresenter(temp, p);
-                    addPresent.Show();
+                    var temp2 = (Guid)dataGridView_Presenters.SelectedRows[i].Cells[0].Value;
+                    //Prevent lazy loading
+                    var temp = db.Events.Include(e => e.Location).FirstOrDefault(e => e.EventId == temp2);
+                    if (temp != null)
+                    {
+                        var addPresent = new AddPresenter(temp, p);
+                        addPresent.Show();
+                    }
+                    else
+                        throw new Exception("Error finding Event");
                 }
-                else
-                    MessageBox.Show("Error finding Event");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

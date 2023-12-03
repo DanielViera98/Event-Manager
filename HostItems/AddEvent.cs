@@ -29,18 +29,23 @@ namespace Event_Manager.HostItems
 
         private void button_AddEvent_Click(object sender, EventArgs e)
         {
-            //Check if name empty
-            if (string.IsNullOrWhiteSpace(textBox_Name.Text))
+            string selectedLocation;
+            IQueryable<EventContext.HostView> viewFound;
+            try
             {
-                MessageBox.Show("Must enter a value for Event name, start date, and end date.");
-                return;
+                //Check if name empty
+                if (string.IsNullOrWhiteSpace(textBox_Name.Text))
+                    throw new Exception("Must enter a value for Event name, start date, and end date.");
+
+                //Get address, grab the view corresponding
+                selectedLocation = ((Location)comboBox_Locations.SelectedItem).Address;
+                viewFound = view.Where(s => s.Address == selectedLocation);
+                if (viewFound == null)
+                    throw new Exception("Selected location does not exist in the database.");
             }
-            //Get address, grab the view corresponding
-            var selectedLocation = ((Location)comboBox_Locations.SelectedItem).Address;
-            var viewFound = view.Where(s => s.Address == selectedLocation);
-            if (viewFound == null)
+            catch (Exception ex)
             {
-                MessageBox.Show("Selected location does not exist in the database.");
+                MessageBox.Show(ex.Message);
                 return;
             }
 
@@ -51,7 +56,8 @@ namespace Event_Manager.HostItems
                 dateTimePicker_Start.Value.ToUniversalTime(),
                 dateTimePicker_End.Value.ToUniversalTime(),
                 textBox_Website.Text,
-                db.Locations.Find(selectedLocation));
+                db.Locations.Find(selectedLocation),
+                hostUser.HostID);
 
             //Add to events table.
             db.Events.Add(addedEvent);

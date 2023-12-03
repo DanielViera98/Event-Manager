@@ -1,4 +1,6 @@
-﻿namespace Event_Manager.PresenterItems
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Event_Manager.PresenterItems
 {
     public partial class AddPresenter : Form
     {
@@ -11,25 +13,25 @@
             this.p = p;
             InitializeComponent();
             label_Welcome.Text.Concat(e.Name);
-            Location l = db.Locations.Find(e.Location);
-            DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
-            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0);
+            Location l = e.Location;
+            DateTime startTime = e.StartDate;
+            DateTime endTime = e.EndDate;
 
             while (startTime < endTime)
             {
                 comboBox_Timeslot.Items.Add(startTime.ToString("hh:mm tt"));
                 startTime = startTime.AddMinutes(30);
             }
-            for (int i = 0; i < 20; i++)
-            {
+            //add every room to the list
+            for (int i = 0; i < l.Rooms; i++)
                 comboBox_Room.Items.Add(i);
-            }
         }
 
         private void button_register_Click(object sender, EventArgs e)
         {
             try
             {
+                //Add to presents table
                 db.Presents.Add(new Presents
                 {
                     RoomID = (int)comboBox_Room.SelectedItem,
@@ -40,6 +42,7 @@
                     Time = DateTime.Parse(comboBox_Timeslot.SelectedItem.ToString()).ToUniversalTime()
                 });
                 db.SaveChanges();
+                throw new Exception("Timeslot/Room taken");
             }
             catch (Exception ex)
             {

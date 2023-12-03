@@ -32,6 +32,7 @@
             panel1 = new Panel();
             panel2 = new Panel();
             button_close = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Presenters).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -63,6 +64,7 @@
             // panel2
             // 
             panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel2.Controls.Add(button1);
             panel2.Controls.Add(button_close);
             panel2.Dock = DockStyle.Bottom;
             panel2.Location = new Point(0, 349);
@@ -80,6 +82,16 @@
             button_close.Text = "Close";
             button_close.UseVisualStyleBackColor = true;
             button_close.Click += button_close_Click;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.None;
+            button1.Location = new Point(171, 13);
+            button1.Name = "button1";
+            button1.Size = new Size(110, 70);
+            button1.TabIndex = 1;
+            button1.Text = "Close";
+            button1.UseVisualStyleBackColor = true;
             // 
             // ViewPresenters
             // 
@@ -103,5 +115,6 @@
         private Panel panel1;
         private Panel panel2;
         private Button button_close;
+        private Button button1;
     }
 }

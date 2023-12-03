@@ -31,7 +31,7 @@ public class EventContext : DbContext
 
 
 
-protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // ... other configurations ...
         //VIEW for presenters
@@ -178,8 +178,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 }
 
-
-
 public class EventLog
 {
     public EventLog() { }
@@ -213,7 +211,7 @@ public class EventLog
 public class Event                                      //Event Entity Table
 {
     public Event() { }
-    public Event(string name, string desc, DateTime start, DateTime end, string site, Location local)
+    public Event(string name, string desc, DateTime start, DateTime end, string site, Location local, Guid hostID)
     {
         EventId = new Guid();
         Name = name;
@@ -222,6 +220,7 @@ public class Event                                      //Event Entity Table
         EndDate = end;
         Website = site;
         Location = local;
+        HostID = hostID;
     }
     [Key] public Guid EventId { get; set; }
     public string Name { get; set; }
@@ -230,7 +229,7 @@ public class Event                                      //Event Entity Table
     public DateTime EndDate { get; set; }
     public string Website { get; set; }
     public Location Location { get; set; }              //FK to Location Table
-
+    public Guid? HostID { get; set; }
     /*public List<Host> Hosts { get; set; }
     public List<Vendor> Vendors { get; set; }
     public List<Ticket> Tickets { get; set; }

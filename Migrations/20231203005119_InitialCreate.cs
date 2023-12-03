@@ -139,7 +139,7 @@ namespace Event_Manager.Migrations
                     Pay = table.Column<decimal>(type: "numeric", nullable: false),
                     ShiftSchedule = table.Column<string>(type: "text", nullable: true),
                     LocationAddress = table.Column<string>(type: "text", nullable: true),
-                    HostID = table.Column<Guid>(type: "uuid", nullable: false)
+                    HostID = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -373,7 +373,7 @@ namespace Event_Manager.Migrations
             migrationBuilder.Sql(@"DROP VIEW public.location_view_min;");
             migrationBuilder.Sql(@"DROP VIEW public.hosts_view_min;");
             migrationBuilder.Sql(@"DROP VIEW public.vendor_view");
-            migrationBuilder.Sql(@"DROP VIEW public.hosts_view");
+            migrationBuilder.Sql(@"DROP VIEW public.host_view");
             migrationBuilder.Sql(@"DROP VIEW public.events_renamed;");
 
             migrationBuilder.DropTable(

@@ -58,10 +58,12 @@ CREATE OR REPLACE VIEW host_view AS
         "H"."PhoneNumber" AS "HostPhoneNumber",
         "H"."Discriminator" AS "HostType",
         "H"."RepresentativeName",
-        "H"."RepresentativePhone"
+        "H"."RepresentativePhone",
+        "HB"."HostedID"
     FROM events_renamed AS "E" 
     FULL OUTER JOIN "Hosts" AS "H" ON "H"."HostID" = "E"."HostID"
-    FULL OUTER JOIN "Locations" AS "L" ON "L"."Address" = "E"."LocationAddress";
+    FULL OUTER JOIN "Locations" AS "L" ON "L"."Address" = "E"."LocationAddress"
+    FULL OUTER JOIN "HostedBy" AS "HB" ON "HB"."EventId" = "E"."EventId";
 
 --Vendors should be able to see everything in events, Hosts name/site/email, Everything from location,
 --TicketCount, and everything in vendors

@@ -30,7 +30,7 @@ namespace Event_Manager.PresenterItems
                 PresentationTime = s.Time,
                 PresentationRoom = s.RoomID
             }).Where(s => s.EventName != null && s.StartDate != null && s.EndDate != null &&
-                s.HostName != null && s.Presenter != null && s.PresentationDescription != null && 
+                s.HostName != null && s.Presenter != null && s.PresentationDescription != null &&
                 s.PresentationTime != null && s.PresentationRoom != null)
             .ToList();
             BindingList<object> items = new BindingList<object>(temp.Cast<object>().ToList());

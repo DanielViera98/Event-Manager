@@ -15,20 +15,20 @@ namespace Event_Manager
         public static bool CheckNull(List<string> args)
         {
             if (args.Any(tb => string.IsNullOrWhiteSpace(tb)))
-            {
-                MessageBox.Show("Required entry is empty.");
                 return false;
-            }
             return true;
         }
         public static bool CheckMin(List<string> args, int length)
         {
             if (args.Any(tb => tb.Count() < length))
-            {
-                MessageBox.Show($"Entry less than {length}.");
                 return false;
-            }
             return true;
+        }
+        public static bool CheckContains(List<string> args, char[] testFor)
+        {
+            if (args.Any(tb => tb.IndexOfAny(testFor) >= 0))
+                return true;
+            return false;
         }
         public static bool CheckEmail(string email)
         {
