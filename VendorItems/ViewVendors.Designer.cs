@@ -34,10 +34,10 @@
             button_DeleteVendor = new Button();
             button_close = new Button();
             panel1 = new Panel();
-            dataGridView1 = new DataGridView();
+            dataGridView_Vendors = new DataGridView();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_Vendors).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -73,6 +73,7 @@
             checkBox_ViewUserVendor.TabIndex = 4;
             checkBox_ViewUserVendor.Text = "View User's \r\nSpaces";
             checkBox_ViewUserVendor.UseVisualStyleBackColor = true;
+            checkBox_ViewUserVendor.CheckedChanged += checkBox_ViewUserVendor_CheckedChanged;
             // 
             // button_DeleteVendor
             // 
@@ -83,6 +84,7 @@
             button_DeleteVendor.TabIndex = 1;
             button_DeleteVendor.Text = "Delete Vendor";
             button_DeleteVendor.UseVisualStyleBackColor = true;
+            button_DeleteVendor.Click += button_DeleteVendor_Click;
             // 
             // button_close
             // 
@@ -93,26 +95,27 @@
             button_close.TabIndex = 0;
             button_close.Text = "Close";
             button_close.UseVisualStyleBackColor = true;
+            button_close.Click += button_close_Click;
             // 
             // panel1
             // 
-            panel1.Controls.Add(dataGridView1);
+            panel1.Controls.Add(dataGridView_Vendors);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 350);
             panel1.TabIndex = 4;
             // 
-            // dataGridView1
+            // dataGridView_Vendors
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(800, 350);
-            dataGridView1.TabIndex = 0;
+            dataGridView_Vendors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_Vendors.Dock = DockStyle.Fill;
+            dataGridView_Vendors.Location = new Point(0, 0);
+            dataGridView_Vendors.Name = "dataGridView_Vendors";
+            dataGridView_Vendors.RowHeadersWidth = 62;
+            dataGridView_Vendors.RowTemplate.Height = 33;
+            dataGridView_Vendors.Size = new Size(800, 350);
+            dataGridView_Vendors.TabIndex = 0;
             // 
             // ViewVendors
             // 
@@ -126,7 +129,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_Vendors).EndInit();
             ResumeLayout(false);
         }
 
@@ -138,6 +141,6 @@
         private Button button_DeleteVendor;
         private Button button_close;
         private Panel panel1;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridView_Vendors;
     }
 }

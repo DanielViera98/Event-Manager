@@ -86,6 +86,20 @@ namespace Event_Manager.VendorItems
 
         private void button_ViewPresenters_Click(object sender, EventArgs e)
         {
+            //Get selected rows
+            var selected = dataGridView_Vendors.SelectedRows;
+            if (selected.Count <= 0)
+            {
+                MessageBox.Show("Must Select an Event.");
+                return;
+            }
+            //get event guids, sent to new viewpresenters form
+            List<Guid> guids = new List<Guid>();
+            for (int i = 0; i < selected.Count; i++)
+                guids.Add((Guid)dataGridView_Vendors.SelectedRows[i].Cells[0].Value);
+            var newForm = new ViewVendors(guids, currVendor, view);
+            newForm.Show();
+            
 
         }
     }
